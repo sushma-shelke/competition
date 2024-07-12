@@ -106,3 +106,26 @@ button:active {
     transform: rotate(360deg);
   }
 }
+
+.carousel-img {
+  transition: transform 0.5s ease-in-out;
+}
+
+.bullets {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.bullet.active {
+  background-color: #333;
+}
