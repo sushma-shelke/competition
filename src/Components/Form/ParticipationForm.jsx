@@ -51,7 +51,7 @@ const ParticipationForm = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              label="SHG Name"
+              label="SHG Name / बचत गटाचे नाव "
               {...register("shgName", { required: "SHG Name is required" })}
               error={!!errors.shgName}
             />
@@ -59,7 +59,7 @@ const ParticipationForm = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              label="SHG Leader Name"
+              label="SHG Leader Name / बचत गट प्रमुखाचे नाव "
               {...register("shgLeaderName", {
                 required: "SHG Leader Name is required",
               })}
@@ -69,7 +69,7 @@ const ParticipationForm = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              label="Participating Persons Mobile Number"
+              label="Participating Persons Mobile Number / मोबाईल नंबर"
               {...register("mobileNumber")}
             />
           </Grid>
@@ -77,7 +77,7 @@ const ParticipationForm = () => {
             <TextField
               fullWidth
               type="file"
-              label="SHG Group Photo"
+              label="SHG Group Photo / बचत गटाचा फोटो"
               InputLabelProps={{ shrink: true }}
               {...register("groupPhoto")}
             />
@@ -85,7 +85,7 @@ const ParticipationForm = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              label="Product Name"
+              label="Product Name / उत्पादनाचे नाव"
               {...register("productName")}
             />
           </Grid>
@@ -94,7 +94,7 @@ const ParticipationForm = () => {
               fullWidth
               multiline
               rows={4}
-              label="Product Short Description"
+              label="Product Short Description / उत्पादनाचे संक्षिप्त वर्णन"
               {...register("shortDescription")}
             />
           </Grid>
@@ -102,7 +102,7 @@ const ParticipationForm = () => {
             <TextField
               fullWidth
               type="file"
-              label="Product Main Photos"
+              label="Product Main Photo / उत्पादन मुख्य फोटो"
               InputLabelProps={{ shrink: true }}
               {...register("mainPhoto")}
             />
@@ -111,7 +111,7 @@ const ParticipationForm = () => {
             <TextField
               fullWidth
               type="file"
-              label="Product Gallery Photos"
+              label="Product Photo Gallery (Max 3) / उत्पादन गॅलरी छायाचित्रे"
               InputLabelProps={{ shrink: true }}
               {...register("galleryPhotos")}
               inputProps={{ multiple: true }}
@@ -120,27 +120,39 @@ const ParticipationForm = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              label="Product Weight"
+              label="Product Weight / उत्पादनाचे वजन"
               {...register("weight")}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <TextField fullWidth label="Length" {...register("length")} />
+            <TextField
+              fullWidth
+              label="Length / लांबी"
+              {...register("length")}
+            />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TextField fullWidth label="Width" {...register("width")} />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <TextField fullWidth label="Product Color" {...register("color")} />
+            <TextField
+              fullWidth
+              label="Product Color / उत्पादनाचा रंग"
+              {...register("color")}
+            />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <TextField fullWidth label="Product Price" {...register("price")} />
+            <TextField
+              fullWidth
+              label="Product Price / उत्पादन किंमत"
+              {...register("price")}
+            />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
               select
-              label="Product Category"
+              label="Product Category / उत्पादन श्रेणी"
               {...register("category")}
             >
               <MenuItem value="Food">Food and Drinks</MenuItem>
