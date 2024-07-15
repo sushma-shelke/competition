@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Button, Modal, Box, Typography, TextField } from "@mui/material";
+import {
+  Grid,
+  Button,
+  Modal,
+  Box,
+  Typography,
+  TextField,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { useMediaQuery } from "@mui/material";
 import img1 from "../Assets/Images/homepage1.jpg";
 import img2 from "../Assets/Images/homepage2.jpg";
 import ParticipationForm from "./Form/ParticipationForm"; // Import your ParticipationForm component here
@@ -11,6 +21,8 @@ const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
+
+  const isMobile = useMediaQuery("(max-width: 600px)"); // Media query to check if screen width is less than 600px
 
   useEffect(() => {
     // Simulate checking if user is logged in (could be replaced with actual logic)
@@ -69,7 +81,18 @@ const ImageCarousel = () => {
           variant="contained"
           color="primary"
           onClick={handleOpenModal}
-          style={{ position: "relative", top: "-88px" }}
+          style={{
+            position: "relative",
+            top: "-55px",
+            width: "15%",
+            backgroundColor: "#9C2946",
+            fontWeight: "600",
+            textTransform: "capitalize",
+            borderRadius: "50px",
+            padding: " 30px",
+            fontSize: "16px",
+            boxShadow: "4px 6px 10px 0px grey",
+          }}
         >
           Click to Participate
         </Button>
@@ -79,13 +102,23 @@ const ImageCarousel = () => {
           color="primary"
           onClick={handleOpenModal}
           style={{
+            // position: "relative",
+            // top: "-84px",
+            // width: "30%",
+            // backgroundColor: "#9C2946",
+            // fontWeight: "600",
+            // textTransform: "capitalize",
+            // borderRadius: "50px",
             position: "relative",
-            top: "-84px",
-            width: "14rem",
+            top: "-55px",
+            width: "15%",
             backgroundColor: "#9C2946",
             fontWeight: "600",
             textTransform: "capitalize",
             borderRadius: "50px",
+            padding: " 30px",
+            fontSize: "16px",
+            boxShadow: "4px 6px 10px 0px grey",
           }}
         >
           Login to Participate
@@ -98,19 +131,36 @@ const ImageCarousel = () => {
         onClose={handleCloseModal}
         aria-labelledby="login-modal-title"
         aria-describedby="login-modal-description"
+        disableScrollLock // Allow background scrolling
       >
         <Box
+          xs={12}
+          md={6}
+          lg={4}
           sx={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 900,
+            width: isMobile ? "100%" : isLoggedIn ? "80%" : "20%", // Conditional width based on screen size and login status
             bgcolor: "background.paper",
             boxShadow: 24,
+            borderRadius: 3,
             p: 4,
+            maxHeight: "90vh",
+            overflowY: "auto",
           }}
         >
+          <IconButton
+            onClick={handleCloseModal}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
           <Typography
             id="login-modal-title"
             variant="h6"
@@ -124,7 +174,7 @@ const ImageCarousel = () => {
               fontSize: "20px",
             }}
           >
-            {isLoggedIn ? "Participate" : "Login"}
+            {isLoggedIn ? "" : "Login"}
           </Typography>
           {isLoggedIn ? (
             <ParticipationForm />
@@ -149,12 +199,16 @@ const ImageCarousel = () => {
                   color="primary"
                   onClick={handleLogin}
                   style={{
-                    width: "13rem",
-                    marginTop: "10px",
+                    position: "relative",
+                    // top: "-55px",
+                    width: "25%",
                     backgroundColor: "#9C2946",
                     fontWeight: "600",
                     textTransform: "capitalize",
                     borderRadius: "50px",
+                    padding: " 20px",
+                    fontSize: "16px",
+                    boxShadow: "4px 6px 10px 0px grey",
                   }}
                 >
                   Login

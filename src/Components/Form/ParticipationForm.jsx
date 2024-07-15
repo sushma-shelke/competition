@@ -5,8 +5,8 @@ import CustomButton from "./../CustomButton.jsx"; // Changed the import to .jsx
 import { useCompitationContext } from "../../Context/CompitationContext.jsx";
 
 const ParticipationForm = () => {
-  const { faq } = useCompitationContext();
-  console.log(faq, "FAQWQ");
+  // const { faq } = useCompitationContext();
+  // console.log(faq, "FAQWQ");
 
   const {
     register,
@@ -33,7 +33,8 @@ const ParticipationForm = () => {
         variant="h5"
         sx={{
           mr: 2,
-          display: { xs: "none", md: "flex" },
+          // display: { xs: "none", md: "flex" },
+          display: "flex",
           justifyContent: "center",
           fontWeight: 700,
           textDecoration: "none",

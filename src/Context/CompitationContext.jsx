@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
   const [faq, setFaq] = useState([]);
+  const [product, setProduct] = useState([]);
 
   //  FAQ List All
   useEffect(() => {
@@ -16,6 +17,14 @@ export const CompitationContextProvider = ({ children }) => {
     })();
   }, []);
 
+  // Produt List all
+  useEffect(() => {
+    (async () => {
+      const data = await ListAllApi.getProduct();
+      // console.log(data, "resss");
+      setProduct(data);
+    })();
+  });
   // Register user
   const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
   const registerUser = async (formData) => {
@@ -25,6 +34,7 @@ export const CompitationContextProvider = ({ children }) => {
 
   const value = {
     faq,
+    product,
   };
   return (
     <CompitationContext.Provider value={value}>
