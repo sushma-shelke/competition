@@ -80,7 +80,6 @@ const ProductPost = ({
 
   return (
     <Card sx={{ maxWidth: 345, margin: 2, position: "relative" }}>
-      <AnimatedLikeIcon animate={animateLike ? 1 : 0} />
       <CardMedia
         component="img"
         height="300"
