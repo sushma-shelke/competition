@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import ProductPost from "./ProductPost";
+import { useCompitationContext } from "../../Context/CompitationContext";
 
 const products = [
   {
@@ -98,6 +99,8 @@ const products = [
 ];
 
 const ProductGrid = () => {
+  // const { product } = useCompitationContext();
+  // console.log(product, "asdasd");
   return (
     <Grid container spacing={2} justifyContent="center">
       {products.map((product, index) => (

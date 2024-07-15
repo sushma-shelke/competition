@@ -13,7 +13,7 @@ function App() {
       <header className="App-header">
         <Header />
         <ImageCarousel />
-        <ParticipationForm />
+        {/* <ParticipationForm /> */}
         <ProductMainCategory />
         <ProductGrid />
         <Footer />

@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import logoImage from "../Assets/Images/image__17_-removebg-preview (1).png";
 
-const pages = ["Products", "Categories", "Votes", "FAQ"];
+const pages = ["Products", "Categories", "Votes"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header() {
