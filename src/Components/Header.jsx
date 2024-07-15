@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import logoImage from "../Assets/Images/image__17_-removebg-preview (1).png";
 
 const pages = ["Products", "Categories", "Votes", "FAQ"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -40,31 +41,14 @@ function Header() {
     <AppBar
       position="static"
       sx={{
-        background:
-          "linear-gradient(45deg, #f58529 30%, #dd2a7b 50%, #8134af 70%, #515bd4 90%)",
+        background: "#fff",
+        // background:
+        //   "linear-gradient(45deg, #f58529 30%, #dd2a7b 50%, #8134af 70%, #515bd4 90%)",
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
+          <img src={logoImage} height="100px" width="100px" />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -125,7 +109,14 @@ function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "#9C2946",
+                  display: "block",
+                  fontWeight: "700",
+                  textTransform: "capitalize",
+                  fontSize: "20px",
+                }}
               >
                 {page}
               </Button>
