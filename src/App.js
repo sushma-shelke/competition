@@ -6,6 +6,7 @@ import ProductMainCategory from "./Components/Products/ProductMainCategory";
 import ParticipationForm from "./Components/Form/ParticipationForm";
 import ProductGrid from "./Components/Products/ProductGrid";
 import ImageCarousel from "./Components/ImageCarousel";
+import ProductDetail from "./Components/Products/ProductDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Header />
         <ImageCarousel />
         {/* <ParticipationForm /> */}
+        <ProductDetail />
         <ProductMainCategory />
         <ProductGrid />
         <Footer />
