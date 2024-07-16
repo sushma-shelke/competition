@@ -37,8 +37,11 @@ const products = [
     category: "Food and Drinks",
   },
   {
+
     _id: "3",
     name: "Handcrafted Wooden Bowl",
+    name: " Wooden Bowl",
+
     shortDescription: "A beautiful bowl crafted from sustainable wood.",
     photos: [
       "https://via.placeholder.com/140",
