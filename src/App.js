@@ -6,8 +6,12 @@ import ProductMainCategory from "./Components/Products/ProductMainCategory";
 import ParticipationForm from "./Components/Form/ParticipationForm";
 import ProductGrid from "./Components/Products/ProductGrid";
 import ImageCarousel from "./Components/ImageCarousel";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CategoryDetail from "./Components/Products/CategoryDetail";
+
+import ProductDetail from "./Components/Products/ProductDetail";
+
 
 function App() {
   return (
@@ -19,6 +23,7 @@ function App() {
         <Header />
         <ImageCarousel />
         {/* <ParticipationForm /> */}
+        <ProductDetail />
         <ProductMainCategory />
         <Routes>
           {/* <Route path="/" element={<ProductMainCategory />} /> */}
