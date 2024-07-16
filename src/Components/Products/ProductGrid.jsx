@@ -1,10 +1,10 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import ProductPost from "./ProductPost";
-import { useCompitationContext } from "../../Context/CompitationContext";
 
 const products = [
   {
+    _id: "1",
     name: "Handmade Tote Bag",
     shortDescription:
       "A stylish and eco-friendly tote bag made from recycled materials.",
@@ -21,6 +21,7 @@ const products = [
     category: "Bags and Luggage",
   },
   {
+    _id: "2",
     name: "Organic Jam",
     shortDescription: "Delicious homemade jam made from organic fruits.",
     photos: [
@@ -36,7 +37,11 @@ const products = [
     category: "Food and Drinks",
   },
   {
+
+    _id: "3",
+    name: "Handcrafted Wooden Bowl",
     name: " Wooden Bowl",
+
     shortDescription: "A beautiful bowl crafted from sustainable wood.",
     photos: [
       "https://via.placeholder.com/140",
@@ -51,6 +56,7 @@ const products = [
     category: "Home Decor",
   },
   {
+    _id: "4",
     name: "Natural Soy Candles",
     shortDescription: "Eco-friendly candles made from natural soy wax.",
     photos: [
@@ -66,6 +72,7 @@ const products = [
     category: "Home Fragrance",
   },
   {
+    _id: "5",
     name: "Knitted Scarf",
     shortDescription: "A warm and cozy scarf knitted from organic wool.",
     photos: [
@@ -81,6 +88,7 @@ const products = [
     category: "Apparel",
   },
   {
+    _id: "6",
     name: "Ceramic Coffee Mug",
     shortDescription:
       "A handcrafted ceramic mug perfect for your morning coffee.",
@@ -99,12 +107,10 @@ const products = [
 ];
 
 const ProductGrid = () => {
-  // const { product } = useCompitationContext();
-  // console.log(product, "asdasd");
   return (
     <Grid container spacing={2} justifyContent="center">
-      {products.map((product, index) => (
-        <Grid item key={index} xs={12} sm={6} md={3}>
+      {products.map((product) => (
+        <Grid item key={product._id} xs={12} sm={6} md={3}>
           <ProductPost {...product} />
         </Grid>
       ))}
