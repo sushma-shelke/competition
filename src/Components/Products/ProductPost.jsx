@@ -65,7 +65,7 @@ const ProductPost = ({
     setAnimateLike(true);
     setTimeout(() => setAnimateLike(false), 600);
 
-    // Increment or decrement likeCount based on liked state
+        // Increment or decrement likeCount based on liked state
     if (!liked) {
       setLikeCount(likeCount + 1);
     } else {
@@ -73,6 +73,14 @@ const ProductPost = ({
     }
   };
 
+
+  const truncateName = (name, wordLimit) => {
+    const words = name.split(' ');
+    return words.length > wordLimit
+      ? words.slice(0, wordLimit).join(' ') + '...'
+      : name;
+  };
+  
   const handleShare = () => {
     // Add share logic here
     alert("Share button clicked!");
@@ -83,6 +91,7 @@ const ProductPost = ({
       <CardMedia
         component="img"
         height="300"
+        width={'100%'}
         image={photos[0]}
         // alt={${name} photo}
       />
@@ -93,7 +102,8 @@ const ProductPost = ({
           variant="h5"
           component="div"
         >
-          {name}
+           {truncateName(name, 2)}
+          {/* {name} */}
         </Typography>
         <Typography
           sx={{ textAlign: "left" }}

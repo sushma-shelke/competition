@@ -2,14 +2,15 @@ import React from "react";
 import { Grid } from "@mui/material";
 import ProductPost from "./ProductPost";
 import { useCompitationContext } from "../../Context/CompitationContext";
-
+import HandcraftedWoodenBowl  from '../../Assets/Images/HandcraftedWoodenBowl.jpeg'
+import toeabag from '../../Assets/Images/Handcrafted-Tote-bag.jpeg'
 const products = [
   {
     name: "Handmade Tote Bag",
     shortDescription:
       "A stylish and eco-friendly tote bag made from recycled materials.",
     photos: [
-      "https://via.placeholder.com/140",
+      toeabag,
       "https://via.placeholder.com/140",
       "https://via.placeholder.com/140",
     ],
@@ -24,7 +25,7 @@ const products = [
     name: "Organic Jam",
     shortDescription: "Delicious homemade jam made from organic fruits.",
     photos: [
-      "https://via.placeholder.com/140",
+      "https://andyjconnelly.wordpress.com/wp-content/uploads/2013/10/jam-jars.jpg",
       "https://via.placeholder.com/140",
       "https://via.placeholder.com/140",
     ],
@@ -39,7 +40,7 @@ const products = [
     name: "Handcrafted Wooden Bowl",
     shortDescription: "A beautiful bowl crafted from sustainable wood.",
     photos: [
-      "https://via.placeholder.com/140",
+      HandcraftedWoodenBowl,
       "https://via.placeholder.com/140",
       "https://via.placeholder.com/140",
     ],
@@ -54,7 +55,7 @@ const products = [
     name: "Natural Soy Candles",
     shortDescription: "Eco-friendly candles made from natural soy wax.",
     photos: [
-      "https://via.placeholder.com/140",
+      "https://www.coastmagazine.co.uk/wp-content/uploads/sites/14/2015/11/shutterstock_304268132web-scaled.jpg",
       "https://via.placeholder.com/140",
       "https://via.placeholder.com/140",
     ],
@@ -69,7 +70,7 @@ const products = [
     name: "Knitted Scarf",
     shortDescription: "A warm and cozy scarf knitted from organic wool.",
     photos: [
-      "https://via.placeholder.com/140",
+      "https://www.boontoon.com/blog/wp-content/uploads/2019/08/Hand-knitted-scarf-Handmade-Knitting-4.jpg",
       "https://via.placeholder.com/140",
       "https://via.placeholder.com/140",
     ],
@@ -85,7 +86,7 @@ const products = [
     shortDescription:
       "A handcrafted ceramic mug perfect for your morning coffee.",
     photos: [
-      "https://via.placeholder.com/140",
+      "https://loamclaystudio.ca/cdn/shop/products/Turqoise_Yellow_18ozMug_Angled1_1200x.jpg?v=1588852173",
       "https://via.placeholder.com/140",
       "https://via.placeholder.com/140",
     ],
