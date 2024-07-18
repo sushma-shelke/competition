@@ -22,7 +22,7 @@ const Footer = () => {
           xs={12}
           sx={{ direction: "flex", justifyContent: "center", padding: "10px" }}
         >
-          <Grid container item xs={10}>
+          <Grid container item xs={11}>
             <Grid item xs={4}>
               <Grid container xs={12} gap={1}>
                 <Grid
@@ -61,7 +61,8 @@ const Footer = () => {
                       textAlign: "left",
                     }}
                   >
-                    A 10 ,Bhakti Plaza , Aundh
+                    5, Mahapalika Marg, Dhobi Talao, Chhatrapati Shivaji
+                    Terminus Area, Fort, Mumbai, Maharashtra 400001
                   </Typography>
                 </Grid>
               </Grid>

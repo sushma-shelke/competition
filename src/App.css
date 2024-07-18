@@ -133,5 +133,8 @@ button:active {
 .css-78trlr-MuiButtonBase-root-MuiIconButton-root {
   border-radius: 50px !important;
 }
-
+.logocss{
+  height: 100px !important;
+  width: 100px !important;
+}
 
