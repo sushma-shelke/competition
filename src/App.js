@@ -12,27 +12,25 @@ import CategoryDetail from "./Components/Products/CategoryDetail";
 
 import ProductDetail from "./Components/Products/ProductDetail";
 
-
 function App() {
   return (
     <Router>
+      <div className="App">
+        <header className="App-header">
+          <Header />
+          <ImageCarousel />
+                  <ProductMainCategory />
+          <Routes>
+            <Route path="/category/:name" element={<CategoryDetail />} />
+          </Routes>
+          <ProductGrid />
+          <Routes>
+            <Route path="/product/:id" element={<ProductDetail />} />
+          </Routes>
 
-   
-    <div className="App">
-      <header className="App-header">
-        <Header />
-        <ImageCarousel />
-        {/* <ParticipationForm /> */}
-        <ProductDetail />
-        <ProductMainCategory />
-        <Routes>
-          {/* <Route path="/" element={<ProductMainCategory />} /> */}
-          <Route path="/category/:name" element={<CategoryDetail />} />
-        </Routes>
-        <ProductGrid />
-        <Footer />
-      </header>
-    </div>
+          <Footer />
+        </header>
+      </div>
     </Router>
   );
 }

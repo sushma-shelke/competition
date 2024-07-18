@@ -6,5 +6,7 @@ export const ListAllApi = {
   // faq
   getFAQ: async () => await Get(`/faq`),
 
-  getProduct: async () => await Get("/getproduct"),
+  getProduct: async () => await Get("/getAllproduct"),
+
+  getProductById: async (id) => await Get(`/getproductbyid/${id}`),
 };
