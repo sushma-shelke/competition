@@ -16,7 +16,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-
         <header className="App-header">
           <Header />
           <ImageCarousel />
@@ -28,9 +27,10 @@ function App() {
             {/* <Route path="/" element={<ProductMainCategory />} /> */}
 
             <Route path="/category/:name" element={<CategoryDetail />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-        </Routes>
-        <Footer />
+            <Route path="/product/:id" element={<ProductDetail />} />
+          </Routes>
+          <Footer />
+        </header>
       </div>
     </Router>
   );
