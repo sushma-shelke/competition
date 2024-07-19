@@ -10,23 +10,23 @@ import ImageCarousel from "./Components/ImageCarousel";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CategoryDetail from "./Components/Products/CategoryDetail";
 import ProductDetail from "./Components/Products/ProductDetail";
+// import Result from "./Components/Result";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
-        <Routes>
-          <Route 
-            path="/" 
-            element={
-              <div>
-                <ImageCarousel />
-                <ProductMainCategory />
-                <ProductGrid />
-              </div>
-            } 
-          />
+
+        <header className="App-header">
+          <Header />
+          <ImageCarousel />
+          {/* <ParticipationForm /> */}
+          <ProductDetail />
+          <ProductMainCategory />
+          {/*  <Result />*/}
+          <Routes>
+            {/* <Route path="/" element={<ProductMainCategory />} /> */}
+
             <Route path="/category/:name" element={<CategoryDetail />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
