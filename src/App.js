@@ -19,6 +19,7 @@ function App() {
         <header className="App-header">
           <Header />
           <ImageCarousel />
+
                   <ProductMainCategory />
           <Routes>
             <Route path="/category/:name" element={<CategoryDetail />} />
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/product/:id" element={<ProductDetail />} />
           </Routes>
+
 
           <Footer />
         </header>

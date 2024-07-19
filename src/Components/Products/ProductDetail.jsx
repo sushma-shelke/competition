@@ -123,11 +123,13 @@ const ProductDetail = () => {
                       padding: " 30px",
                       fontSize: "16px",
                       boxShadow: "4px 6px 10px 0px grey",
+
                       color: '#fff'
                     }}
                   >
                     Vote this product 
                     {/* <i className="fas fa-thumbs-up"></i> */}
+
                   </Button>
                 </Grid>
               </Grid>
