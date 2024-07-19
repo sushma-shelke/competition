@@ -7,7 +7,9 @@ import { useForm } from "react-hook-form";
 const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
   const [faq, setFaq] = useState([]);
-  const [product, setProduct] = useState([]);
+  const [products, setProducts] = useState();
+  const[category, setCategory]= useState([]);
+  
 
   //  FAQ List All
   useEffect(() => {
@@ -17,14 +19,28 @@ export const CompitationContextProvider = ({ children }) => {
     })();
   }, []);
 
-  // Produt List all
+     // Product List All
   useEffect(() => {
     (async () => {
-      const data = await ListAllApi.getProduct();
-      // console.log(data, "resss");
-      setProduct(data);
+      try {
+        const response = await ListAllApi.getProduct();
+        setProducts(response?.result?.data || []);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     })();
-  });
+  }, []);
+
+   // Function to fetch product by ID
+   const getProductById = async (id) => {
+    try {
+      const response = await ListAllApi.getProductById(id);
+      return response?.result;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+      return null;
+    }
+  };
   // Register user
   const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
   const registerUser = async (formData) => {
@@ -34,7 +50,8 @@ export const CompitationContextProvider = ({ children }) => {
 
   const value = {
     faq,
-    product,
+    products,
+    getProductById
   };
   return (
     <CompitationContext.Provider value={value}>
