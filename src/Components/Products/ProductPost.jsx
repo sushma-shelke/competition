@@ -10,6 +10,7 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import styled, { keyframes, css } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // Define the animation with css helper
 const likeAnimation = keyframes`
@@ -45,17 +46,9 @@ const AnimatedLikeIcon = styled(FavoriteIcon)`
   pointer-events: none;
 `;
 
-const ProductPost = ({
-  name,
-  shortDescription,
-  photos,
-  weight,
-  quantity,
-  dimensions,
-  color,
-  price,
-  category,
-}) => {
+const ProductPost = ({product}) => {
+  const navigate = useNavigate();
+ 
   const [liked, setLiked] = useState(false);
   const [animateLike, setAnimateLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -73,17 +66,19 @@ const ProductPost = ({
     }
   };
 
-
-  const truncateName = (name, wordLimit) => {
-    const words = name.split(' ');
-    return words.length > wordLimit
-      ? words.slice(0, wordLimit).join(' ') + '...'
-      : name;
-  };
+// const name=product?.name;
+//   const truncateName = (name, wordLimit) => {
+//     const words = name.split(' ');
+//     return words.length > wordLimit
+//       ? words.slice(0, wordLimit).join(' ') + '...'
+//       : name;
+//   };
   
   const handleShare = () => {
-    // Add share logic here
-    alert("Share button clicked!");
+    console.log("click in product");
+  };
+  const handleProductSelect = () => {   
+      navigate(`/product/${product?._Id}`);
   };
 
   return (
@@ -92,8 +87,9 @@ const ProductPost = ({
         component="img"
         height="300"
         width={'100%'}
-        image={photos[0]}
+        image={product?.product_photo}
         // alt={${name} photo}
+        onClick={handleProductSelect}
       />
       <CardContent>
         <Typography
@@ -102,15 +98,15 @@ const ProductPost = ({
           variant="h5"
           component="div"
         >
-           {truncateName(name, 2)}
-          {/* {name} */}
+           {/* {truncateName(name, 2)} */}
+         {product?.product_name}
         </Typography>
         <Typography
           sx={{ textAlign: "left" }}
           variant="body2"
           color="text.secondary"
         >
-          {shortDescription}
+          {product?.product_shortdescription}
         </Typography>
       </CardContent>
       <CardActions>

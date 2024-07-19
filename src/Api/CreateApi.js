@@ -10,6 +10,6 @@ export const CreateApi = {
     return await Login("login", json);
   },
   RegisterApi: async (json) => {
-    return await Post("users", json);
+    return await Post("users/createorloginuser", json);
   },
 };

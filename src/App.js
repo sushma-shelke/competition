@@ -9,7 +9,6 @@ import ImageCarousel from "./Components/ImageCarousel";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CategoryDetail from "./Components/Products/CategoryDetail";
-
 import ProductDetail from "./Components/Products/ProductDetail";
 // import Result from "./Components/Result";
 
@@ -17,6 +16,7 @@ function App() {
   return (
     <Router>
       <div className="App">
+
         <header className="App-header">
           <Header />
           <ImageCarousel />
@@ -26,11 +26,11 @@ function App() {
           {/*  <Result />*/}
           <Routes>
             {/* <Route path="/" element={<ProductMainCategory />} /> */}
+
             <Route path="/category/:name" element={<CategoryDetail />} />
-          </Routes>
-          <ProductGrid />
-          <Footer />
-        </header>
+          <Route path="/product/:id" element={<ProductDetail />} />
+        </Routes>
+        <Footer />
       </div>
     </Router>
   );

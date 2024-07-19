@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
 import img1 from "../Assets/Images/homepage1.jpg";
 import img2 from "../Assets/Images/homepage2.jpg";
+import { useCompitationContext } from "../Context/CompitationContext"; // Import context
 import ParticipationForm from "./Form/ParticipationForm"; // Import your ParticipationForm component here
 
 const images = [img1, img2, img1, img2, img1, img2];
@@ -20,14 +21,10 @@ const intervalTime = 3000; // 3 seconds for autoplay
 const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
+  const [mobileNumber, setMobileNumber] = useState("");
+  const { isLoggedIn, registerOrLoginUser } = useCompitationContext(); // Use context
 
-  const isMobile = useMediaQuery("(max-width: 600px)"); // Media query to check if screen width is less than 600px
-
-  useEffect(() => {
-    // Simulate checking if user is logged in (could be replaced with actual logic)
-    setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true"); // Check localStorage or your authentication state
-  }, []);
+  const isMobile = useMediaQuery("(max-width: 768px)"); // Media query to check if screen width is less than 600px
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -47,12 +44,13 @@ const ImageCarousel = () => {
     setOpenModal(false);
   };
 
-  const handleLogin = () => {
-    // Implement your login logic here
-    alert("Logging in...");
-    localStorage.setItem("isLoggedIn", "true"); // Set isLoggedIn in localStorage or manage your authentication state
-    setIsLoggedIn(true);
-    handleCloseModal(); // Close the modal after successful login
+  const handleLogin = async () => {
+    const result = await registerOrLoginUser(mobileNumber);
+    if (result) {
+      setOpenModal(false); // Close the modal after successful login
+    } else {
+      alert("Failed to login/register.");
+    }
   };
 
   return (
@@ -84,12 +82,12 @@ const ImageCarousel = () => {
           style={{
             position: "relative",
             top: "-55px",
-            width: "15%",
+            width: isMobile ? "55%" : "20%",
             backgroundColor: "#9C2946",
             fontWeight: "600",
             textTransform: "capitalize",
             borderRadius: "50px",
-            padding: " 30px",
+            padding: "30px",
             fontSize: "16px",
             boxShadow: "4px 6px 10px 0px grey",
           }}
@@ -102,21 +100,14 @@ const ImageCarousel = () => {
           color="primary"
           onClick={handleOpenModal}
           style={{
-            // position: "relative",
-            // top: "-84px",
-            // width: "30%",
-            // backgroundColor: "#9C2946",
-            // fontWeight: "600",
-            // textTransform: "capitalize",
-            // borderRadius: "50px",
             position: "relative",
             top: "-55px",
-            width: "15%",
+            width: isMobile ? "55%" : "20%",
             backgroundColor: "#9C2946",
             fontWeight: "600",
             textTransform: "capitalize",
             borderRadius: "50px",
-            padding: " 30px",
+            padding: "30px",
             fontSize: "16px",
             boxShadow: "4px 6px 10px 0px grey",
           }}
@@ -182,8 +173,10 @@ const ImageCarousel = () => {
             <>
               <TextField
                 id="mobile"
-                label="mobile"
+                label="Mobile Number"
                 type="number"
+                value={mobileNumber}
+                onChange={(e) => setMobileNumber(e.target.value)}
                 variant="outlined"
                 fullWidth
                 margin="normal"
@@ -200,13 +193,12 @@ const ImageCarousel = () => {
                   onClick={handleLogin}
                   style={{
                     position: "relative",
-                    // top: "-55px",
                     width: "25%",
                     backgroundColor: "#9C2946",
                     fontWeight: "600",
                     textTransform: "capitalize",
                     borderRadius: "50px",
-                    padding: " 20px",
+                    padding: "20px",
                     fontSize: "16px",
                     boxShadow: "4px 6px 10px 0px grey",
                   }}
