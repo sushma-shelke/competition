@@ -1,32 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Button, Grid, Typography } from "@mui/material";
-import "../../../src/Card.css"; 
+import "../../../src/Card.css";
 import { useParams } from "react-router-dom";
-import { ListAllApi } from "../../Api/ListAllApi";
+import { useCompitationContext } from "../../Context/CompitationContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
-      const [product, setProduct] = useState(null); 
-  
-    useEffect(() => {
-            const fetchProduct = async () => {
-        try {
-          const response = await ListAllApi.getProductById(id);
-                   setProduct(response?.result);
-        } catch (error) {
-          console.error("Error fetching product:", error);
-        }
-      };
-  
-      fetchProduct();
-    }, [id]);
-  
-    if (!product) {
-      return <div>Loading...</div>; 
-    }
-  
-  
- 
+  const [product, setProduct] = useState(null);
+  const { getProductById } = useCompitationContext();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const fetchedProduct = await getProductById(id);
+      setProduct(fetchedProduct);
+    };
+
+    fetchProduct();
+  }, [id, getProductById]);
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12} lg={11}>
@@ -35,7 +30,7 @@ const ProductDetail = () => {
             <div className="product-imgs">
               <div className="img-display">
                 <div className="img-showcase">
-                {product?.product_photo_gallery?.map((photo, index) => (
+                  {product?.product_photo_gallery?.map((photo, index) => (
                     <img key={index} src={photo} alt={`Product ${index + 1}`} />
                   ))}
                 </div>
@@ -85,7 +80,7 @@ const ProductDetail = () => {
               <div className="product-detail">
                 <h2>About this item: </h2>
                 <p>{product.product_shortdescription}</p>
-                               <ul>
+                <ul>
                   <li>
                     Category: <span>{product.product_category}</span>
                   </li>
@@ -104,11 +99,9 @@ const ProductDetail = () => {
                   <li>
                     Self Help Group Name: <span>{product.shgname}</span>
                   </li>
-                  
                 </ul>
               </div>
               <Grid Container lg={12} sx={{ display: "flex" }}>
-               
                 <Grid lg={6}>
                   <Button
                     type="button"
@@ -124,12 +117,11 @@ const ProductDetail = () => {
                       fontSize: "16px",
                       boxShadow: "4px 6px 10px 0px grey",
 
-                      color: '#fff'
+                      color: "#fff",
                     }}
                   >
-                    Vote this product 
+                    Vote this product
                     {/* <i className="fas fa-thumbs-up"></i> */}
-
                   </Button>
                 </Grid>
               </Grid>
@@ -142,4 +134,3 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
-
