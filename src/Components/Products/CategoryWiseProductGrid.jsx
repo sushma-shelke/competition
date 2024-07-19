@@ -6,7 +6,7 @@ const CategoryWiseProductGrid = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleSelectCategory = (category) => {
-    console.log('category',category);
+    console.log("category", category);
     setSelectedCategory(category);
   };
   return (

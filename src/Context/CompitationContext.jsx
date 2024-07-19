@@ -11,7 +11,10 @@ export const CompitationContextProvider = ({ children }) => {
   const [products, setProducts] = useState();
   const [category, setCategory] = useState([]);
 
- 
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
+
   //  FAQ List All
   // useEffect(() => {
   //   (async () => {
@@ -43,6 +46,7 @@ export const CompitationContextProvider = ({ children }) => {
     }
   };
 
+
  
     
      // Category List All
@@ -71,14 +75,43 @@ export const CompitationContextProvider = ({ children }) => {
   const registerUser = async (formData) => {
     const jsonData = { ...formData };
     const { result } = await CreateApi.RegisterApi(jsonData);
+
+  const registerOrLoginUser = async (mobileNumber) => {
+    console.log("LOGIN ATTEMPT");
+    try {
+      const jsonData = { mobileNumber };
+      const response = await ListAllApi.RegisterApi(jsonData);
+
+      // Check if the response is as expected
+      console.log(response);
+
+      // Assuming response structure: { data: { ... }, status: "200" }
+      if (response && response.data) {
+        setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", "true");
+        return response.data;
+      } else {
+        console.error("Unexpected response format", response);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error during registration or login:", error);
+      return null;
+    }
   };
 
   const value = {
     faq,
     products,
+
     category,
     getProductById,
     getProductByCayegoryId
+
+    getProductById,
+    isLoggedIn,
+    registerOrLoginUser,
+
   };
   return (
     <CompitationContext.Provider value={value}>
