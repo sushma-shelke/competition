@@ -6,19 +6,22 @@ import { useForm } from "react-hook-form";
 
 const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
+
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
   const [category, setCategory] = useState([]);
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
+
   //  FAQ List All
-  useEffect(() => {
-    (async () => {
-      const { result } = await ListAllApi.getFAQ();
-      setFaq(result);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { result } = await ListAllApi.getFAQ();
+  //     setFaq(result);
+  //   })();
+  // }, []);
 
   // Product List All
   useEffect(() => {
@@ -42,6 +45,37 @@ export const CompitationContextProvider = ({ children }) => {
       return null;
     }
   };
+
+
+ 
+    
+     // Category List All
+    useEffect(() => {
+      (async () => {
+        try {
+          const response = await ListAllApi.getCategory();
+          setCategory(response?.result?.data || []);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      })();
+    }, []);
+// Category wise product
+    const getProductByCayegoryId = async (id) => {
+      try {
+        const response = await ListAllApi.getProductListByCategoryId(id);
+        return response?.result;
+      } catch (error) {
+        console.error("Error fetching product by ID:", error);
+        return null;
+      }
+    };
+    // Register user
+  const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
+  const registerUser = async (formData) => {
+    const jsonData = { ...formData };
+    const { result } = await CreateApi.RegisterApi(jsonData);
+
   const registerOrLoginUser = async (mobileNumber) => {
     console.log("LOGIN ATTEMPT");
     try {
@@ -69,9 +103,15 @@ export const CompitationContextProvider = ({ children }) => {
   const value = {
     faq,
     products,
+
+    category,
+    getProductById,
+    getProductByCayegoryId
+
     getProductById,
     isLoggedIn,
     registerOrLoginUser,
+
   };
   return (
     <CompitationContext.Provider value={value}>
