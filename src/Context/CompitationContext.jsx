@@ -8,9 +8,10 @@ const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
-  const[category, setCategory]= useState([]);
-  
-
+  const [category, setCategory] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
   //  FAQ List All
   useEffect(() => {
     (async () => {
@@ -19,7 +20,7 @@ export const CompitationContextProvider = ({ children }) => {
     })();
   }, []);
 
-     // Product List All
+  // Product List All
   useEffect(() => {
     (async () => {
       try {
@@ -31,8 +32,8 @@ export const CompitationContextProvider = ({ children }) => {
     })();
   }, []);
 
-   // Function to fetch product by ID
-   const getProductById = async (id) => {
+  // Function to fetch product by ID
+  const getProductById = async (id) => {
     try {
       const response = await ListAllApi.getProductById(id);
       return response?.result;
@@ -41,17 +42,36 @@ export const CompitationContextProvider = ({ children }) => {
       return null;
     }
   };
-  // Register user
-  const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
-  const registerUser = async (formData) => {
-    const jsonData = { ...formData };
-    const { result } = await CreateApi.RegisterApi(jsonData);
+  const registerOrLoginUser = async (mobileNumber) => {
+    console.log("LOGIN ATTEMPT");
+    try {
+      const jsonData = { mobileNumber };
+      const response = await ListAllApi.RegisterApi(jsonData);
+
+      // Check if the response is as expected
+      console.log(response);
+
+      // Assuming response structure: { data: { ... }, status: "200" }
+      if (response && response.data) {
+        setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", "true");
+        return response.data;
+      } else {
+        console.error("Unexpected response format", response);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error during registration or login:", error);
+      return null;
+    }
   };
 
   const value = {
     faq,
     products,
-    getProductById
+    getProductById,
+    isLoggedIn,
+    registerOrLoginUser,
   };
   return (
     <CompitationContext.Provider value={value}>
