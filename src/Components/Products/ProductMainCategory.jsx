@@ -28,20 +28,22 @@ const ProductMainCategory = () => {
     <Grid
       container
       sx={{ justifyContent: "center", marginBottom: "40px" }}
-      spacing={5}
+      spacing={2}
     >
-      {categories.map((category, index) => (        
+      {categories.map((category, index) => (
         <Grid
           item
-          xs={1.5}
+          xs={3} // Each item takes up 6/12 columns on extra-small screens
+          sm={3} // Each item takes up 3/12 columns on small screens
+          lg={1.5}
           key={index}
-          onClick={() => 
-            handleCategorySelect(category.name)}
+          onClick={() => handleCategorySelect(category.name)}
+          sx={{ display: "flex", justifyContent: "center" }}
         >
           <img
             src={category.src}
             alt={category.alt}
-            style={{ width: "100%", cursor: "pointer" }}
+            style={{ width: "100%", maxWidth: "150px", cursor: "pointer" }}
           />
         </Grid>
       ))}
