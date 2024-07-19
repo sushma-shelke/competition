@@ -6,20 +6,21 @@ import { useForm } from "react-hook-form";
 
 const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
+
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
-  const[category, setCategory]= useState([]);
-  
+  const [category, setCategory] = useState([]);
 
+ 
   //  FAQ List All
-  useEffect(() => {
-    (async () => {
-      const { result } = await ListAllApi.getFAQ();
-      setFaq(result);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { result } = await ListAllApi.getFAQ();
+  //     setFaq(result);
+  //   })();
+  // }, []);
 
-     // Product List All
+  // Product List All
   useEffect(() => {
     (async () => {
       try {
@@ -31,8 +32,8 @@ export const CompitationContextProvider = ({ children }) => {
     })();
   }, []);
 
-   // Function to fetch product by ID
-   const getProductById = async (id) => {
+  // Function to fetch product by ID
+  const getProductById = async (id) => {
     try {
       const response = await ListAllApi.getProductById(id);
       return response?.result;
@@ -41,7 +42,31 @@ export const CompitationContextProvider = ({ children }) => {
       return null;
     }
   };
-  // Register user
+
+ 
+    
+     // Category List All
+    useEffect(() => {
+      (async () => {
+        try {
+          const response = await ListAllApi.getCategory();
+          setCategory(response?.result?.data || []);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      })();
+    }, []);
+// Category wise product
+    const getProductByCayegoryId = async (id) => {
+      try {
+        const response = await ListAllApi.getProductListByCategoryId(id);
+        return response?.result;
+      } catch (error) {
+        console.error("Error fetching product by ID:", error);
+        return null;
+      }
+    };
+    // Register user
   const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
   const registerUser = async (formData) => {
     const jsonData = { ...formData };
@@ -51,7 +76,9 @@ export const CompitationContextProvider = ({ children }) => {
   const value = {
     faq,
     products,
-    getProductById
+    category,
+    getProductById,
+    getProductByCayegoryId
   };
   return (
     <CompitationContext.Provider value={value}>
