@@ -5,7 +5,7 @@ import Response from "./Response";
 
 class RequestDefaults {
   static token = "";
-  static baseUrl = "/http://localhost:8080";
+  static baseUrl = "http://localhost:8080";
   // static baseUrl = "https://kitcentral.tech/api_gov_champ/public/";
 
   static version = "/v1";

@@ -139,17 +139,20 @@ img {
   margin: 1rem 0;
   font-size: 0.9rem;
   color: #333; /* Dark gray color for the text */
+  /* float: left; */
 }
 
 .product-detail ul li {
   margin: 0;
   list-style: none;
-  background: url(https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/checked.png)
-    left center no-repeat;
+  /* background: url(https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/checked.png)
+    left center no-repeat; */
   background-size: 18px;
   padding-left: 1.7rem;
   margin: 0.4rem 0;
   font-weight: 600;
+  text-align: left !important;
+  /* float: left; */
   opacity: 0.9;
   color: #333; /* Dark gray color for the text */
 }
@@ -183,7 +186,7 @@ img {
 }
 
 .purchase-info .btn:first-of-type {
-  background: #256eff;
+  background: #f6f7f8;
 }
 
 .purchase-info .btn:last-of-type {

@@ -19,14 +19,17 @@ function App() {
         <header className="App-header">
           <Header />
           <ImageCarousel />
-          {/* <ParticipationForm /> */}
-          <ProductDetail />
-          <ProductMainCategory />
+
+                  <ProductMainCategory />
           <Routes>
-            {/* <Route path="/" element={<ProductMainCategory />} /> */}
             <Route path="/category/:name" element={<CategoryDetail />} />
           </Routes>
           <ProductGrid />
+          <Routes>
+            <Route path="/product/:id" element={<ProductDetail />} />
+          </Routes>
+
+
           <Footer />
         </header>
       </div>
