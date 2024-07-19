@@ -71,10 +71,10 @@ export const CompitationContextProvider = ({ children }) => {
       }
     };
     // Register user
-  const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
-  const registerUser = async (formData) => {
-    const jsonData = { ...formData };
-    const { result } = await CreateApi.RegisterApi(jsonData);
+  // const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
+  // const registerUser = async (formData) => {
+  //   const jsonData = { ...formData };
+  //   const { result } = await CreateApi.RegisterApi(jsonData);
 
   const registerOrLoginUser = async (mobileNumber) => {
     console.log("LOGIN ATTEMPT");
@@ -99,15 +99,13 @@ export const CompitationContextProvider = ({ children }) => {
       return null;
     }
   };
-
+// }
   const value = {
     faq,
     products,
-
     category,
     getProductById,
-    getProductByCayegoryId
-
+    getProductByCayegoryId,
     getProductById,
     isLoggedIn,
     registerOrLoginUser,
