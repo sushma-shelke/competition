@@ -22,7 +22,7 @@ const ImageCarousel = () => {
   const [openModal, setOpenModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // State to manage login status
 
-  const isMobile = useMediaQuery("(max-width: 600px)"); // Media query to check if screen width is less than 600px
+  const isMobile = useMediaQuery("(max-width: 768px)"); // Media query to check if screen width is less than 600px
 
   useEffect(() => {
     // Simulate checking if user is logged in (could be replaced with actual logic)
@@ -84,7 +84,7 @@ const ImageCarousel = () => {
           style={{
             position: "relative",
             top: "-55px",
-            width: "15%",
+            width: isMobile ? "55%" : "20%",
             backgroundColor: "#9C2946",
             fontWeight: "600",
             textTransform: "capitalize",
