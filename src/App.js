@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CategoryDetail from "./Components/Products/CategoryDetail";
 
 import ProductDetail from "./Components/Products/ProductDetail";
-import Result from "./Components/Result";
+// import Result from "./Components/Result";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           {/* <ParticipationForm /> */}
           <ProductDetail />
           <ProductMainCategory />
-          <Result />
+          {/*  <Result />*/}
           <Routes>
             {/* <Route path="/" element={<ProductMainCategory />} /> */}
             <Route path="/category/:name" element={<CategoryDetail />} />
