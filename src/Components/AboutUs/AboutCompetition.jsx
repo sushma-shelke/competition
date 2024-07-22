@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import Winning from "../../Assets/Images/Winning.png";
 import Registration from "../../Assets/Images/Registration.png";
+import Votes from "../../Assets/Images/Votes.png";
 const AboutCompetition = () => {
   return (
     <Grid container sx={{ mt: 4, justifyContent: "center" }}>
@@ -77,7 +78,7 @@ const AboutCompetition = () => {
             User Voting:
           </Typography>
           <img
-            src={Registration}
+            src={Votes}
             alt={"Image1"}
             style={{
               width: "80%",
