@@ -49,6 +49,8 @@ import ImageCarousel from "./Components/ImageCarousel";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CategoryDetail from "./Components/Products/CategoryDetail";
 import ProductDetail from "./Components/Products/ProductDetail";
+import AboutUs from "./Components/AboutUs/AboutUs";
+import AboutCompetition from "./Components/AboutUs/AboutCompetition";
 
 function App() {
   return (
@@ -56,17 +58,19 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route 
-            path="/" 
+          <Route
+            path="/"
             element={
               <div>
                 <ImageCarousel />
                 <ProductMainCategory />
                 <ProductGrid />
+                <AboutUs />
+                <AboutCompetition />
               </div>
-            } 
+            }
           />
-            <Route path="/category/:name" element={<CategoryDetail />} />
+          <Route path="/category/:name" element={<CategoryDetail />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
         <Footer />

@@ -46,9 +46,9 @@ const AnimatedLikeIcon = styled(FavoriteIcon)`
   pointer-events: none;
 `;
 
-const ProductPost = ({product}) => {
+const ProductPost = ({ product }) => {
   const navigate = useNavigate();
- 
+
   const [liked, setLiked] = useState(false);
   const [animateLike, setAnimateLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -58,7 +58,7 @@ const ProductPost = ({product}) => {
     setAnimateLike(true);
     setTimeout(() => setAnimateLike(false), 600);
 
-        // Increment or decrement likeCount based on liked state
+    // Increment or decrement likeCount based on liked state
     if (!liked) {
       setLikeCount(likeCount + 1);
     } else {
@@ -66,19 +66,19 @@ const ProductPost = ({product}) => {
     }
   };
 
-// const name=product?.name;
-//   const truncateName = (name, wordLimit) => {
-//     const words = name.split(' ');
-//     return words.length > wordLimit
-//       ? words.slice(0, wordLimit).join(' ') + '...'
-//       : name;
-//   };
-  
+  // const name=product?.name;
+  //   const truncateName = (name, wordLimit) => {
+  //     const words = name.split(' ');
+  //     return words.length > wordLimit
+  //       ? words.slice(0, wordLimit).join(' ') + '...'
+  //       : name;
+  //   };
+
   const handleShare = () => {
     console.log("click in product");
   };
-  const handleProductSelect = () => {   
-      navigate(`/product/${product?._Id}`);
+  const handleProductSelect = () => {
+    navigate(`/product/${product?._Id}`);
   };
 
   return (
@@ -86,7 +86,7 @@ const ProductPost = ({product}) => {
       <CardMedia
         component="img"
         height="300"
-        width={'100%'}
+        width={"100%"}
         image={product?.product_photo}
         // alt={${name} photo}
         onClick={handleProductSelect}
@@ -98,8 +98,8 @@ const ProductPost = ({product}) => {
           variant="h5"
           component="div"
         >
-           {/* {truncateName(name, 2)} */}
-         {product?.product_name}
+          {/* {truncateName(name, 2)} */}
+          {product?.product_name}
         </Typography>
         <Typography
           sx={{ textAlign: "left" }}
