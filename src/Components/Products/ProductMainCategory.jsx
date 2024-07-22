@@ -57,7 +57,7 @@ const categories = [
 
 const ProductMainCategory = () => {
   const { category } = useCompitationContext();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleCategorySelect = (id) => {
     navigate(`/category/${id}`);
   };
@@ -65,14 +65,14 @@ const ProductMainCategory = () => {
     <Grid
       container
       sx={{ justifyContent: "center", marginBottom: "40px" }}
-      spacing={2}
+      xs={12}
     >
       {categories.map((category, index) => (
         <Grid
           item
           xs={3} // Each item takes up 6/12 columns on extra-small screens
           sm={3} // Each item takes up 3/12 columns on small screens
-          lg={1.5}
+          lg={1.7}
           key={index}
           onClick={() => handleCategorySelect(category.id)}
           sx={{ display: "flex", justifyContent: "center" }}
@@ -80,7 +80,7 @@ const ProductMainCategory = () => {
           <img
             src={category.src}
             alt={category.alt}
-            style={{ width: "100%", maxWidth: "150px", cursor: "pointer" }}
+            style={{ borderRadius: "16px" }}
           />
         </Grid>
       ))}
