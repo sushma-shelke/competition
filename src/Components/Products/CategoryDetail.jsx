@@ -5,6 +5,8 @@ import ProductMainCategory from './ProductMainCategory';
 import { useCompitationContext } from '../../Context/CompitationContext';
 import { Grid } from '@mui/material';
 import ProductPost from './ProductPost';
+import Header from '../Header';
+import ImageCarousel from '../ImageCarousel';
 
 const CategoryDetail = () => {
     const { name } = useParams();
@@ -24,6 +26,7 @@ const CategoryDetail = () => {
 
     return (
         <>
+                 <ImageCarousel />
             <div style={{ marginTop: '16px' }}>
                 <ProductMainCategory />
                 <Grid container spacing={2} justifyContent="center">
