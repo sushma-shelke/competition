@@ -66,17 +66,11 @@ const ProductPost = ({ product }) => {
     }
   };
 
-  // const name=product?.name;
-  //   const truncateName = (name, wordLimit) => {
-  //     const words = name.split(' ');
-  //     return words.length > wordLimit
-  //       ? words.slice(0, wordLimit).join(' ') + '...'
-  //       : name;
-  //   };
-
   const handleShare = () => {
-    console.log("click in product");
+    const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}. Link: ${window.location.origin}/product/${product._Id}`;
+    window.open(whatsappUrl, "_blank");
   };
+
   const handleProductSelect = () => {
     navigate(`/product/${product?._Id}`);
   };
@@ -94,7 +88,7 @@ const ProductPost = ({ product }) => {
             transform: "scale(1.1)", // Scale the image to 110% on hover
           },
         }}
-        // alt={${name} photo}
+        // alt={`${product?.product_name} photo`}
         onClick={handleProductSelect}
       />
       <CardContent>
@@ -115,7 +109,6 @@ const ProductPost = ({ product }) => {
         <Typography
           sx={{
             textAlign: "left",
-            textAlign: "left",
             width: 280,
             whiteSpace: "nowrap",
             overflow: "hidden",
@@ -127,16 +120,13 @@ const ProductPost = ({ product }) => {
           {product?.product_shortdescription}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <IconButton
           color={liked ? "secondary" : "default"}
           onClick={handleLike}
         >
           <FavoriteIcon />
         </IconButton>
-        {/*<Typography variant="body2" color="text.secondary">
-          {likeCount} votes
-        </Typography>*/}
         <IconButton color="default" onClick={handleShare}>
           <ShareIcon />
         </IconButton>
