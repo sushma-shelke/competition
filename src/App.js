@@ -51,6 +51,7 @@ import CategoryDetail from "./Components/Products/CategoryDetail";
 import ProductDetail from "./Components/Products/ProductDetail";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import AboutCompetition from "./Components/AboutUs/AboutCompetition";
+import MainCounter from "./Components/Counter/MainCounter";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
                 <ProductMainCategory />
                 <ProductGrid />
                 <AboutUs />
+                <MainCounter/>
                 <AboutCompetition />
               </div>
             }
