@@ -6,8 +6,6 @@ import CardContent from "@mui/material/CardContent";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
-import IconButton from "@mui/material/IconButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Grid } from "@mui/material";
 
 const TopVotedProduct = ({ product }) => {
@@ -17,6 +15,7 @@ const TopVotedProduct = ({ product }) => {
     }
     return text.substring(0, maxLength) + "...";
   };
+
   return (
     <Grid
       item
@@ -45,6 +44,12 @@ const TopVotedProduct = ({ product }) => {
           height="194"
           image={product.product_photo}
           alt={product.product_name}
+          sx={{
+            transition: "transform 0.4s ease", // Smooth transition
+            "&:hover": {
+              transform: "scale(1.1)", // Scale the image to 110% on hover
+            },
+          }}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
