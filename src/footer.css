@@ -1,5 +1,16 @@
 .footer-content{
-  background: #6F1C32;
+  background: #e8e8e8;
   padding: 10px;
   
+}
+.footerSideImage{
+width: 68%;
+margin-top: -6rem;
+}
+
+@media only screen and (min-width:320px){
+  .footerSideImage{
+    width: 68%;
+    margin-top: 0rem;
+    }
 }
