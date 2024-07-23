@@ -103,7 +103,7 @@ const Footer = () => {
                       textAlign: "left",
                     }}
                   >
-                    +91 6787656780
+                    +91 84591 72859
                   </Typography>
                 </Grid>
               </Grid>
@@ -146,7 +146,7 @@ const Footer = () => {
                       textAlign: "left",
                     }}
                   >
-                    shgeshop@gmail.com
+                    support@mumbailocal.org
                   </Typography>
                 </Grid>
               </Grid>
@@ -161,6 +161,7 @@ const Footer = () => {
               paddingTop: "10px",
               paddingLeft: "3rem",
               textAlign: "left",
+              color: "#fff",
             }}
           >
             Join the SHGeshop Competition with BMCs Mumbai Local and support
@@ -174,9 +175,10 @@ const Footer = () => {
             sx={{
               fontSize: "19px",
               paddingLeft: "1rem",
-              fontWeight: "800",
+              fontWeight: "900",
               textAlign: "left",
               paddingTop: "2.5rem",
+              color: "#fff",
             }}
           >
             Follow Us
@@ -199,7 +201,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   style={{ color: "#1DA1F2" }}
                 >
-                  <FontAwesomeIcon icon={faTwitter} size="1x" />
+                  <FontAwesomeIcon icon={faTwitter} size="2x" />
                 </a>
               </Grid>
 
@@ -209,14 +211,14 @@ const Footer = () => {
                 sx={{ display: "flex", justifyContent: "center" }}
               >
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/profile.php?id=61562700044024"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
                     color: "#1877F2",
                   }}
                 >
-                  <FontAwesomeIcon icon={faFacebookSquare} size="1x" />
+                  <FontAwesomeIcon icon={faFacebookSquare} size="2x" />
                 </a>
               </Grid>
 
@@ -231,7 +233,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   style={{ color: "#E1306C" }}
                 >
-                  <FontAwesomeIcon icon={faInstagram} size="1x" />
+                  <FontAwesomeIcon icon={faInstagram} size="2x" />
                 </a>
               </Grid>
 
@@ -241,12 +243,12 @@ const Footer = () => {
                 sx={{ display: "flex", justifyContent: "center" }}
               >
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/mumbai-local-263ab831a/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#0A66C2" }}
                 >
-                  <FontAwesomeIcon icon={faLinkedin} size="1x" />
+                  <FontAwesomeIcon icon={faLinkedin} size="2x" />
                 </a>
               </Grid>
             </Grid>
