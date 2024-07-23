@@ -9,7 +9,10 @@ export const CompitationContextProvider = ({ children }) => {
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
   const [category, setCategory] = useState([]);
+  const [users , setUsers]= useState([]);
+  const [votes, setVotes]= useState([]);
   const [topVoted, setTopVoted] = useState([]);
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
@@ -109,11 +112,43 @@ export const CompitationContextProvider = ({ children }) => {
       return null;
     }
   };
+
+// }
+
+// users list all
+useEffect(() => {
+  (async () => {
+    try {
+      const response = await ListAllApi.getUsers();
+      console.log("users response",response)
+      setUsers(response?.result?.data || []);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  })();
+}, []);
+
+// votes list all
+useEffect(() => {
+  (async () => {
+    try {
+      const response = await ListAllApi.getvotes();
+      console.log("vote response",response)
+      setVotes(response?.result?.data || []);
+    } catch (error) {
+      console.error("Error fetching votes:", error);
+    }
+  })();
+}, []);
+
   // }
+
   const value = {
     faq,
     products,
     category,
+    users,
+    votes,
     topVoted,
     getProductById,
     getProductByCayegoryId,

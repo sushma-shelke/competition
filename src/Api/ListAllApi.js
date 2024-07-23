@@ -16,7 +16,16 @@ export const ListAllApi = {
 
   getCategory: async () => await Get("/categoryList"),
 
+
+  //users
+  getUsers: async () => await Get("/users/list"),
+
+  //vote
+  getvotes: async () => await Get("/votes/getAllvotes"),
+
+
   getTopVotedProduct: async () => await Get("/votes/top-voted"),
+
   RegisterApi: async (json) => {
     return await Post("/users/createorloginuser", json);
   },

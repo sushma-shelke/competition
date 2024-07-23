@@ -51,8 +51,12 @@ import CategoryDetail from "./Components/Products/CategoryDetail";
 import ProductDetail from "./Components/Products/ProductDetail";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import AboutCompetition from "./Components/AboutUs/AboutCompetition";
+
+import MainCounter from "./Components/Counter/MainCounter";
+
 import TopVotedProductGrid from "./Components/Stats/TopVotedProductGrid";
 import TopVotedProduct from "./Components/Stats/TopVotedProduct";
+
 
 function App() {
   return (
@@ -68,6 +72,7 @@ function App() {
                 <ProductMainCategory />
                 <ProductGrid />
                 <AboutUs />
+                <MainCounter/>
                 <AboutCompetition />
                 <TopVotedProductGrid products={TopVotedProduct} />
               </div>
