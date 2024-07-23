@@ -88,21 +88,39 @@ const ProductPost = ({ product }) => {
         height="300"
         width={"100%"}
         image={product?.product_photo}
+        sx={{
+          transition: "transform 0.4s ease", // Smooth transition
+          "&:hover": {
+            transform: "scale(1.1)", // Scale the image to 110% on hover
+          },
+        }}
         // alt={${name} photo}
         onClick={handleProductSelect}
       />
       <CardContent>
         <Typography
-          sx={{ textAlign: "left" }}
+          sx={{
+            textAlign: "left",
+            height: 30,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
           gutterBottom
           variant="h5"
           component="div"
         >
-          {/* {truncateName(name, 2)} */}
           {product?.product_name}
         </Typography>
         <Typography
-          sx={{ textAlign: "left" }}
+          sx={{
+            textAlign: "left",
+            textAlign: "left",
+            width: 280,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
           variant="body2"
           color="text.secondary"
         >
@@ -116,9 +134,9 @@ const ProductPost = ({ product }) => {
         >
           <FavoriteIcon />
         </IconButton>
-        <Typography variant="body2" color="text.secondary">
+        {/*<Typography variant="body2" color="text.secondary">
           {likeCount} votes
-        </Typography>
+        </Typography>*/}
         <IconButton color="default" onClick={handleShare}>
           <ShareIcon />
         </IconButton>

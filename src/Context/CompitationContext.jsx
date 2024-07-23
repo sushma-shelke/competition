@@ -6,12 +6,13 @@ import { useForm } from "react-hook-form";
 
 const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
-
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
   const [category, setCategory] = useState([]);
   const [users , setUsers]= useState([]);
   const [votes, setVotes]= useState([]);
+  const [topVoted, setTopVoted] = useState([]);
+
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
@@ -48,31 +49,41 @@ export const CompitationContextProvider = ({ children }) => {
     }
   };
 
-
- 
-    
-     // Category List All
-    useEffect(() => {
-      (async () => {
-        try {
-          const response = await ListAllApi.getCategory();
-          setCategory(response?.result?.data || []);
-        } catch (error) {
-          console.error("Error fetching products:", error);
-        }
-      })();
-    }, []);
-// Category wise product
-    const getProductByCayegoryId = async (id) => {
+  // Category List All
+  useEffect(() => {
+    (async () => {
       try {
-        const response = await ListAllApi.getProductListByCategoryId(id);
-        return response?.result;
+        const response = await ListAllApi.getCategory();
+        setCategory(response?.result?.data || []);
       } catch (error) {
-        console.error("Error fetching product by ID:", error);
-        return null;
+        console.error("Error fetching products:", error);
       }
-    };
-    // Register user
+    })();
+  }, []);
+  // Category wise product
+  const getProductByCayegoryId = async (id) => {
+    try {
+      const response = await ListAllApi.getProductListByCategoryId(id);
+      return response?.result;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+      return null;
+    }
+  };
+
+  //  Top Voted Product
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await ListAllApi.getTopVotedProduct();
+        console.log(response?.result?.data, "TOP VOTED PRODUCT");
+        setTopVoted(response?.result?.data || []);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    })();
+  }, []);
+  // Register user
   // const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
   // const registerUser = async (formData) => {
   //   const jsonData = { ...formData };
@@ -101,6 +112,7 @@ export const CompitationContextProvider = ({ children }) => {
       return null;
     }
   };
+
 // }
 
 // users list all
@@ -129,18 +141,20 @@ useEffect(() => {
   })();
 }, []);
 
+  // }
+
   const value = {
     faq,
     products,
     category,
     users,
     votes,
+    topVoted,
     getProductById,
     getProductByCayegoryId,
     getProductById,
     isLoggedIn,
     registerOrLoginUser,
-
   };
   return (
     <CompitationContext.Provider value={value}>
