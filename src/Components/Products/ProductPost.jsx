@@ -88,6 +88,12 @@ const ProductPost = ({ product }) => {
         height="300"
         width={"100%"}
         image={product?.product_photo}
+        sx={{
+          transition: "transform 0.4s ease", // Smooth transition
+          "&:hover": {
+            transform: "scale(1.1)", // Scale the image to 110% on hover
+          },
+        }}
         // alt={${name} photo}
         onClick={handleProductSelect}
       />
