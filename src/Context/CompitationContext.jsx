@@ -82,26 +82,20 @@ export const CompitationContextProvider = ({ children }) => {
       }
     })();
   }, []);
-  // Register user
-  // const { control: userControl, handleSubmit: userHandleSubmit } = useForm();
-  // const registerUser = async (formData) => {
-  //   const jsonData = { ...formData };
-  //   const { result } = await CreateApi.RegisterApi(jsonData);
 
+  // Login and Register User
   const registerOrLoginUser = async (mobileNumber) => {
-    console.log("LOGIN ATTEMPT");
     try {
       const jsonData = { mobileNumber };
       const response = await ListAllApi.RegisterApi(jsonData);
-
-      // Check if the response is as expected
-      console.log(response);
-
-      // Assuming response structure: { data: { ... }, status: "200" }
-      if (response && response.data) {
+      if (response && response?.result) {
+        const userData = response?.result?.data;
         setIsLoggedIn(true);
         localStorage.setItem("isLoggedIn", "true");
-        return response.data;
+        localStorage.setItem("user", JSON.stringify(userData));
+        alert("Login successful !!");
+
+        return userData;
       } else {
         console.error("Unexpected response format", response);
         return null;
