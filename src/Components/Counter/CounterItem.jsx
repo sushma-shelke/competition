@@ -5,7 +5,8 @@ import CategoryIcon from "@mui/icons-material/Category";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import GroupIcon from "@mui/icons-material/Group";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
-import Stats from "../../Assets/Images/bgStaticInfo.png";
+import Stats from "../../Assets/Images/bg.png";
+// import Stats from "../../Assets/Images/bgStaticInfo.png";
 
 const backgroundStyle = {
   backgroundImage: `url(${Stats})`,
