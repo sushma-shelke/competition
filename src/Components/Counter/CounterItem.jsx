@@ -205,7 +205,7 @@ const CounterItem = () => {
                 gutterBottom
                 sx={{ mt: 2, fontWeight: 700, color: "#ffffff" }}
               >
-                1000+
+                {voteCount}
               </Typography>
             </Grid>
           </Grid>
