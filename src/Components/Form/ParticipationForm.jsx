@@ -43,10 +43,7 @@ const ParticipationForm = () => {
   return (
     <Box
       sx={{
-        padding: 4,
-        border: "1px solid #ccc",
         borderRadius: 2,
-        maxWidth: "97%",
         margin: "0 auto",
         mt: 4,
       }}
@@ -54,7 +51,6 @@ const ParticipationForm = () => {
       <Typography
         variant="h5"
         sx={{
-          mr: 2,
           display: "flex",
           justifyContent: "center",
           fontWeight: 700,
@@ -82,7 +78,8 @@ const ParticipationForm = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              label="Participating Persons Mobile Number / मोबाईल नंबर"
+              type="number"
+              label="Mobile Number / मोबाईल नंबर"
               {...register("mobileNumber")}
             />
           </Grid>
@@ -110,15 +107,7 @@ const ParticipationForm = () => {
               <MenuItem value="Other">Other</MenuItem>
             </TextField>
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <TextField
-              fullWidth
-              multiline
-              rows={4}
-              label="Product Short Description / उत्पादनाचे संक्षिप्त वर्णन"
-              {...register("shortDescription")}
-            />
-          </Grid>
+
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
@@ -168,6 +157,15 @@ const ParticipationForm = () => {
               fullWidth
               label="Product Price / उत्पादन किंमत"
               {...register("price")}
+            />
+          </Grid>
+          <Grid item xs={12} md={6} lg={12}>
+            <TextField
+              fullWidth
+              multiline
+              rows={3}
+              label="Product Short Description / उत्पादनाचे संक्षिप्त वर्णन"
+              {...register("shortDescription")}
             />
           </Grid>
 

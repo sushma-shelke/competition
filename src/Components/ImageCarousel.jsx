@@ -133,7 +133,7 @@ const ImageCarousel = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: isMobile ? "100%" : isLoggedIn ? "80%" : "20%", // Conditional width based on screen size and login status
+            width: isMobile ? "100%" : isLoggedIn ? "90%" : "20%", // Conditional width based on screen size and login status
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: 3,
