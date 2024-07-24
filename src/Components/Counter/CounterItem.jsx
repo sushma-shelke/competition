@@ -5,7 +5,15 @@ import CategoryIcon from "@mui/icons-material/Category";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import GroupIcon from "@mui/icons-material/Group";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import Stats from "../../Assets/Images/bgStaticInfo.png";
 
+const backgroundStyle = {
+  backgroundImage: `url(${Stats})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  width: "100%",
+};
 const CounterItem = () => {
   const { products, users, votes } = useCompitationContext();
   console.log("votes", votes);
@@ -40,20 +48,22 @@ const CounterItem = () => {
       <Grid
         container
         sx={{
-          mt: 4,
-          justifyContent: "center",
-          background: "linear-gradient(to right, #e6739d, #edd7df)",
+          // mt: 4,
+          // justifyContent: "center",
+          // background: "linear-gradient(to right, #e6739d, #edd7df)",
+          ...backgroundStyle,
+          alignSelf: "center",
         }}
       >
         <Grid
           container
           sx={{
-            m: 3,
+            m: 4,
             justifyContent: "center",
-            background: "linear-gradient(to right, #e6739d, #edd7df)",
+            background: "rgba(128, 128, 128, 0.4)", // Adding opacity to the background colors
             borderRadius: "15px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-                     }}
+          }}
         >
           <Grid
             item
@@ -63,14 +73,15 @@ const CounterItem = () => {
               justifyContent: "center",
               alignItems: "center",
               textAlign: "center",
-              mt: 4,
+              mt: 3,
             }}
           >
             <Grid
               item
               lg={3}
               md={3}
-              sm={12}
+              sm={6}
+              xs={12}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -78,22 +89,22 @@ const CounterItem = () => {
                 alignItems: "center",
               }}
             >
-              <CategoryIcon sx={{ fontSize: "5rem", color: "#6f1c32" }} />
+              <CategoryIcon sx={{ fontSize: "6rem", color: "#ffffff" }} />
 
               <Typography
                 sx={{
                   textAlign: "center",
                   fontWeight: "bold",
                   fontSize: "1rem",
-                  color: "#6F1C32",
+                  color: "#ffffff",
                 }}
               >
                 Categories
               </Typography>
               <Typography
-                variant="h5"
+                variant="h4"
                 gutterBottom
-                sx={{ mt: 2, fontWeight: 700, color: "#6f1c32" }}
+                sx={{ mt: 2, fontWeight: 700, color: "#ffffff" }}
               >
                 7
               </Typography>
@@ -102,7 +113,8 @@ const CounterItem = () => {
               item
               lg={3}
               md={3}
-              sm={12}
+              sm={6}
+              xs={12}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -110,32 +122,32 @@ const CounterItem = () => {
                 alignItems: "center",
               }}
             >
-              <ShoppingBagIcon sx={{ fontSize: "5rem", color: "#6f1c32" }} />
+              <ShoppingBagIcon sx={{ fontSize: "6rem", color: "#ffffff" }} />
               <Typography
                 sx={{
                   textAlign: "center",
                   fontWeight: "bold",
                   fontSize: "1rem",
-                  color: "#6F1C32",
+                  color: "#ffffff",
                 }}
               >
                 Products
               </Typography>
 
               <Typography
-                variant="h5"
+                variant="h4"
                 gutterBottom
-                sx={{ mt: 2, fontWeight: 700, color: "#6f1c32" }}
+                sx={{ mt: 2, fontWeight: 700, color: "#ffffff" }}
               >
                 {productCount}
-               
               </Typography>
             </Grid>
             <Grid
               item
               lg={3}
               md={3}
-              sm={12}
+              sm={6}
+              xs={12}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -143,21 +155,21 @@ const CounterItem = () => {
                 alignItems: "center",
               }}
             >
-              <GroupIcon sx={{ fontSize: "5rem", color: "#6f1c32" }} />
+              <GroupIcon sx={{ fontSize: "6rem", color: "#ffffff" }} />
               <Typography
                 sx={{
                   textAlign: "center",
                   fontWeight: "bold",
                   fontSize: "1rem",
-                  color: "#6F1C32",
+                  color: "#ffffff",
                 }}
               >
                 Users
               </Typography>
               <Typography
-                variant="h5"
+                variant="h4"
                 gutterBottom
-                sx={{ mt: 2, fontWeight: 700, color: "#6f1c32" }}
+                sx={{ mt: 2, fontWeight: 700, color: "#ffffff" }}
               >
                 {userCount}
               </Typography>
@@ -166,7 +178,8 @@ const CounterItem = () => {
               item
               lg={3}
               md={3}
-              sm={12}
+              sm={6}
+              xs={12}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -174,22 +187,22 @@ const CounterItem = () => {
                 alignItems: "center",
               }}
             >
-              <HowToVoteIcon sx={{ fontSize: "5rem", color: "#6f1c32" }} />
+              <HowToVoteIcon sx={{ fontSize: "6rem", color: "#ffffff" }} />
               <Typography
                 sx={{
                   textAlign: "center",
                   fontWeight: "bold",
                   fontSize: "1rem",
-                  color: "#6F1C32",
+                  color: "#ffffff",
                 }}
               >
                 Votes
               </Typography>
 
               <Typography
-                variant="h5"
+                variant="h4"
                 gutterBottom
-                sx={{ mt: 2, fontWeight: 700, color: "#6f1c32" }}
+                sx={{ mt: 2, fontWeight: 700, color: "#ffffff" }}
               >
                 1000+
               </Typography>
@@ -201,4 +214,4 @@ const CounterItem = () => {
   );
 };
 
-export default CounterItem; 
+export default CounterItem;
