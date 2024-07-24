@@ -21,7 +21,7 @@ const TopVotedProduct = ({ product }) => {
       item
       container
       xs={12}
-      lg={9}
+      lg={12}
       sx={{
         justifyContent: "center",
         alignItems: "center",
@@ -29,7 +29,7 @@ const TopVotedProduct = ({ product }) => {
         mt: 3,
       }}
     >
-      <Card lg={3.5} md={3} sm={12}>
+      <Card lg={4} md={3} sm={12}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -52,8 +52,12 @@ const TopVotedProduct = ({ product }) => {
           }}
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {truncateText(product.product_shortdescription, 95)}
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ textAlign: "left" }}
+          >
+            {truncateText(product.product_shortdescription, 90)}
           </Typography>
           <Typography
             variant="h6"
