@@ -15,7 +15,6 @@ const TopVotedProduct = ({ product }) => {
     }
     return text.substring(0, maxLength) + "...";
   };
-
   return (
     <>
       <Grid
@@ -35,43 +34,24 @@ const TopVotedProduct = ({ product }) => {
             lg: 4,
             md: 3,
             sm: 12,
-            boxShadow: "2px 5px 12px rgba(0, 0, 0, 0.25)", // Adding box shadow
+            boxShadow: "2px 5px 12px rgba(0, 0, 0, 0.25)", 
             borderRadius: "10px",
           }}
         >
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {product.shgname.charAt(0)}
-              </Avatar>
-            }
-            title={product.product_name}
-            subheader={product.shgname}
-          />
-          <CardMedia
+                 <CardMedia
             component="img"
             height="300"
-            // width="600"
             image={product.product_photo}
             alt={product.product_name}
             sx={{
-              transition: "transform 0.4s ease", // Smooth transition
+              transition: "transform 0.4s ease", 
               "&:hover": {
                 transform: "scale(1.1)",
-                // backgroundColor:'#212121',
-                // borderRadius:'45px' // Scale the image to 110% on hover
-              },
+                 },
             }}
           />
           <CardContent sx={{ backgroundColor: "#E8E8E8" }}>
-            {/* <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ textAlign: "left" }}
-          >
-            {truncateText(product.product_shortdescription, 90)}
-          </Typography> */}
-            <Typography
+                     <Typography
               style={{ color: "#6F1C32", fontWeight: "bold", fontSize: "17px" }}
             >
               {product.product_name}
@@ -82,10 +62,7 @@ const TopVotedProduct = ({ product }) => {
               {product.shgname}
             </Typography>
             <Typography
-              // variant="h6"
-              // color="text.primary"
-              // sx={{ mt: 2, textAlign: "right" }}
-              style={{ color: "#6F1C32", fontWeight: "bold" }}
+                style={{ color: "#6F1C32", fontWeight: "bold" }}
             >
               Total Votes: {product.votecount}
             </Typography>
