@@ -14,6 +14,6 @@ export const CreateApi = {
   },
   // Participation Form
   AddProduct: async (json) => {
-    return await Post("addproduct", json);
+    return await Post("/addproduct", json);
   },
 };
