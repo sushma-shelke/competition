@@ -31,13 +31,23 @@ const TopVotedProduct = ({ product }) => {
         mt: 3,
       }}
     >
-      <Card lg={4} md={3} sm={12}>
-        {/* <CardHeader
-          // avatar={
-          //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-          //     {product.shgname.charAt(0)}
-          //   </Avatar>
-          // }
+
+      <Card
+        sx={{
+          lg: 4,
+          md: 3,
+          sm: 12,
+          boxShadow: "2px 5px 12px rgba(0, 0, 0, 0.25)", // Adding box shadow
+          borderRadius: "10px",
+        }}
+      >
+        <CardHeader
+          avatar={
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              {product.shgname.charAt(0)}
+            </Avatar>
+          }
+
           title={product.product_name}
           subheader={product.shgname}
         /> */}

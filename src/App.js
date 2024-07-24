@@ -72,6 +72,7 @@ function Home() {
     <div>
       <ImageCarousel />
       <ProductMainCategory />
+      <ParticipationForm />
       <ProductGrid />
       <AboutUs />
       <MainCounter />

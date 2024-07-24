@@ -9,10 +9,9 @@ export const CompitationContextProvider = ({ children }) => {
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
   const [category, setCategory] = useState([]);
-  const [users , setUsers]= useState([]);
-  const [votes, setVotes]= useState([]);
+  const [users, setUsers] = useState([]);
+  const [votes, setVotes] = useState([]);
   const [topVoted, setTopVoted] = useState([]);
-
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
@@ -113,33 +112,44 @@ export const CompitationContextProvider = ({ children }) => {
     }
   };
 
-// }
-
-// users list all
-useEffect(() => {
-  (async () => {
+  // Function to add a product
+  const addProduct = async (productData) => {
     try {
-      const response = await ListAllApi.getUsers();
-      console.log("users response",response)
-      setUsers(response?.result?.data || []);
+      const response = await CreateApi.AddProduct(productData);
+      // Handle the response as needed
+      console.log("Product added successfully:", response);
+      return response;
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error adding product:", error);
+      throw error; // Optionally rethrow the error for further handling
     }
-  })();
-}, []);
+  };
 
-// votes list all
-useEffect(() => {
-  (async () => {
-    try {
-      const response = await ListAllApi.getvotes();
-      console.log("vote response",response)
-      setVotes(response?.result?.data || []);
-    } catch (error) {
-      console.error("Error fetching votes:", error);
-    }
-  })();
-}, []);
+  // users list all
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await ListAllApi.getUsers();
+        console.log("users response", response);
+        setUsers(response?.result?.data || []);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    })();
+  }, []);
+
+  // votes list all
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await ListAllApi.getvotes();
+        console.log("vote response", response);
+        setVotes(response?.result?.data || []);
+      } catch (error) {
+        console.error("Error fetching votes:", error);
+      }
+    })();
+  }, []);
 
   // }
 
@@ -155,6 +165,7 @@ useEffect(() => {
     getProductById,
     isLoggedIn,
     registerOrLoginUser,
+    addProduct,
   };
   return (
     <CompitationContext.Provider value={value}>

@@ -1,21 +1,43 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Box, TextField, Grid, MenuItem, Typography } from "@mui/material";
-import CustomButton from "./../CustomButton.jsx"; // Changed the import to .jsx
+import CustomButton from "./../CustomButton.jsx"; // Ensure this import is correct
 import { useCompitationContext } from "../../Context/CompitationContext.jsx";
 
 const ParticipationForm = () => {
-  // const { faq } = useCompitationContext();
-  // console.log(faq, "FAQWQ");
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { addProduct } = useCompitationContext();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      // Construct the payload for the API
+      const productData = {
+        shgname: data.shgName,
+        product_name: data.productName,
+        product_shortdescription: data.shortDescription,
+        participating_persons_mobilenumber: data.mobileNumber,
+        product_photo: data.groupPhoto[0]?.name, // Adjust as needed for file uploads
+        product_photo_gallery: Array.from(data.galleryPhotos).map(
+          (file) => file.name
+        ), // Adjust for file array
+        product_weight: data.weight,
+        product_lenght: data.length,
+        product_width: data.width,
+        product_colour: data.color,
+        product_price: data.price,
+        product_category: data.category,
+        votecount: 0, // Default or dynamically set this as needed
+      };
+
+      const response = await addProduct(productData);
+      console.log("Product submitted successfully:", response);
+    } catch (error) {
+      console.error("Error submitting product:", error);
+    }
   };
 
   return (
@@ -24,7 +46,7 @@ const ParticipationForm = () => {
         padding: 4,
         border: "1px solid #ccc",
         borderRadius: 2,
-        maxWidth: "80%",
+        maxWidth: "97%",
         margin: "0 auto",
         mt: 4,
       }}
@@ -33,7 +55,6 @@ const ParticipationForm = () => {
         variant="h5"
         sx={{
           mr: 2,
-          // display: { xs: "none", md: "flex" },
           display: "flex",
           justifyContent: "center",
           fontWeight: 700,
@@ -57,16 +78,7 @@ const ParticipationForm = () => {
               error={!!errors.shgName}
             />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <TextField
-              fullWidth
-              label="SHG Leader Name / बचत गट प्रमुखाचे नाव "
-              {...register("shgLeaderName", {
-                required: "SHG Leader Name is required",
-              })}
-              error={!!errors.shgLeaderName}
-            />
-          </Grid>
+
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
@@ -77,18 +89,26 @@ const ParticipationForm = () => {
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              type="file"
-              label="SHG Group Photo / बचत गटाचा फोटो"
-              InputLabelProps={{ shrink: true }}
-              {...register("groupPhoto")}
+              label="Product Name / उत्पादनाचे नाव"
+              {...register("productName")}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
-              label="Product Name / उत्पादनाचे नाव"
-              {...register("productName")}
-            />
+              select
+              label="Product Category / उत्पादन श्रेणी"
+              {...register("category")}
+            >
+              <MenuItem value="Food">Food and Drinks</MenuItem>
+              <MenuItem value="Clothing">Clothing</MenuItem>
+              <MenuItem value="Home Decor">Home Decor</MenuItem>
+              <MenuItem value="Devine Things">Devine Things</MenuItem>
+              <MenuItem value="Homemade">Homemade</MenuItem>
+              <MenuItem value="Art and Craft">Art and Craft</MenuItem>
+              <MenuItem value="Gardening">Gardening</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </TextField>
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TextField
@@ -106,6 +126,7 @@ const ParticipationForm = () => {
               label="Product Main Photo / उत्पादन मुख्य फोटो"
               InputLabelProps={{ shrink: true }}
               {...register("mainPhoto")}
+              inputProps={{ accept: "image/*" }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
@@ -115,7 +136,7 @@ const ParticipationForm = () => {
               label="Product Photo Gallery (Max 3) / उत्पादन गॅलरी छायाचित्रे"
               InputLabelProps={{ shrink: true }}
               {...register("galleryPhotos")}
-              inputProps={{ multiple: true }}
+              inputProps={{ multiple: true, accept: "image/*" }}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
@@ -149,23 +170,7 @@ const ParticipationForm = () => {
               {...register("price")}
             />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <TextField
-              fullWidth
-              select
-              label="Product Category / उत्पादन श्रेणी"
-              {...register("category")}
-            >
-              <MenuItem value="Food">Food and Drinks</MenuItem>
-              <MenuItem value="Clothing">Clothing</MenuItem>
-              <MenuItem value="Home Decor">Home Decor</MenuItem>
-              <MenuItem value="Devine Things">Devine Things</MenuItem>
-              <MenuItem value="Homemade">Homemade</MenuItem>
-              <MenuItem value="Art and Craft">Art and Craft</MenuItem>
-              <MenuItem value="Gardening">Gardening</MenuItem>
-              <MenuItem value="Other">Other</MenuItem>
-            </TextField>
-          </Grid>
+
           <Grid item xs={12}>
             <CustomButton type="submit">Submit</CustomButton>
           </Grid>
