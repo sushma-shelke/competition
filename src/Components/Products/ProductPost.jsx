@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import styled, { keyframes, css } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useCompitationContext } from "../../Context/CompitationContext";
 
 // Define the animation with css helper
 const likeAnimation = keyframes`
@@ -54,18 +55,26 @@ const ProductPost = ({ product }) => {
   const [liked, setLiked] = useState(false);
   const [animateLike, setAnimateLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
-
+  const { giveVote}= useCompitationContext();
+ // get data form session storage
+ const [user, setUser] = useState(null);
+ useEffect(() => {
+   const storedUser = localStorage.getItem("user");
+   if (storedUser) {
+     setUser(JSON.parse(storedUser));
+   }
+ }, []);
+  const votedata={
+    userid:user?.id,
+    productid: product?._Id,
+    categoryid: product?.product_category
+  }
   const handleLike = () => {
     setLiked(!liked);
     setAnimateLike(true);
     setTimeout(() => setAnimateLike(false), 600);
-
-    // Increment or decrement likeCount based on liked state
-    if (!liked) {
-      setLikeCount(likeCount + 1);
-    } else {
-      setLikeCount(likeCount - 1);
-    }
+        giveVote(votedata);
+   
   };
 
   const handleShare = () => {
@@ -132,6 +141,7 @@ const ProductPost = ({ product }) => {
           </Typography>
         )}
       </CardContent>
+
       <CardActions
         sx={{
           display: "flex",
@@ -140,6 +150,7 @@ const ProductPost = ({ product }) => {
         }}
       >
         <IconButton
+
           color={liked ? "secondary" : "default"}
           onClick={handleLike}
           sx={{
@@ -149,7 +160,9 @@ const ProductPost = ({ product }) => {
             justifyContent: "center",
           }}
         >
+
           <FavoriteIcon fontSize={isMobile ? "small" : "medium"} />
+
         </IconButton>
         <IconButton
           color="default"

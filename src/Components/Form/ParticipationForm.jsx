@@ -13,6 +13,7 @@ const ParticipationForm = () => {
   const { addProduct } = useCompitationContext();
 
   const onSubmit = async (data) => {
+    console.log("data",data.shgName);
     try {
       // Construct the payload for the API
       const productData = {
@@ -30,9 +31,9 @@ const ParticipationForm = () => {
         product_colour: data.color,
         product_price: data.price,
         product_category: data.category,
-        votecount: 0, // Default or dynamically set this as needed
+        // votecount: 0, // Default or dynamically set this as needed
       };
-
+console.log(productData,"productData")
       const response = await addProduct(productData);
       console.log("Product submitted successfully:", response);
     } catch (error) {
