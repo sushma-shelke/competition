@@ -290,7 +290,7 @@ const Footer = () => {
             fontWeight: "700",
           }}
         >
-          Copyright © 2024 shgeshop
+          Copyright © 2024 MumbaiLocal
         </Typography>
       </Grid>
     </Box>
