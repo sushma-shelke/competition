@@ -16,4 +16,9 @@ export const CreateApi = {
   AddProduct: async (json) => {
     return await Post("/addproduct", json);
   },
+
+  // create vote
+  GiveVote:async(json)=>{
+    return await Post("/votes/create",json);
+  }
 };

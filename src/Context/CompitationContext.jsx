@@ -145,7 +145,22 @@ export const CompitationContextProvider = ({ children }) => {
     })();
   }, []);
 
-  // }
+  // give vote
+  const giveVote = async (votedata) => {
+    try {
+      const response = await CreateApi.GiveVote(votedata);
+      if (response?.result?.status == 200) {
+        alert("Congratulation You Have Nice Choise");
+        return response;
+      }
+      if (response?.result?.status == 204) {
+        alert("You Alrady Give Vote to This Product");
+      }
+    } catch (error) {
+      console.error("Error adding vote:", error);
+      throw error; 
+    }
+  };
 
   const value = {
     faq,
@@ -160,6 +175,7 @@ export const CompitationContextProvider = ({ children }) => {
     isLoggedIn,
     registerOrLoginUser,
     addProduct,
+    giveVote,
   };
   return (
     <CompitationContext.Provider value={value}>
