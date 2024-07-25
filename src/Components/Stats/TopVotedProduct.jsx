@@ -34,24 +34,24 @@ const TopVotedProduct = ({ product }) => {
             lg: 4,
             md: 3,
             sm: 12,
-            boxShadow: "2px 5px 12px rgba(0, 0, 0, 0.25)", 
+            boxShadow: "2px 5px 12px rgba(0, 0, 0, 0.25)",
             borderRadius: "10px",
           }}
         >
-                 <CardMedia
+          <CardMedia
             component="img"
             height="300"
             image={product.product_photo}
             alt={product.product_name}
             sx={{
-              transition: "transform 0.4s ease", 
+              transition: "transform 0.4s ease",
               "&:hover": {
                 transform: "scale(1.1)",
-                 },
+              },
             }}
           />
-          <CardContent sx={{ backgroundColor: "#E8E8E8" }}>
-                     <Typography
+          <CardContent sx={{ backgroundColor: "#f8f7f7" }}>
+            <Typography
               style={{ color: "#6F1C32", fontWeight: "bold", fontSize: "17px" }}
             >
               {product.product_name}
@@ -61,9 +61,7 @@ const TopVotedProduct = ({ product }) => {
             >
               {product.shgname}
             </Typography>
-            <Typography
-                style={{ color: "#6F1C32", fontWeight: "bold" }}
-            >
+            <Typography style={{ color: "#6F1C32", fontWeight: "bold" }}>
               Total Votes: {product.votecount}
             </Typography>
           </CardContent>

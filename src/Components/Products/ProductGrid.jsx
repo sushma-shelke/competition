@@ -4,8 +4,8 @@ import ProductPost from "./ProductPost";
 import { useCompitationContext } from "../../Context/CompitationContext";
 
 const ProductGrid = () => {
-   const { products } = useCompitationContext();
-   return (
+  const { products } = useCompitationContext();
+  return (
     <Grid container spacing={2} justifyContent="center">
       {products &&
         products.map((product) => (
