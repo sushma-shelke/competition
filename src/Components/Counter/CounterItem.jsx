@@ -82,7 +82,7 @@ const CounterItem = () => {
               lg={3}
               md={3}
               sm={6}
-              xs={12}
+              xs={6}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -115,7 +115,7 @@ const CounterItem = () => {
               lg={3}
               md={3}
               sm={6}
-              xs={12}
+              xs={6}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -148,7 +148,7 @@ const CounterItem = () => {
               lg={3}
               md={3}
               sm={6}
-              xs={12}
+              xs={6}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -180,7 +180,7 @@ const CounterItem = () => {
               lg={3}
               md={3}
               sm={6}
-              xs={12}
+              xs={6}
               sx={{
                 display: "flex",
                 flexDirection: "column",

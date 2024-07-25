@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
   CardActions,
+  useMediaQuery,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
@@ -49,6 +50,7 @@ const AnimatedLikeIcon = styled(FavoriteIcon)`
 
 const ProductPost = ({ product }) => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
 
   const [liked, setLiked] = useState(false);
   const [animateLike, setAnimateLike] = useState(false);
@@ -76,9 +78,9 @@ const ProductPost = ({ product }) => {
   };
 
   const handleShare = () => {
-       const productUrl = `http://mumbailocal.org:8080/getproductbyid/${product._Id}`;
-     const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
-  window.open(whatsappUrl, "_blank");
+    const productUrl = `http://mumbailocal.org:8080/getproductbyid/${product._Id}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   const handleProductSelect = () => {
@@ -86,10 +88,17 @@ const ProductPost = ({ product }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, margin: 2, position: "relative" }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: 1,
+        position: "relative",
+        height: isMobile ? "240px" : "400px",
+      }}
+    >
       <CardMedia
         component="img"
-        height="300"
+        height={isMobile ? 150 : 300}
         width={"100%"}
         image={product?.product_photo}
         sx={{
@@ -98,10 +107,9 @@ const ProductPost = ({ product }) => {
             transform: "scale(1.1)", // Scale the image to 110% on hover
           },
         }}
-        // alt={`${product?.product_name} photo`}
         onClick={handleProductSelect}
       />
-      <CardContent>
+      <CardContent sx={{ padding: isMobile ? "8px" : "16px" }}>
         <Typography
           sx={{
             textAlign: "left",
@@ -109,6 +117,7 @@ const ProductPost = ({ product }) => {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            fontSize: isMobile ? "1rem" : "1.25rem", // Adjust font size based on screen size
           }}
           gutterBottom
           variant="h5"
@@ -116,30 +125,56 @@ const ProductPost = ({ product }) => {
         >
           {product?.product_name}
         </Typography>
-        <Typography
-          sx={{
-            textAlign: "left",
-            width: 280,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-          variant="body2"
-          color="text.secondary"
-        >
-          {product?.product_shortdescription}
-        </Typography>
+        {!isMobile && (
+          <Typography
+            sx={{
+              textAlign: "left",
+              width: 280,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            variant="body2"
+            color="text.secondary"
+          >
+            {product?.product_shortdescription}
+          </Typography>
+        )}
       </CardContent>
-      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-               <IconButton
+
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: isMobile ? "0 8px" : "8px",
+        }}
+      >
+        <IconButton
+
           color={liked ? "secondary" : "default"}
           onClick={handleLike}
+          sx={{
+            flexBasis: "50%",
+            padding: isMobile ? "5px" : "8px",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
-          {/* <Typography sx={{fontWeight:'bold',fontSize:'20px' }}>Vote</Typography> */}
-          <FavoriteIcon />
+
+          <FavoriteIcon fontSize={isMobile ? "small" : "medium"} />
+
         </IconButton>
-        <IconButton color="default" onClick={handleShare}>
-          <ShareIcon />
+        <IconButton
+          color="default"
+          onClick={handleShare}
+          sx={{
+            flexBasis: "50%",
+            padding: isMobile ? "5px" : "8px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <ShareIcon fontSize={isMobile ? "small" : "medium"} />
         </IconButton>
       </CardActions>
     </Card>
