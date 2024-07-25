@@ -20,7 +20,7 @@ const ParticipationForm = () => {
         product_name: data.productName,
         product_shortdescription: data.shortDescription,
         participating_persons_mobilenumber: data.mobileNumber,
-        product_photo: data.groupPhoto[0]?.name, // Adjust as needed for file uploads
+        product_photo: data.mainPhoto[0]?.name, // Adjust as needed for file uploads
         product_photo_gallery: Array.from(data.galleryPhotos).map(
           (file) => file.name
         ), // Adjust for file array
@@ -72,6 +72,7 @@ const ParticipationForm = () => {
               label="SHG Name / बचत गटाचे नाव "
               {...register("shgName", { required: "SHG Name is required" })}
               error={!!errors.shgName}
+              helperText={errors.shgName && errors.shgName.message}
             />
           </Grid>
 
