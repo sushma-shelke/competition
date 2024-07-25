@@ -5,8 +5,8 @@ import CategoryIcon from "@mui/icons-material/Category";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import GroupIcon from "@mui/icons-material/Group";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
-import Stats from "../../Assets/Images/bg.png";
-// import Stats from "../../Assets/Images/bgStaticInfo.png";
+// import Stats from "../../Assets/Images/bg.png";
+import Stats from "../../Assets/Images/1111.jpg";
 
 const backgroundStyle = {
   backgroundImage: `url(${Stats})`,
@@ -61,7 +61,7 @@ const CounterItem = () => {
           sx={{
             m: 4,
             justifyContent: "center",
-            background: "rgba(128, 128, 128, 0.4)", // Adding opacity to the background colors
+            background: "rgba(255, 255, 255, 0.1)", // Adding opacity to the background colors
             borderRadius: "15px",
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
           }}

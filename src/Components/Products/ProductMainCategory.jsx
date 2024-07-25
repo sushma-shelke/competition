@@ -70,7 +70,7 @@ const ProductMainCategory = () => {
       {categories.map((category, index) => (
         <Grid
           item
-          xs={3} // Each item takes up 6/12 columns on extra-small screens
+          xs={4} // Each item takes up 6/12 columns on extra-small screens
           sm={3} // Each item takes up 3/12 columns on small screens
           lg={1.7}
           key={index}
