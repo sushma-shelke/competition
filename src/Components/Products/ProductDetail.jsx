@@ -9,9 +9,18 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
-  const { getProductById } = useCompitationContext();
+  const { getProductById ,giveVote} = useCompitationContext();
 
+  // get data form session storage
+  const [user, setUser] = useState(null);
   useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+    useEffect(() => {
     const fetchProduct = async () => {
       const fetchedProduct = await getProductById(id);
       setProduct(fetchedProduct);
@@ -34,6 +43,15 @@ const ProductDetail = () => {
     const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
     window.open(whatsappUrl, "_blank");
   };
+  const voteData = {
+    userid:user?.id,
+    productid: product?._Id,
+    categoryid: product?.product_category
+  };
+  
+  const handleVote =()=>{
+    giveVote(voteData);
+    }
   return (
     <Grid container spacing={2} sx={{ padding: 2 }}>
       <Grid item xs={12}>
@@ -145,7 +163,9 @@ const ProductDetail = () => {
                     fontSize: "16px",
                     boxShadow: "4px 6px 10px 0px grey",
                     color: "#fff",
+                   
                   }}
+                  onClick={handleVote}
                 >
                   <FavoriteIcon />
                   Vote this product
