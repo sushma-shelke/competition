@@ -93,7 +93,7 @@
 //                 // borderRadius:'20px',
 //                 height:'150px',
 //                 // width:'100px'
-                
+
 //               }}
 //             >
 //               <CategoryIcon sx={{ fontSize: "2rem", color: "#6F1C32" }} />
@@ -115,7 +115,7 @@
 //               >
 //                 Categories
 //               </Typography>
-             
+
 //             </Grid>
 //             <Grid
 //               item
@@ -154,7 +154,6 @@
 //                 Products
 //               </Typography>
 
-              
 //             </Grid>
 //             <Grid
 //               item
@@ -192,7 +191,7 @@
 //               >
 //                 Users
 //               </Typography>
-             
+
 //             </Grid>
 //             <Grid
 //               item
@@ -231,7 +230,6 @@
 //                 Votes
 //               </Typography>
 
-             
 //             </Grid>
 //           </Grid>
 //         {/* </Grid> */}
@@ -241,7 +239,6 @@
 // }
 
 // export default MainCounter
-
 
 import { Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -281,10 +278,26 @@ const MainCounter = () => {
   }, [products?.length, users?.length, votes?.length]);
 
   const counterItems = [
-    { icon: <CategoryIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />, count: 7, label: "Categories" },
-    { icon: <ShoppingBagIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />, count: productCount, label: "Products" },
-    { icon: <GroupIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />, count: userCount, label: "Users" },
-    { icon: <HowToVoteIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />, count: voteCount, label: "Votes" },
+    {
+      icon: <CategoryIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />,
+      count: 7,
+      label: "Categories",
+    },
+    {
+      icon: <ShoppingBagIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />,
+      count: productCount,
+      label: "Products",
+    },
+    {
+      icon: <GroupIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />,
+      count: userCount,
+      label: "Users",
+    },
+    {
+      icon: <HowToVoteIcon sx={{ fontSize: "3rem", color: "#6F1C32" }} />,
+      count: voteCount,
+      label: "Votes",
+    },
   ];
 
   return (
@@ -294,8 +307,9 @@ const MainCounter = () => {
       sx={{
         mt: 4,
         justifyContent: "center",
-        backgroundColor: '#F5F5F5',
-        padding: 4,
+        backgroundColor: "#f5f5f5",
+        // backgroundColor: "#F5F5F5",
+        padding: 2,
         borderRadius: 2,
       }}
     >
@@ -303,27 +317,27 @@ const MainCounter = () => {
         <Grid
           item
           key={index}
-          lg={3}
-          md={3}
-          sm={6}
-          xs={12}
+          lg={2.5}
+          md={2.5}
+          sm={4}
+          xs={5}
           sx={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: '#ffffff',
+            backgroundColor: "#ffffff",
             padding: 3,
+            margin: 2,
             borderRadius: 2,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)",
             textAlign: "center",
           }}
         >
           {item.icon}
           <Typography
             variant="h3"
-            gutterBottom
-            sx={{ fontWeight: 700, color: "#333333" }}
+            sx={{ m: 1, fontWeight: 500, color: "#727070" }}
           >
             {item.count.toLocaleString()}
           </Typography>
@@ -331,7 +345,7 @@ const MainCounter = () => {
             sx={{
               fontWeight: "bold",
               fontSize: "1rem",
-              color: "#888888",
+              color: "#878787",
             }}
           >
             {item.label}
