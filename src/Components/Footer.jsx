@@ -166,7 +166,7 @@ const Footer = () => {
             <Typography
               sx={{
                 fontSize: "16px",
-                paddingTop: "10px",
+                // paddingTop: "10px",
                 paddingLeft: "2rem",
                 textAlign: "left",
                 color: "#453D34",
