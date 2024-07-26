@@ -49,6 +49,7 @@ const AnimatedLikeIcon = styled(FavoriteIcon)`
 `;
 
 const ProductPost = ({ product }) => {
+  console.log(product?.result,"userproduct")
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
 
@@ -84,9 +85,11 @@ const ProductPost = ({ product }) => {
   };
 
   const handleProductSelect = () => {
-    navigate(`/product/${product?._Id}`);
+    navigate(`/product/${product?._Id?product?._Id:product?.result?._Id}`);
   };
-
+  
+  const sortdesc= product?.product_shortdescription?product?.product_shortdescription:product?.result?.product_shortdescription
+  const desc= sortdesc.length > 30 ? sortdesc.substring(0, 30) + '...' : sortdesc;
   return (
     <Card
       sx={{
@@ -100,7 +103,7 @@ const ProductPost = ({ product }) => {
         component="img"
         height={isMobile ? 150 : 300}
         width={"100%"}
-        image={product?.product_photo}
+        image={product?.product_photo?product?.product_photo:product?.result?.product_photo}
         sx={{
           transition: "transform 0.4s ease", // Smooth transition
           "&:hover": {
@@ -123,7 +126,7 @@ const ProductPost = ({ product }) => {
           variant="h5"
           component="div"
         >
-          {product?.product_name}
+          {product?.product_name?product?.product_name:product?.result?.product_name}
         </Typography>
         {!isMobile && (
           <Typography
@@ -137,7 +140,8 @@ const ProductPost = ({ product }) => {
             variant="body2"
             color="text.secondary"
           >
-            {product?.product_shortdescription}
+            {desc}
+             {/* {truncateText(product?.product_shortdescription?product?.product_shortdescription:product?.result?.product_shortdescription)} */}
           </Typography>
         )}
       </CardContent>
