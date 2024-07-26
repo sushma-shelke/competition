@@ -35,12 +35,17 @@ const UserDetail = () => {
   }, [user, getProductById]);
 
   return (
+  <>
+      <Grid xs={12} style={{  background: 'linear-gradient(to right, #FF4485, #FE8A77)',  height:'400px'}}>
+
+    </Grid>
+    
     <Container>
       <Profile>
         <CenteredAvatar src={userIcon} alt="User Icon" />
-        <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#AF3D46' }}>{user?.mobileNumber}</Typography>
+        <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#666666' }}>{user?.mobileNumber}</Typography>
       </Profile>
-      <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#AF3D46' }}>* Your Product *</Typography>
+      <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#666666' }}>* Your Product *</Typography>
      
       <Grid container spacing={2} sx={{ marginTop: 2 }}>
         <Grid item xs={12} md={6}>
@@ -60,17 +65,17 @@ const UserDetail = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box sx={{ padding: 2 }}>
-          <Typography variant="h6" sx={{ textAlign:'left', fontWeight: 'bold', color: '#AF3D46' }}>
+          <Typography variant="h6" sx={{ textAlign:'left', fontWeight: 'bold', color: '#666666' ,textTransform:"capitalize"}}>
                <span>{user?.registeredProduct[0]?.product_name} </span>
             </Typography>
-            <Typography variant="h6" sx={{ textAlign:'left', fontWeight: 'bold', color: '#AF3D46' }}>
+            <Typography variant="h6" sx={{ textAlign:'left', fontWeight: 'bold', color: '#666666' }}>
               Price: <span>{user?.registeredProduct[0]?.product_price} ₹</span>
             </Typography>
-            <Typography variant="h6" sx={{ textAlign:'left', fontWeight: 'bold', color: '#AF3D46' }}>About this item:</Typography>
-            <Typography variant="body1" sx={{  textAlign:'left',fontWeight: 'bold', color: '#AF3D46' }}>
+            <Typography variant="h6" sx={{ textAlign:'left', fontWeight: 'bold', color: '#666666' }}>About this item:</Typography>
+            <Typography variant="body1" sx={{  textAlign:'left',fontWeight: 'bold', color: '#666666' }}>
               {user?.registeredProduct[0]?.product_shortdescription}
             </Typography>
-            <ul style={{textAlign:'left', paddingLeft: "20px", lineHeight: "1.6", fontWeight: 'bold', color: '#AF3D46' }}>
+            <ul style={{textAlign:'left', paddingLeft: "20px", lineHeight: "1.6", fontWeight: 'bold', color: '#666666' }}>
               <li>
                 Category: <span>{user?.registeredProduct[0]?.product_category}</span>
               </li>
@@ -115,7 +120,7 @@ const UserDetail = () => {
           </Box>
         </Grid>
       </Grid>
-      <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#AF3D46', marginTop: 4 }}>
+      <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#666666', marginTop: 4 }}>
         Products you voted for...
       </Typography>
       <Grid container spacing={2}>
@@ -132,6 +137,7 @@ const UserDetail = () => {
           ))}
       </Grid>
     </Container>
+    </>
   );
 };
 
@@ -141,10 +147,12 @@ export default UserDetail;
 const Container = styled(Box)(({ theme }) => ({
   maxWidth: "1200px",
   margin: "0 auto",
-  marginTop: "80px",
+  marginTop: "-309px",
   padding: "20px",
-  backgroundColor: "#FDE6DD",
-  borderRadius: "10px",
+  backgroundColor: "#fff",
+//   backgroundColor: "#FDE6DD",
+
+  borderRadius: "30px",
   boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
   textAlign: "center",
 }));
@@ -163,3 +171,4 @@ const CenteredAvatar = styled(Avatar)(({ theme }) => ({
   marginBottom: "20px",
   boxShadow: "0 0 20px rgba(0, 0, 0, 40%)",
 }));
+
