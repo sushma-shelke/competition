@@ -49,6 +49,10 @@ function Header() {
     navigate("/");
   };
 
+  const handleClick = () => {
+    navigate("/userdetail");
+     };
+
   return (
     <AppBar
       position="static"
@@ -139,7 +143,9 @@ function Header() {
               </Button>
             ))}
           </Box>
-          <Avatar />
+          <Box onClick={handleClick}>
+  <Avatar />
+</Box>
         </Toolbar>
       </Container>
     </AppBar>
