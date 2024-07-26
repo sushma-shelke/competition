@@ -36,20 +36,7 @@ const ProductGrid = () => {
         Participating Products
       </Typography>
     <Box>
-//       <Grid container spacing={2} justifyContent="center">
-//         {products?.length > 0 ? (
-//           products.map((product) => (
-//             <Grid item key={product._id} xs={12} sm={6} md={3}>
-//               <ProductPost product={product} />
-//             </Grid>
-//           ))
-//         ) : (
-//           <Grid item xs={12}>
-//             <Box textAlign="center">No products available</Box>
-//           </Grid>
-//         )}
-//       </Grid>
-            <Grid container spacing={1} justifyContent="center">
+                 <Grid container spacing={1} justifyContent="center">
         {products &&
           products.map((product) => (
             <Grid
