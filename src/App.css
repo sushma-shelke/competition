@@ -138,3 +138,54 @@ button:active {
   width: 100px !important;
 }
 
+.productGallery{
+  width: "50%";
+  height: "50%";
+  border: "1px solid #ccc";
+  border-radius: 10;
+}
+
+.img-select{
+  display: "flex";
+  flex-Direction: "column";
+  overflow-x: "auto";
+  white-space: "nowrap";
+}
+
+@media only screen and (max-width:467px){
+  .imageClassMobile{
+    display: grid !important;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 38rem;
+  }
+  .img-select{
+    display: inline-flex !important;
+    flex-direction: row !important;
+    overflow-x: "auto";
+    white-space: "nowrap";
+  }
+  .productGallery{
+   padding: 5px;    
+  }
+  .product-content{
+    padding: 4rem 1rem !important;
+    position: relative;
+    top:30rem;
+  
+  }
+  .mobileViewMargin{
+    margin-bottom: 30rem !important;
+  }
+  .product-title{
+    /* position: relative; */
+    /* top:55rem; */
+    font-size: 1.2rem;
+  }
+  .img-showcase {
+    position: absolute;
+    top: 20%;
+  }
+
+} 

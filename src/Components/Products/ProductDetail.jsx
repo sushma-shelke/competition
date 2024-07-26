@@ -35,10 +35,9 @@ const ProductDetail = () => {
     window.open(whatsappUrl, "_blank");
   };
   return (
-    <Grid container spacing={2} sx={{ padding: 2 }}>
+    <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
       <Grid item xs={12}>
         <Typography
-          variant="h4"
           className="product-title"
           sx={{ fontWeight: "bold", textAlign: "center" }}
         >
@@ -47,15 +46,15 @@ const ProductDetail = () => {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item lg={2} md={6} xs={12}>
+        <Grid item lg={2} md={6} xs={12} className="imageClassMobile">
           <div
             className="img-select"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              overflowX: "auto",
-              whiteSpace: "nowrap",
-            }}
+            // style={{
+            //   // display: "flex",
+            //   // flexDirection: "column",
+            //   // overflowX: "auto",
+            //   // whiteSpace: "nowrap",
+            // }}
           >
             {product?.product_photo_gallery?.map((photo, index) => (
               <div
@@ -71,12 +70,13 @@ const ProductDetail = () => {
                   <img
                     src={photo}
                     alt={`Product gallery ${index}`}
-                    style={{
-                      width: "50%",
-                      height: "50%",
-                      border: "1px solid #ccc",
-                      borderRadius: 10,
-                    }}
+                    className="productGallery"
+                    // style={{
+                    //   width: "50%",
+                    //   height: "50%",
+                    //   border: "1px solid #ccc",
+                    //   borderRadius: 10,
+                    // }}
                   />
                 </a>
               </div>
