@@ -8,6 +8,8 @@ const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [category, setCategory] = useState([]);
   const [users, setUsers] = useState([]);
   const [votes, setVotes] = useState([]);
@@ -36,6 +38,31 @@ export const CompitationContextProvider = ({ children }) => {
       }
     })();
   }, []);
+   // Product List All pgination 
+   useEffect(() => {
+    (async () => {
+      try {
+        const response = await ListAllApi.getProductPagination(currentPage, 4);
+        setProducts(response?.result?.data || []);
+        
+        setTotalPages(response?.result?.totalPages || 2); // Assuming the API returns totalPages
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    })();
+  }, [currentPage]);
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await ListAllApi.getProductPagination(currentPage, 2);
+  //       setProducts(response?.result?.data || []);
+  //       setTotalPages(response?.result?.totalPages || 0); // Assuming the API returns totalPages
+  //     } catch (error) {
+  //       console.error("Error fetching products:", error);
+  //     }
+  //   };
+  //   fetchProducts();
+  // }, [currentPage]);
 
   // Function to fetch product by ID
   const getProductById = async (id) => {
@@ -164,7 +191,9 @@ export const CompitationContextProvider = ({ children }) => {
 
   const value = {
     faq,
-    products,
+    products, currentPage,
+    setCurrentPage,
+    totalPages,
     category,
     users,
     votes,
