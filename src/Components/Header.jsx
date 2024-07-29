@@ -360,7 +360,7 @@ function Header() {
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please enter your mobile number to login/register.
+            Please enter your mobile number to login.
           </DialogContentText>
           <TextField
             autoFocus
@@ -375,11 +375,31 @@ function Header() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseModal} color="primary">
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "#9C2946",
+              fontWeight: "800",
+              width: "10rem",
+              borderRadius: "50px",
+            }}
+            onClick={handleCloseModal}
+            color="primary"
+          >
             Cancel
           </Button>
-          <Button onClick={handleLogin} color="primary">
-            Submit
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "#9C2946",
+              fontWeight: "800",
+              width: "10rem",
+              borderRadius: "50px",
+            }}
+            onClick={handleLogin}
+            color="primary"
+          >
+            Login
           </Button>
         </DialogActions>
       </Dialog>

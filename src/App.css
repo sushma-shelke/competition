@@ -151,7 +151,9 @@ button:active {
   overflow-x: "auto";
   white-space: "nowrap";
 }
-
+.css-1xmpwxz-MuiDialogContent-root{
+  overflow: hidden !important;
+}
 @media only screen and (max-width: 467px) {
   .imageClassMobile {
     display: grid !important;
