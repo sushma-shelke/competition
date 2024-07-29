@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -6,11 +6,13 @@ import {
   Typography,
   IconButton,
   CardActions,
+  useMediaQuery,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import styled, { keyframes, css } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useCompitationContext } from "../../Context/CompitationContext";
 
 // Define the animation with css helper
 const likeAnimation = keyframes`
@@ -47,51 +49,70 @@ const AnimatedLikeIcon = styled(FavoriteIcon)`
 `;
 
 const ProductPost = ({ product }) => {
+  console.log(product?.result,"userproduct")
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
 
   const [liked, setLiked] = useState(false);
   const [animateLike, setAnimateLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
-
+  const { giveVote}= useCompitationContext();
+ // get data form session storage
+ const [user, setUser] = useState(null);
+ useEffect(() => {
+   const storedUser = localStorage.getItem("user");
+   if (storedUser) {
+     setUser(JSON.parse(storedUser));
+   }
+ }, []);
+  const votedata={
+    userid:user?.id,
+    productid: product?._Id,
+    categoryid: product?.product_category
+  }
   const handleLike = () => {
     setLiked(!liked);
     setAnimateLike(true);
     setTimeout(() => setAnimateLike(false), 600);
-
-    // Increment or decrement likeCount based on liked state
-    if (!liked) {
-      setLikeCount(likeCount + 1);
-    } else {
-      setLikeCount(likeCount - 1);
-    }
+        giveVote(votedata);
+   
   };
-
-  // const name=product?.name;
-  //   const truncateName = (name, wordLimit) => {
-  //     const words = name.split(' ');
-  //     return words.length > wordLimit
-  //       ? words.slice(0, wordLimit).join(' ') + '...'
-  //       : name;
-  //   };
 
   const handleShare = () => {
-    console.log("click in product");
-  };
-  const handleProductSelect = () => {
-    navigate(`/product/${product?._Id}`);
+    const productUrl = `http://mumbailocal.org:8080/getproductbyid/${product._Id}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
+    window.open(whatsappUrl, "_blank");
   };
 
+  const handleProductSelect = () => {
+    navigate(`/product/${product?._Id?product?._Id:product?.result?._Id}`);
+  };
+  
+  const sortdesc= product?.product_shortdescription?product?.product_shortdescription:product?.result?.product_shortdescription
+  const desc= sortdesc.length > 30 ? sortdesc.substring(0, 30) + '...' : sortdesc;
   return (
-    <Card sx={{ maxWidth: 345, margin: 2, position: "relative" }}>
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: 1,
+        position: "relative",
+        height: isMobile ? "240px" : "400px",
+      }}
+    >
       <CardMedia
         component="img"
-        height="300"
+        height={isMobile ? 150 : 300}
         width={"100%"}
-        image={product?.product_photo}
-        // alt={${name} photo}
+        image={product?.product_photo?product?.product_photo:product?.result?.product_photo}
+        sx={{
+          transition: "transform 0.4s ease", // Smooth transition
+          "&:hover": {
+            transform: "scale(1.1)", // Scale the image to 110% on hover
+          },
+        }}
         onClick={handleProductSelect}
       />
-      <CardContent>
+      <CardContent sx={{ padding: isMobile ? "8px" : "16px" }}>
         <Typography
           sx={{
             textAlign: "left",
@@ -99,40 +120,65 @@ const ProductPost = ({ product }) => {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            fontSize: isMobile ? "1rem" : "1.25rem", // Adjust font size based on screen size
           }}
           gutterBottom
           variant="h5"
           component="div"
         >
-          {product?.product_name}
+          {product?.product_name?product?.product_name:product?.result?.product_name}
         </Typography>
-        <Typography
-          sx={{
-            textAlign: "left",
-            textAlign: "left",
-            width: 280,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-          variant="body2"
-          color="text.secondary"
-        >
-          {product?.product_shortdescription}
-        </Typography>
+        {!isMobile && (
+          <Typography
+            sx={{
+              textAlign: "left",
+              width: 280,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            variant="body2"
+            color="text.secondary"
+          >
+            {desc}
+             {/* {truncateText(product?.product_shortdescription?product?.product_shortdescription:product?.result?.product_shortdescription)} */}
+          </Typography>
+        )}
       </CardContent>
-      <CardActions>
+
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: isMobile ? "0 8px" : "8px",
+        }}
+      >
         <IconButton
+
           color={liked ? "secondary" : "default"}
           onClick={handleLike}
+          sx={{
+            flexBasis: "50%",
+            padding: isMobile ? "5px" : "8px",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
-          <FavoriteIcon />
+
+          <FavoriteIcon fontSize={isMobile ? "small" : "medium"} />
+
         </IconButton>
-        {/*<Typography variant="body2" color="text.secondary">
-          {likeCount} votes
-        </Typography>*/}
-        <IconButton color="default" onClick={handleShare}>
-          <ShareIcon />
+        <IconButton
+          color="default"
+          onClick={handleShare}
+          sx={{
+            flexBasis: "50%",
+            padding: isMobile ? "5px" : "8px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <ShareIcon fontSize={isMobile ? "small" : "medium"} />
         </IconButton>
       </CardActions>
     </Card>

@@ -12,4 +12,13 @@ export const CreateApi = {
   RegisterApi: async (json) => {
     return await Post("users/createorloginuser", json);
   },
+  // Participation Form
+  AddProduct: async (json) => {
+    return await Post("/addproduct", json);
+  },
+
+  // create vote
+  GiveVote:async(json)=>{
+    return await Post("/votes/create",json);
+  }
 };

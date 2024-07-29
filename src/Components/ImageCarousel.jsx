@@ -81,18 +81,18 @@ const ImageCarousel = () => {
           onClick={handleOpenModal}
           style={{
             position: "relative",
-            top: "-55px",
+            top: isMobile ? "-35px" : "-55px",
             width: isMobile ? "55%" : "20%",
             backgroundColor: "#9C2946",
             fontWeight: "600",
             textTransform: "capitalize",
             borderRadius: "50px",
-            padding: "30px",
+            padding: isMobile ? "20px" : "30px",
             fontSize: "16px",
             boxShadow: "4px 6px 10px 0px grey",
           }}
         >
-          Click to Participate
+          {isMobile ? "Participate" : "Click to Participate"}
         </Button>
       ) : (
         <Button
@@ -133,7 +133,7 @@ const ImageCarousel = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: isMobile ? "100%" : isLoggedIn ? "80%" : "20%", // Conditional width based on screen size and login status
+            width: isMobile ? "100%" : isLoggedIn ? "90%" : "20%", // Conditional width based on screen size and login status
             bgcolor: "background.paper",
             boxShadow: 24,
             borderRadius: 3,

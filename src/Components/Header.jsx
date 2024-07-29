@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,7 +10,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import logoImage from "../Assets/Images/image__17_-removebg-preview (1).png";
@@ -20,6 +20,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -29,13 +30,28 @@ function Header() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
+    if (page === "Products") {
+      navigate("/products");
+    } else if (page === "Categories") {
+      navigate("/categories");
+    } else if (page === "Votes") {
+      navigate("/");
+    }
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
+  const handleClick = () => {
+    navigate("/userdetail");
+     };
 
   return (
     <AppBar
@@ -48,7 +64,12 @@ function Header() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src={logoImage} className="logocss" />
+          <img
+            src={logoImage}
+            className="logocss"
+            onClick={handleLogoClick}
+            style={{ cursor: "pointer" }}
+          />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -73,13 +94,13 @@ function Header() {
                 horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClose={() => handleCloseNavMenu(null)}
               sx={{
                 display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -108,7 +129,7 @@ function Header() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(page)}
                 sx={{
                   my: 2,
                   color: "#9C2946",
@@ -122,7 +143,9 @@ function Header() {
               </Button>
             ))}
           </Box>
-          <Avatar />
+          <Box onClick={handleClick}>
+  <Avatar />
+</Box>
         </Toolbar>
       </Container>
     </AppBar>

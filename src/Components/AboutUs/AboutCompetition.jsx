@@ -1,15 +1,21 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import Winning from "../../Assets/Images/Winning.png";
 import Registration from "../../Assets/Images/Registration.png";
 import Votes from "../../Assets/Images/Votes.png";
 const AboutCompetition = () => {
+  const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
+  const isTablet = useMediaQuery("(max-width: 960px)"); // Tablet view
   return (
     <Grid container sx={{ mt: 4, justifyContent: "center" }}>
       <Typography
-        variant="h4"
         gutterBottom
-        sx={{ mb: 4, fontWeight: 700, color: "#6f1c32" }}
+        sx={{
+          mb: 4,
+          fontWeight: 700,
+          color: "#6f1c32",
+          fontSize: isMobile ? "1.5rem" : "2.125rem",
+        }}
       >
         Competition Highlights
       </Typography>

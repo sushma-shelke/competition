@@ -15,7 +15,12 @@ const AboutUs = () => {
           textAlign: "center",
         }}
       >
-        <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
           <img
             src={Image1}
             alt={"Image1"}
@@ -28,12 +33,13 @@ const AboutUs = () => {
         </Grid>
         <Grid
           item
-          xs={8}
+          xs={12}
+          md={8}
           sx={{
             padding: 3,
-            maxWidth: "80%",
+            maxWidth: "90%",
             margin: "0 auto",
-            textAlign: "left",
+            textAlign: "justify",
           }}
         >
           <Typography
