@@ -15,6 +15,7 @@ import TopVotedProductGrid from "./Components/Stats/TopVotedProductGrid";
 import TopVotedProduct from "./Components/Stats/TopVotedProduct";
 import UserDetail from "./Components/User/UserDetail";
 import Result from "./Components/Result";
+import ParticipationForm from "./Components/Form/ParticipationForm";
 
 function Home() {
   return (
@@ -38,11 +39,12 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/participationform" element={<ParticipationForm />} />
           <Route path="/products" element={<ProductGrid />} />
           <Route path="/categories" element={<ProductMainCategory />} />
           <Route path="/category/:name" element={<CategoryDetail />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/userdetail" element={<UserDetail/>} />
+          <Route path="/userdetail" element={<UserDetail />} />
           <Route path="/result" element={<Result />} />
         </Routes>
         <Footer />
