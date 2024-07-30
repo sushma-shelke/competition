@@ -7,10 +7,18 @@
 width: 68%;
 margin-top: -6rem;
 }
+.footerLogo{
+  width: 100%;
+  margin-top: -15px;
+}
 
-@media only screen and (min-width:320px){
+@media only screen and (max-width:467px){
   .footerSideImage{
     width: 68%;
     margin-top: 0rem;
     }
+    .footerLogo {
+      width: 50%;
+      margin-top: -83px;
+  }
 }
