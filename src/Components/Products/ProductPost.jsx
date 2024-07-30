@@ -49,7 +49,7 @@ const AnimatedLikeIcon = styled(FavoriteIcon)`
 `;
 
 const ProductPost = ({ product }) => {
-  console.log(product?.result,"userproduct")
+  console.log(product?.product_name,"userproduct")
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
 
