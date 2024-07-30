@@ -8,8 +8,7 @@ export const ListAllApi = {
 
   // products
   getProduct: async () => await Get("/getAllproduct"),
-  // getproductpagination: async()=>await Get('/getproduct'),
-   getProductPagination :async (page, size) => 
+  getProductPagination :async (page, size) => 
      await Get(`/getproduct?page=${page}&size=${size}`),
   
   getProductById: async (id) => await Get(`/getproductbyid/${id}`),
@@ -17,9 +16,10 @@ export const ListAllApi = {
     await Get(`/getproductbycategoryid/${id}`),
 
   // category
-
   getCategory: async () => await Get("/categoryList"),
-
+  getCategoryPagination :async (id,page, size) => 
+    await Get(`/getproductbycategoryid/${id}?page=${page}&size=${size}`),
+ 
 
   //users
   getUsers: async () => await Get("/users/list"),

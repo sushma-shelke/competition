@@ -186,7 +186,7 @@ function Header() {
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
   const { isLoggedIn, registerOrLoginUser } = useCompitationContext();
-  console.log("statussss", isLoggedIn);
+ 
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {

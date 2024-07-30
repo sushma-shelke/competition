@@ -100,10 +100,6 @@ const ProductGrid = () => {
     setCurrentPage(pageNumber);
   };
 
-  console.log("Products:", products);
-  console.log("Current Page:", currentPage);
-  console.log("Total Pages:", totalPages);
-
   return (
     <>
       <Typography
