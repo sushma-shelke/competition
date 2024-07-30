@@ -134,8 +134,11 @@ button:active {
   border-radius: 50px !important;
 }
 .logocss {
-  height: 100px !important;
-  width: 100px !important;
+  /* height: 100px !important; */
+  width: 130px ;
+  Margin-top: 5px;
+  Margin-bottom: 5px;
+  Margin-right:15px ;
 }
 
 .productGallery {
@@ -155,6 +158,16 @@ button:active {
   overflow: hidden !important;
 }
 @media only screen and (max-width: 467px) {
+  .logocss {
+    /* height: 100px !important; */
+    width: 60px;
+    position: relative;
+    left :2rem
+  }
+  .menuButton{
+    position: relative;
+    left :-8rem
+  }
   .imageClassMobile {
     display: grid !important;
     margin-left: auto;
