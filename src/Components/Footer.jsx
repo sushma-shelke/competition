@@ -16,6 +16,7 @@ import footerimg1 from "../Assets/Images/Footer/3.png";
 import footerimg2 from "../Assets/Images/Footer/7.png";
 import footerimg3 from "../Assets/Images/Footer/9.png";
 import footerimag4 from "../Assets/Images/Footer/10.png";
+import logo from "../Assets/Images/Mumbai-Local-PNG.png";
 
 const Footer = () => {
   return (
@@ -162,23 +163,29 @@ const Footer = () => {
         </Grid>
 
         <Grid item container xs={12}>
-          <Grid item lg={7} md={7} sm={12}>
-            <Typography
-              sx={{
-                fontSize: "16px",
-                // paddingTop: "10px",
-                paddingLeft: "2rem",
-                textAlign: "left",
-                color: "#453D34",
-              }}
-            >
-              Join the SHGeshop Competition with BMCs Mumbai Local and support
-              local Self-Help Groups (SHGs) as they showcase their best
-              products. Submit creations, vote, and recognize talent in various
-              categories. Celebrate community craftsmanship, help SHGs gain
-              recognition, and discover unique, high-quality products. Empower
-              local entrepreneurs today!
-            </Typography>
+          <Grid container item lg={7} md={7} sm={12}>
+            <Grid item lg={2}>
+              <img src={logo} className="footerLogo" />
+            </Grid>
+            <Grid item lg={10}>
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  // paddingTop: "10px",
+                  paddingLeft: "2rem",
+                  textAlign: "left",
+                  color: "#453D34",
+                }}
+              >
+                Join the SHGeshop Competition with BMCs Mumbai Local and support
+                local Self-Help Groups (SHGs) as they showcase their best
+                products. Submit creations, vote, and recognize talent in
+                various categories. Celebrate community craftsmanship, help SHGs
+                gain recognition, and discover unique, high-quality products.
+                Empower local entrepreneurs today!
+              </Typography>
+            </Grid>
+
             <Typography
               sx={{
                 fontSize: "19px",
