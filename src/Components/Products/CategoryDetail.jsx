@@ -13,8 +13,7 @@ const CategoryDetail = () => {
     currentPage,
     setCurrentPage,
     totalPages,
-    getProductByCayegoryIdpagination,
-    setPid,
+        setPid,
   } = useCompitationContext();
 
   useEffect(() => {

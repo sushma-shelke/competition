@@ -58,7 +58,7 @@ export const CompitationContextProvider = ({ children }) => {
     if (pid) {
       (async () => {
         try {
-          const response = await ListAllApi.getCategoryPagination(pid, currentPage, 3);
+          const response = await ListAllApi.getCategoryPagination(pid, currentPage, 12);
           setCategoryProduct(response?.result?.data?.data || []);
           setTotalPages(response?.result?.data?.totalPages || 1);
         } catch (error) {
