@@ -9,8 +9,10 @@ export const CompitationContextProvider = ({ children }) => {
   const [faq, setFaq] = useState([]);
   const [products, setProducts] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [pid, setPid] = useState(null);
   const [totalPages, setTotalPages] = useState(1);
   const [category, setCategory] = useState([]);
+  const [categoryProduct, setCategoryProduct] = useState([]);
   const [users, setUsers] = useState([]);
   const [votes, setVotes] = useState([]);
   const [topVoted, setTopVoted] = useState([]);
@@ -51,6 +53,20 @@ export const CompitationContextProvider = ({ children }) => {
     })();
   }, [currentPage]);
  
+   // category product list with pagination 
+   useEffect(() => {
+    if (pid) {
+      (async () => {
+        try {
+          const response = await ListAllApi.getCategoryPagination(pid, currentPage, 3);
+          setCategoryProduct(response?.result?.data?.data || []);
+          setTotalPages(response?.result?.data?.totalPages || 1);
+        } catch (error) {
+          console.error("Error fetching category products:", error);
+        }
+      })();
+    }
+  }, [pid, currentPage]);
     // Function to fetch product by ID
   const getProductById = async (id) => {
     try {
@@ -67,7 +83,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getCategory();
-        setCategory(response?.result?.data || []);
+               setCategory(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -89,8 +105,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getTopVotedProduct();
-        console.log(response?.result?.data, "TOP VOTED PRODUCT");
-        setTopVoted(response?.result?.data || []);
+              setTopVoted(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -124,12 +139,11 @@ export const CompitationContextProvider = ({ children }) => {
   const addProduct = async (productData) => {
     try {
       const response = await CreateApi.AddProduct(productData);
-      // Handle the response as needed
-      console.log("Product added successfully:", response);
+       console.log("Product added successfully:", response);
       return response;
     } catch (error) {
       console.error("Error adding product:", error);
-      throw error; // Optionally rethrow the error for further handling
+      throw error; 
     }
   };
 
@@ -138,8 +152,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getUsers();
-        console.log("users response", response);
-        setUsers(response?.result?.data || []);
+            setUsers(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -151,8 +164,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getvotes();
-        console.log("vote response", response);
-        setVotes(response?.result?.data || []);
+               setVotes(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching votes:", error);
       }
@@ -192,6 +204,9 @@ export const CompitationContextProvider = ({ children }) => {
     registerOrLoginUser,
     addProduct,
     giveVote,
+    categoryProduct,
+       pid,setPid,
+    
   };
   return (
     <CompitationContext.Provider value={value}>
