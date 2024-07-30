@@ -42,29 +42,16 @@ export const CompitationContextProvider = ({ children }) => {
    useEffect(() => {
     (async () => {
       try {
-        const response = await ListAllApi.getProductPagination(currentPage, 4);
-        setProducts(response?.result?.data || []);
-        
-        setTotalPages(response?.result?.totalPages || 2); // Assuming the API returns totalPages
+        const response = await ListAllApi.getProductPagination(currentPage, 12);
+        setProducts(response?.result?.data?.data || []);
+        setTotalPages(response?.result?.data?.totalPages || 1); 
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     })();
   }, [currentPage]);
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await ListAllApi.getProductPagination(currentPage, 2);
-  //       setProducts(response?.result?.data || []);
-  //       setTotalPages(response?.result?.totalPages || 0); // Assuming the API returns totalPages
-  //     } catch (error) {
-  //       console.error("Error fetching products:", error);
-  //     }
-  //   };
-  //   fetchProducts();
-  // }, [currentPage]);
-
-  // Function to fetch product by ID
+ 
+    // Function to fetch product by ID
   const getProductById = async (id) => {
     try {
       const response = await ListAllApi.getProductById(id);

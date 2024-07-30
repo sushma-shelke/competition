@@ -128,24 +128,24 @@ const ProductDetail = () => {
             <Typography variant="body1">
               {product.product_shortdescription}
             </Typography>
-            <ul style={{ paddingLeft: "20px", lineHeight: "1.6" }}>
+            <ul style={{ paddingLeft: "20px", lineHeight: "1.6" ,   textTransform: "capitalize"}}>
               <li>
-                Category: <span>{product.product_category}</span>
+                Category: <span>{product?.category_name}</span>
               </li>
               <li>
-                Color: <span>{product.product_colour}</span>
+                Color: <span>{product?.product_colour}</span>
               </li>
               <li>
-                Weight: <span>{product.product_weight}</span>
+                Weight: <span>{product?.product_weight}</span>
               </li>
               <li>
-                Length: <span>{product.product_length}</span>
+                Length: <span>{product?.product_length}</span>
               </li>
               <li>
-                Width: <span>{product.product_width}</span>
+                Width: <span>{product?.product_width}</span>
               </li>
               <li>
-                Self Help Group Name: <span>{product.shgname}</span>
+                Self Help Group Name: <span>{product?.shgname}</span>
               </li>
             </ul>
             <Grid container spacing={2} sx={{ marginTop: "5rem" }}>
