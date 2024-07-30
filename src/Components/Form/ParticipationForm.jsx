@@ -294,6 +294,22 @@ const ParticipationForm = () => {
         (cat) => cat.category_name === data.category
       );
 
+      // const productData = {
+      //   shgname: data.shgName,
+      //   product_name: data.productName,
+      //   product_shortdescription: data.shortDescription,
+      //   participating_persons_mobilenumber: data.mobileNumber,
+      //   product_photo: productPhotoUrl, // Use the uploaded main photo URL
+      //   product_photo_gallery: productPhotoGalleryUrls, // Use the uploaded gallery photo URLs
+      //   product_weight: data.weight,
+      //   product_lenght: data.length,
+      //   product_width: data.width,
+      //   product_colour: data.color,
+      //   product_price: data.price,
+      //   product_category: selectedCategory ? selectedCategory.id : null, // Use category ID
+      //   votecount: 0,
+      // };
+
       const productData = {
         shgname: data.shgName,
         product_name: data.productName,
@@ -301,18 +317,17 @@ const ParticipationForm = () => {
         participating_persons_mobilenumber: data.mobileNumber,
         product_photo: productPhotoUrl, // Use the uploaded main photo URL
         product_photo_gallery: productPhotoGalleryUrls, // Use the uploaded gallery photo URLs
-        product_weight: data.weight,
-        product_lenght: data.length,
-        product_width: data.width,
+        product_weight: parseFloat(data.weight), // Ensure weight is a number
+        product_lenght: parseFloat(data.length), // Ensure length is a number
+        product_width: parseFloat(data.width), // Ensure width is a number
         product_colour: data.color,
-        product_price: data.price,
+        product_price: parseFloat(data.price), // Ensure price is a number
         product_category: selectedCategory ? selectedCategory.id : null, // Use category ID
         votecount: 0,
       };
-
       console.log("Product data to be submitted:", productData);
       const response = await addProduct(productData);
-      console.log("Product submitted successfully:", response);
+            console.log("Product submitted successfully:", response);
     } catch (error) {
       console.error("Error submitting product:", error);
     }
