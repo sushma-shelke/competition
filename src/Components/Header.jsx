@@ -174,7 +174,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import logoImage from "../Assets/Images/image__17_-removebg-preview (1).png";
+import logoImage from "../Assets/Images/Mumbai-Local-PNG1.png";
 import { useCompitationContext } from "../Context/CompitationContext";
 
 const pages = ["Products", "Categories", "Votes"];
@@ -256,6 +256,7 @@ function Header() {
           />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
+              className="menuButton"
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -263,7 +264,7 @@ function Header() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: "#9C2946" }} />
             </IconButton>
             <Menu
               id="menu-appbar"
