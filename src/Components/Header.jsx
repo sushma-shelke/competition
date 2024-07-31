@@ -396,9 +396,13 @@ function Header() {
         gap: '16px', // Add some space between the avatar and button
       }}
     >
-      <Box onClick={handleClick} sx={{ cursor: 'pointer' }}>
-        <Avatar />
-      </Box>
+               <Box onClick={handleClick} sx={{ cursor: 'pointer' }}>
+            <Avatar 
+              sx={{
+                bgcolor: "#972A41", 
+                            }}
+            />
+          </Box>
       <Button
         variant="contained"
         color="primary"
