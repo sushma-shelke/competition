@@ -9,7 +9,7 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
-  const { getProductById ,giveVote} = useCompitationContext();
+  const { getProductById, giveVote } = useCompitationContext();
 
   // get data form session storage
   const [user, setUser] = useState(null);
@@ -20,7 +20,7 @@ const ProductDetail = () => {
     }
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchProduct = async () => {
       const fetchedProduct = await getProductById(id);
       setProduct(fetchedProduct);
@@ -44,20 +44,25 @@ const ProductDetail = () => {
     window.open(whatsappUrl, "_blank");
   };
   const voteData = {
-    userid:user?.id,
+    userid: user?.id,
     productid: product?._Id,
-    categoryid: product?.product_category
+    categoryid: product?.product_category,
   };
-  
-  const handleVote =()=>{
+
+  const handleVote = () => {
     giveVote(voteData);
-    }
+  };
   return (
     <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
       <Grid item xs={12}>
         <Typography
           className="product-title"
-          sx={{ fontWeight: "bold", textAlign: "center" }}
+          sx={{
+            fontSize: "24px",
+            fontWeight: "bold",
+            textAlign: "center",
+            zIndex: "1000",
+          }}
         >
           {product?.product_name}
         </Typography>
@@ -65,15 +70,7 @@ const ProductDetail = () => {
 
       <Grid container spacing={2}>
         <Grid item lg={2} md={6} xs={12} className="imageClassMobile">
-          <div
-            className="img-select"
-            // style={{
-            //   // display: "flex",
-            //   // flexDirection: "column",
-            //   // overflowX: "auto",
-            //   // whiteSpace: "nowrap",
-            // }}
-          >
+          <div className="img-select">
             {product?.product_photo_gallery?.map((photo, index) => (
               <div
                 className="img-item"
@@ -128,7 +125,13 @@ const ProductDetail = () => {
             <Typography variant="body1">
               {product.product_shortdescription}
             </Typography>
-            <ul style={{ paddingLeft: "20px", lineHeight: "1.6" ,   textTransform: "capitalize"}}>
+            <ul
+              style={{
+                paddingLeft: "20px",
+                lineHeight: "1.6",
+                textTransform: "capitalize",
+              }}
+            >
               <li>
                 Category: <span>{product?.category_name}</span>
               </li>
@@ -163,7 +166,6 @@ const ProductDetail = () => {
                     fontSize: "16px",
                     boxShadow: "4px 6px 10px 0px grey",
                     color: "#fff",
-                   
                   }}
                   onClick={handleVote}
                 >

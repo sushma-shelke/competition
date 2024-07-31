@@ -16,6 +16,7 @@ import TopVotedProduct from "./Components/Stats/TopVotedProduct";
 import UserDetail from "./Components/User/UserDetail";
 import Result from "./Components/Result";
 import ParticipationForm from "./Components/Form/ParticipationForm";
+import FAQ from "./Components/AboutUs/FAQComponent";
 
 function Home() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/userdetail" element={<UserDetail />} />
           <Route path="/result" element={<Result />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
         <Footer />
       </div>
