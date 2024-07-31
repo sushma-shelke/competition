@@ -188,6 +188,12 @@ export const CompitationContextProvider = ({ children }) => {
     }
   };
 
+  const logoutUser = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("user");
+  };
+
   const value = {
     faq,
     products, currentPage,
@@ -206,6 +212,7 @@ export const CompitationContextProvider = ({ children }) => {
     giveVote,
     categoryProduct,
        pid,setPid,
+       logoutUser,
     
   };
   return (
