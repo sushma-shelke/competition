@@ -69,7 +69,7 @@ button {
 }
 button:hover {
   /* color: rgb(173, 171, 37); */
-  color: #5d51f0f0;
+  color: #ffffff;
   /* background: #1ecd97; */
 }
 button:active {
@@ -135,10 +135,10 @@ button:active {
 }
 .logocss {
   /* height: 100px !important; */
-  width: 130px ;
-  Margin-top: 5px;
-  Margin-bottom: 5px;
-  Margin-right:15px ;
+  width: 130px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 15px;
 }
 
 .productGallery {
@@ -154,7 +154,7 @@ button:active {
   overflow-x: "auto";
   white-space: "nowrap";
 }
-.css-1xmpwxz-MuiDialogContent-root{
+.css-1xmpwxz-MuiDialogContent-root {
   overflow: hidden !important;
 }
 @media only screen and (max-width: 467px) {
@@ -162,11 +162,11 @@ button:active {
     /* height: 100px !important; */
     width: 60px;
     position: relative;
-    left :2rem
+    left: 2rem;
   }
-  .menuButton{
+  .menuButton {
     position: relative;
-    left :-8rem
+    left: -8rem;
   }
   .imageClassMobile {
     display: grid !important;
@@ -201,4 +201,11 @@ button:active {
     position: absolute;
     top: 20%;
   }
+}
+.css-1i5opmb-MuiButtonBase-root-MuiButton-root:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  background-color: #9c2946 !important;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
