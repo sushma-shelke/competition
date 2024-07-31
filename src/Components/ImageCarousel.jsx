@@ -12,10 +12,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
 import img1 from "../Assets/Images/homepage1.jpg";
 import img2 from "../Assets/Images/homepage2.jpg";
+import img3 from "../Assets/Images/homepage3.jpg";
+
 import { useCompitationContext } from "../Context/CompitationContext"; // Import context
 import ParticipationForm from "./Form/ParticipationForm"; // Import your ParticipationForm component here
 
-const images = [img1, img2, img1, img2, img1, img2];
+const images = [img1, img2,img3, img1, img2,img3, img1, img2,img3];
 const intervalTime = 3000; // 3 seconds for autoplay
 
 const ImageCarousel = () => {
@@ -61,7 +63,7 @@ const ImageCarousel = () => {
             src={images[currentIndex]}
             alt={`Carousel ${currentIndex}`}
             className="carousel-img"
-            style={{ width: "100%", maxHeight: "500px" }}
+            style={{ width: "100%"}}
           />
         </Grid>
       </Grid>
