@@ -49,7 +49,7 @@ const AnimatedLikeIcon = styled(FavoriteIcon)`
 `;
 
 const ProductPost = ({ product }) => {
-
+console.log(product?.result?._id,"productproduct")
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
 
@@ -85,7 +85,7 @@ const ProductPost = ({ product }) => {
   };
 
   const handleProductSelect = () => {
-    navigate(`/product/${product?._Id?product?._Id:product?.result?._Id}`);
+    navigate(`/product/${product?._Id?product?._Id:product?.result?._id}`);
   };
   
   const sortdesc= product?.product_shortdescription?product?.product_shortdescription:product?.result?.product_shortdescription

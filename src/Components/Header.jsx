@@ -177,6 +177,8 @@ import TextField from "@mui/material/TextField";
 import logoImage from "../Assets/Images/Mumbai-Local-PNG1.png";
 import { useCompitationContext } from "../Context/CompitationContext";
 
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 const pages = ["Products", "Categories", "Votes", "FAQ"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -185,8 +187,8 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
-  const { isLoggedIn, registerOrLoginUser } = useCompitationContext();
 
+  const { isLoggedIn, registerOrLoginUser,logoutUser } = useCompitationContext();
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -229,6 +231,10 @@ function Header() {
     } else {
       alert("Failed to login/register.");
     }
+  };
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/");
   };
 
   const handleOpenModal = () => {
@@ -332,13 +338,18 @@ function Header() {
           </Box>
           <Box>
             {isLoggedIn === false ? (
+              <> 
+              {/* <Typography> 
+              Login
+                </Typography>
+                <LoginIcon sx={{color:"#9C2946", fontSize: "40px",}}/> */}
               <Button
                 variant="contained"
                 color="primary"
                 onClick={handleOpenModal}
                 style={{
                   position: "relative",
-                  width: "25%",
+                  // width: "45%",
                   backgroundColor: "#9C2946",
                   fontWeight: "600",
                   textTransform: "capitalize",
@@ -349,11 +360,73 @@ function Header() {
                 }}
               >
                 Login
+                <LoginIcon sx={{color:"#fff",marginLeft:'10px'}}/>
               </Button>
-            ) : (
+              </>
+            )  : (
+              <> 
+              {/* <Box Container>
               <Box onClick={handleClick}>
                 <Avatar />
+               
               </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpenModal}
+                style={{
+                  position: "relative",
+                  // width: "45%",
+                  backgroundColor: "#9C2946",
+                  fontWeight: "600",
+                  textTransform: "capitalize",
+                  borderRadius: "50px",
+                  padding: "20px",
+                  fontSize: "16px",
+                  boxShadow: "4px 6px 10px 0px grey",
+                }}
+              >
+                Logout
+                <LogoutIcon sx={{color:"#fff",marginLeft:'10px'}}/>
+              </Button>
+              </Box> */}
+              <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between', // Adjust this based on your layout needs
+        padding: '16px',
+        gap: '16px', // Add some space between the avatar and button
+      }}
+    >
+               <Box onClick={handleClick} sx={{ cursor: 'pointer' }}>
+            <Avatar 
+              sx={{
+                bgcolor: "#972A41", 
+                            }}
+            />
+          </Box>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleLogout}
+        sx={{
+          backgroundColor: '#9C2946',
+          fontWeight: '600',
+          textTransform: 'capitalize',
+          borderRadius: '50px',
+          padding: '10px 20px',
+          fontSize: '16px',
+          boxShadow: '4px 6px 10px 0px grey',
+          display: 'flex',
+          alignItems: 'left', 
+        }}
+      >
+        Logout
+        <LogoutIcon sx={{ color: '#fff', marginLeft: '10px' }} />
+      </Button>
+    </Box>
+               </>
             )}
           </Box>
         </Toolbar>
