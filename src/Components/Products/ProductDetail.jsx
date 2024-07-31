@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Grid, Typography, IconButton } from "@mui/material";
+import { Button, Grid, Typography, IconButton, DialogActions, TextField, DialogContentText, DialogTitle, Dialog, DialogContent } from "@mui/material";
 import "../../../src/Card.css";
 import { useParams } from "react-router-dom";
 import { useCompitationContext } from "../../Context/CompitationContext";
@@ -9,8 +9,9 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
-  const { getProductById ,giveVote} = useCompitationContext();
-
+  const { getProductById ,giveVote,registerOrLoginUser} = useCompitationContext();
+  const [openModal, setOpenModal] = React.useState(false);
+  const [mobileNumber, setMobileNumber] = React.useState("");
   // get data form session storage
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -19,6 +20,7 @@ const ProductDetail = () => {
       setUser(JSON.parse(storedUser));
     }
   }, []);
+  console.log("user",user)
 
     useEffect(() => {
     const fetchProduct = async () => {
@@ -50,9 +52,26 @@ const ProductDetail = () => {
   };
   
   const handleVote =()=>{
+    if (!user) {
+            setOpenModal(true); 
+      return;
+    }
     giveVote(voteData);
     }
+
+    const handleLogin = async () => {
+      const result = await registerOrLoginUser(mobileNumber);
+      if (result) {
+        setOpenModal(false); // Close the modal after successful login
+      } else {
+        alert("Failed to login/register.");
+      }
+    };
+    const handleCloseModal = () => {
+      setOpenModal(false);
+    };
   return (
+    <>
     <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
       <Grid item xs={12}>
         <Typography
@@ -196,6 +215,55 @@ const ProductDetail = () => {
         </Grid>
       </Grid>
     </Grid>
+    <Dialog open={openModal} onClose={handleCloseModal}>
+        <DialogTitle>Login</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter your mobile number to login.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="mobileNumber"
+            label="Mobile Number"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "#9C2946",
+              fontWeight: "800",
+              width: "10rem",
+              borderRadius: "50px",
+            }}
+            onClick={handleCloseModal}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "#9C2946",
+              fontWeight: "800",
+              width: "10rem",
+              borderRadius: "50px",
+            }}
+            onClick={handleLogin}
+            color="primary"
+          >
+            Login
+          </Button>
+        </DialogActions>
+      </Dialog>
+</>
+
   );
 };
 
