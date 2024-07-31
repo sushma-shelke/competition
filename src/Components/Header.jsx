@@ -24,7 +24,7 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-const pages = ["Products", "Categories", "Votes", "FAQ"];
+const pages = ["Products", "Categories", "Votes", "Faq"];
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -85,8 +85,8 @@ function Header() {
       navigate("/categories");
     } else if (page === "Votes") {
       navigate("/");
-    } else if (page === "FAQ") {
-      navigate("/");
+    } else if (page === "Faq") {
+      navigate("/faq");
     }
   };
 
@@ -132,12 +132,14 @@ function Header() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img
-            src={logoImage}
-            className="logocss"
-            onClick={handleLogoClick}
-            style={{ cursor: "pointer" }}
-          />
+          <Box>
+            <img
+              src={logoImage}
+              className="logocss"
+              onClick={handleLogoClick}
+              style={{ cursor: "pointer" }}
+            />
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               className="menuButton"
@@ -196,22 +198,27 @@ function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
+              <Typography
                 key={page}
                 onClick={() => handleCloseNavMenu(page)}
                 sx={{
-                  my: 2,
+                  margin: 2,
                   color: "#9C2946",
                   display: "block",
                   fontWeight: "700",
                   textTransform: "capitalize",
                   fontSize: "20px",
+                  cursor: "pointer",
+                  "&:hover": {
+                    color: "#4A4A4A", // Dark gray color on hover
+                  },
                 }}
               >
                 {page}
-              </Button>
+              </Typography>
             ))}
           </Box>
+
           <Box>
             {isLoggedIn === false ? (
               <>
@@ -241,7 +248,7 @@ function Header() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    padding: "16px",
+                    // padding: "16px",
                     gap: "16px",
                   }}
                 >
@@ -266,7 +273,7 @@ function Header() {
                       padding: "10px 20px",
                       fontSize: "16px",
                       boxShadow: "4px 6px 10px 0px grey",
-                      display: "flex",
+                      display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
                       alignItems: "left",
                     }}
                   >
