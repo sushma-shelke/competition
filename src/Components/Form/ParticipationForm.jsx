@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Box, TextField, Grid, MenuItem, Typography } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Grid,
+  MenuItem,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+} from "@mui/material";
 import CustomButton from "./../CustomButton.jsx";
 import { useCompitationContext } from "../../Context/CompitationContext.jsx";
 import wretch from "wretch";
+import { useNavigate } from "react-router-dom";
 
 const ParticipationForm = () => {
   const {
@@ -14,7 +27,9 @@ const ParticipationForm = () => {
   const { addProduct, category } = useCompitationContext();
   const [productPhotoUrl, setProductPhotoUrl] = useState("");
   const [productPhotoGalleryUrls, setProductPhotoGalleryUrls] = useState([]);
-
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [productData, setProductData] = useState({});
+  const navigate = useNavigate();
   const handleMainPhotoUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -63,37 +78,45 @@ const ParticipationForm = () => {
     }
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
+    const selectedCategory = category.find(
+      (cat) => cat.category_name === data.category
+    );
+
+    const productData = {
+      shgname: data.shgName,
+      product_name: data.productName,
+      product_shortdescription: data.shortDescription,
+      participating_persons_mobilenumber: data.mobileNumber,
+      product_photo: productPhotoUrl,
+      product_photo_gallery: productPhotoGalleryUrls,
+      product_weight: parseFloat(data.weight),
+      product_lenght: parseFloat(data.length),
+      product_width: parseFloat(data.width),
+      product_colour: data.color,
+      product_price: parseFloat(data.price),
+      product_category: selectedCategory ? selectedCategory.id : null,
+      votecount: 0,
+    };
+
+    setProductData(productData);
+    setOpenConfirm(true);
+  };
+
+  const handleConfirm = async () => {
     try {
-      const selectedCategory = category.find(
-        (cat) => cat.category_name === data.category
-      );
-      const productData = {
-        shgname: data.shgName,
-        product_name: data.productName,
-        product_shortdescription: data.shortDescription,
-        participating_persons_mobilenumber: data.mobileNumber,
-        product_photo: productPhotoUrl,
-        product_photo_gallery: productPhotoGalleryUrls,
-        product_weight: parseFloat(data.weight),
-        product_lenght: parseFloat(data.length),
-        product_width: parseFloat(data.width),
-        product_colour: data.color,
-        product_price: parseFloat(data.price),
-        product_category: selectedCategory ? selectedCategory.id : null,
-        votecount: 0,
-      };
       const response = await addProduct(productData);
-      console.log(response, "response for status");
-      // Show alert based on response status
-      if (response?.result?.status == "200") {
+      if (response?.result?.status === "200") {
         window.alert("Product submitted successfully!");
+        navigate("/");
       } else {
-        window.alert(`Submission failed: ${response.statusText}`);
+        window.alert(`You already registered a product`);
       }
     } catch (error) {
       console.error("Error submitting product:", error);
       window.alert("Error submitting product. Please try again.");
+    } finally {
+      setOpenConfirm(false);
     }
   };
 
@@ -132,14 +155,22 @@ const ParticipationForm = () => {
               fullWidth
               type="number"
               label="Mobile Number / मोबाईल नंबर"
-              {...register("mobileNumber")}
+              {...register("mobileNumber", {
+                required: "Mobile Number is required",
+              })}
+              error={!!errors.mobileNumber}
+              helperText={errors.mobileNumber && errors.mobileNumber.message}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TextField
               fullWidth
               label="Product Name / उत्पादनाचे नाव"
-              {...register("productName")}
+              {...register("productName", {
+                required: "Product Name is required",
+              })}
+              error={!!errors.productName}
+              helperText={errors.productName && errors.productName.message}
             />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
@@ -147,7 +178,9 @@ const ParticipationForm = () => {
               fullWidth
               select
               label="Product Category / उत्पादन श्रेणी"
-              {...register("category")}
+              {...register("category", { required: "Category is required" })}
+              error={!!errors.category}
+              helperText={errors.category && errors.category.message}
             >
               {category &&
                 category.map((cat) => (
@@ -231,6 +264,70 @@ const ParticipationForm = () => {
           </Grid>
         </Grid>
       </form>
+
+      <Dialog
+        open={openConfirm}
+        onClose={() => setOpenConfirm(false)}
+        aria-labelledby="confirm-dialog-title"
+        aria-describedby="confirm-dialog-description"
+      >
+        <DialogTitle id="confirm-dialog-title">
+          <span style={{ color: "red" }}>
+            Please confirm the details cause you unable to update later:
+          </span>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="confirm-dialog-description">
+            <strong>SHG Name:</strong> {productData.shgname || " "} <br />
+            <strong>Mobile Number:</strong>{" "}
+            {productData.participating_persons_mobilenumber || " "} <br />
+            <strong>Product Name:</strong> {productData.product_name || " "}{" "}
+            <br />
+            <strong>Weight:</strong> {productData.product_weight || " "} <br />
+            <strong>Length:</strong> {productData.product_lenght || " "} <br />
+            <strong>Width:</strong> {productData.product_width || " "} <br />
+            <strong>Color:</strong> {productData.product_colour || " "} <br />
+            <strong>Price:</strong> {productData.product_price || " "} <br />
+            <strong>Short Description:</strong>{" "}
+            {productData.product_shortdescription || " "}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setOpenConfirm(false)}
+            style={{
+              width: "80%",
+              backgroundColor: "#9C2946",
+              fontWeight: "600",
+              textTransform: "capitalize",
+              borderRadius: "50px",
+              padding: "10px 20px",
+              fontSize: "16px",
+              // boxShadow: "4px 6px 10px 0px grey",
+              color: "#fff",
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleConfirm}
+            autoFocus
+            style={{
+              width: "80%",
+              backgroundColor: "#9C2946",
+              fontWeight: "600",
+              textTransform: "capitalize",
+              borderRadius: "50px",
+              padding: "10px 20px",
+              fontSize: "16px",
+              // boxShadow: "4px 6px 10px 0px grey",
+              color: "#fff",
+            }}
+          >
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
