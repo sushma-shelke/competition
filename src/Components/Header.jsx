@@ -176,9 +176,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import logoImage from "../Assets/Images/Mumbai-Local-PNG1.png";
 import { useCompitationContext } from "../Context/CompitationContext";
+
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
-const pages = ["Products", "Categories", "Votes"];
+const pages = ["Products", "Categories", "Votes", "FAQ"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header() {
@@ -186,8 +187,8 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
+
   const { isLoggedIn, registerOrLoginUser,logoutUser } = useCompitationContext();
- 
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
@@ -205,6 +206,8 @@ function Header() {
     } else if (page === "Categories") {
       navigate("/categories");
     } else if (page === "Votes") {
+      navigate("/");
+    } else if (page === "FAQ") {
       navigate("/");
     }
   };
@@ -244,7 +247,7 @@ function Header() {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
         background: "#fff",
         // background:
