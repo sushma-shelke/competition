@@ -19,12 +19,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import logoImage from "../Assets/Images/Mumbai-Local-PNG1.png";
+import logo1Image from "../Assets/Images/BMCLogoo.png";
 import { useCompitationContext } from "../Context/CompitationContext";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 const pages = ["Products", "Categories", "Winner", "Faq"];
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -54,17 +56,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const SmallAvatar = styled(Avatar)(({ theme }) => ({
-  width: 22,
-  height: 22,
-  border: `2px solid ${theme.palette.background.paper}`,
-}));
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState(""); 
+
   const { isLoggedIn, registerOrLoginUser, logoutUser } =
     useCompitationContext();
   const navigate = useNavigate();
@@ -79,6 +76,7 @@ function Header() {
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
+
     if (page === "Products") {
       navigate("/products");
     } else if (page === "Categories") {
@@ -87,6 +85,10 @@ function Header() {
       navigate("/winner");
     } else if (page === "Faq") {
       navigate("/faq");
+
+    if (page) {
+      navigate(`/${page.toLowerCase()}`);
+
     }
   };
 
@@ -94,7 +96,7 @@ function Header() {
     setAnchorElUser(null);
   };
 
-  const handleLogoClick = () => {
+  const handleBMCLogoClick = () => {
     navigate("/");
   };
 
@@ -103,19 +105,14 @@ function Header() {
   };
 
   const handleLogin = async () => {
-    if (mobileNumber.length !== 10) {
-      setErrorMessage("Mobile number must be 10 digits long.");
-      return;
-    }
     const result = await registerOrLoginUser(mobileNumber);
     if (result) {
       setOpenModal(false);
-      setErrorMessage("");
     } else {
       alert("Failed to login/register.");
-      // setErrorMessage("Failed to login/register.");
     }
   };
+
   const handleLogout = () => {
     logoutUser();
     navigate("/");
@@ -123,29 +120,45 @@ function Header() {
 
   const handleOpenModal = () => {
     setOpenModal(true);
-    
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setErrorMessage("");
   };
 
   return (
-    <AppBar
-      position="sticky"
-      sx={{
-        background: "#fff",
-      }}
-    >
+    <AppBar position="sticky" sx={{ background: "#fff" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box>
+          <Box sx={{ display: "flex" }}>
+            <a
+              href="https://www.mcgm.gov.in/irj/portal/anonymous?guest_user=english"
+              target="_blank"
+            >
+              <img
+                src={logo1Image}
+                className="BMC"
+                style={{
+                  cursor: "pointer",
+                  height: "50px",
+                  width: "50px",
+                  margin: "10px",
+                  marginRight: "0px",
+                }}
+              />
+            </a>
             <img
               src={logoImage}
-              className="logocss"
-              onClick={handleLogoClick}
-              style={{ cursor: "pointer" }}
+              className="Mumbai Local"
+              onClick={handleBMCLogoClick} // Assuming this is the correct function
+              style={{
+                cursor: "pointer",
+                height: "50px",
+                width: "auto",
+                margin: "10px",
+                borderLeft: "2px solid #bdbdbd", // Adding a left border
+                paddingLeft: "10px", // Optional: to create space between the border and image
+              }}
             />
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -163,26 +176,31 @@ function Header() {
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
               keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+              transformOrigin={{ vertical: "top", horizontal: "left" }}
               open={Boolean(anchorElNav)}
               onClose={() => handleCloseNavMenu(null)}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+              {isLoggedIn ? (
+                <>
+                  <MenuItem onClick={handleLogout}>
+                    <LogoutIcon sx={{ color: "#9C2946", mr: 1 }} />
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem onClick={handleOpenModal}>
+                  <LoginIcon sx={{ color: "#9C2946", mr: 1 }} />
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -226,70 +244,65 @@ function Header() {
               </Typography>
             ))}
           </Box>
-
-          <Box>
-            {isLoggedIn === false ? (
-              <>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleOpenModal}
-                  style={{
-                    position: "relative",
-                    backgroundColor: "#9C2946",
-                    fontWeight: "600",
-                    textTransform: "capitalize",
-                    borderRadius: "50px",
-                    padding: "20px",
-                    fontSize: "16px",
-                    boxShadow: "4px 6px 10px 0px grey",
-                  }}
+          <Box
+            sx={{
+              display: { xs: "flex", md: "flex" },
+              alignItems: "center",
+              marginRight: "10px",
+            }}
+          >
+            {isLoggedIn && (
+              <Box
+                onClick={handleClick}
+                sx={{ cursor: "pointer", margin: "10px" }}
+              >
+                <StyledBadge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  variant="dot"
                 >
-                  Login
-                  <LoginIcon sx={{ color: "#fff", marginLeft: "10px" }} />
-                </Button>
-              </>
+                  <Avatar />
+                </StyledBadge>
+              </Box>
+            )}
+            {isLoggedIn ? (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleLogout}
+                sx={{
+                  backgroundColor: "#9C2946",
+                  fontWeight: "600",
+                  textTransform: "capitalize",
+                  borderRadius: "50px",
+                  padding: "10px 20px",
+                  fontSize: "16px",
+                  boxShadow: "4px 6px 10px 0px grey",
+                  display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
+                }}
+              >
+                Logout
+                <LogoutIcon sx={{ color: "#fff", marginLeft: "10px" }} />
+              </Button>
             ) : (
-              <>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    // padding: "16px",
-                    gap: "16px",
-                  }}
-                >
-                  <Box onClick={handleClick} sx={{ cursor: "pointer" }}>
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                      variant="dot"
-                    >
-                      <Avatar />
-                    </StyledBadge>
-                  </Box>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleLogout}
-                    sx={{
-                      backgroundColor: "#9C2946",
-                      fontWeight: "600",
-                      textTransform: "capitalize",
-                      borderRadius: "50px",
-                      padding: "10px 20px",
-                      fontSize: "16px",
-                      boxShadow: "4px 6px 10px 0px grey",
-                      display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
-                      alignItems: "left",
-                    }}
-                  >
-                    Logout
-                    <LogoutIcon sx={{ color: "#fff", marginLeft: "10px" }} />
-                  </Button>
-                </Box>
-              </>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpenModal}
+                sx={{
+                  backgroundColor: "#9C2946",
+                  fontWeight: "600",
+                  textTransform: "capitalize",
+                  borderRadius: "50px",
+                  padding: "20px",
+                  fontSize: "16px",
+                  boxShadow: "4px 6px 10px 0px grey",
+                  display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
+                }}
+              >
+                Login
+                <LoginIcon sx={{ color: "#fff", marginLeft: "10px" }} />
+              </Button>
             )}
           </Box>
         </Toolbar>
@@ -306,13 +319,11 @@ function Header() {
             margin="dense"
             id="mobileNumber"
             label="Mobile Number"
-            type="number"
+            type="text"
             fullWidth
             variant="outlined"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
-            error={!!errorMessage} // Show error state if there is an error
-            helperText={errorMessage} 
           />
         </DialogContent>
         <DialogActions>
