@@ -22,7 +22,8 @@ const UserDetail = () => {
   };
   
   const landingonproductdetail = () => {
-       navigate(`/product/${user?.registeredProduct[0]?._id ?user?.registeredProduct[0]?._id:user?.registeredProduct[0]?._Id}`)
+   
+    navigate(`/product/${user?.registeredProduct[0]?._id ?user?.registeredProduct[0]?._id:user?.registeredProduct[0]?._Id}`)
   };
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const UserDetail = () => {
       setUser(JSON.parse(storedUser));
     }
   }, []);
-  console.log(user?.productVotes.length ===0 ,"user?.productVotes === null ")
+  // console.log(user?.productVotes.length ===0 ,"user?.productVotes === null ")
 
   useEffect(() => {
     const fetchVotedProducts = async () => {
