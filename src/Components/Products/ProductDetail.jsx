@@ -13,6 +13,7 @@ const ProductDetail = () => {
   const { getProductById ,giveVote,registerOrLoginUser} = useCompitationContext();
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState(""); 
 
   // get data form session storage
   const [user, setUser] = useState(null);
@@ -63,15 +64,21 @@ const ProductDetail = () => {
     }
 
     const handleLogin = async () => {
+      if (mobileNumber.length !== 10) {
+        setErrorMessage("Mobile number must be 10 digits long.");
+        return;
+      }
       const result = await registerOrLoginUser(mobileNumber);
       if (result) {
         setOpenModal(false); // Close the modal after successful login
+        setErrorMessage("");
       } else {
         alert("Failed to login/register.");
       }
     };
     const handleCloseModal = () => {
       setOpenModal(false);
+      setErrorMessage("");
     };
 
   return (
@@ -232,11 +239,13 @@ const ProductDetail = () => {
             margin="dense"
             id="mobileNumber"
             label="Mobile Number"
-            type="text"
+            type="number"
             fullWidth
             variant="outlined"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
+            error={!!errorMessage}
+            helperText={errorMessage} 
           />
         </DialogContent>
         <DialogActions>
