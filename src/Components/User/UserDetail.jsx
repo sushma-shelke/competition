@@ -22,6 +22,7 @@ const UserDetail = () => {
   };
 
   const landingonproductdetail = () => {
+
     navigate(
       `/product/${
         user?.registeredProduct[0]?._id
@@ -29,6 +30,7 @@ const UserDetail = () => {
           : user?.registeredProduct[0]?._Id
       }`
     );
+
   };
 
   useEffect(() => {
@@ -37,7 +39,6 @@ const UserDetail = () => {
       setUser(JSON.parse(storedUser));
     }
   }, []);
-  console.log(user?.productVotes.length === 0, "user?.productVotes === null ");
 
   useEffect(() => {
     const fetchVotedProducts = async () => {

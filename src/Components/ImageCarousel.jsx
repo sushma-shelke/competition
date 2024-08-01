@@ -10,20 +10,21 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
-import img1 from "../Assets/Images/homepage1.jpg";
-import img2 from "../Assets/Images/homepage2.jpg";
-import img3 from "../Assets/Images/homepage3.jpg";
+import img1 from "../Assets/Images/home1.jpg";
+import img2 from "../Assets/Images/home2.jpg";
+import img3 from "../Assets/Images/home3.png";
 
 import { useCompitationContext } from "../Context/CompitationContext"; // Import context
 import ParticipationForm from "./Form/ParticipationForm"; // Import your ParticipationForm component here
 
-const images = [img1, img2,img3, img1, img2,img3, img1, img2,img3];
+const images = [img1, img2, img3, img1, img2, img3, img1, img2, img3];
 const intervalTime = 3000; // 3 seconds for autoplay
 
 const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [mobileNumber, setMobileNumber] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
   const { isLoggedIn, registerOrLoginUser } = useCompitationContext(); // Use context
 
   const isMobile = useMediaQuery("(max-width: 768px)"); // Media query to check if screen width is less than 600px
@@ -44,14 +45,21 @@ const ImageCarousel = () => {
 
   const handleCloseModal = () => {
     setOpenModal(false);
+    setErrorMessage(""); // Clear error message when closing modal
   };
 
   const handleLogin = async () => {
+    if (mobileNumber.length !== 10) {
+      setErrorMessage("Mobile number must be 10 digits long.");
+      return;
+    }
+
     const result = await registerOrLoginUser(mobileNumber);
     if (result) {
       setOpenModal(false); // Close the modal after successful login
+      setErrorMessage(""); // Clear error message on successful login
     } else {
-      alert("Failed to login/register.");
+      setErrorMessage("Failed to login/register.");
     }
   };
 
@@ -63,7 +71,7 @@ const ImageCarousel = () => {
             src={images[currentIndex]}
             alt={`Carousel ${currentIndex}`}
             className="carousel-img"
-            style={{ width: "100%"}}
+            style={{ width: "100%" }}
           />
         </Grid>
       </Grid>
@@ -182,6 +190,8 @@ const ImageCarousel = () => {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                error={!!errorMessage}
+                helperText={errorMessage} 
               />
               <Box
                 style={{
