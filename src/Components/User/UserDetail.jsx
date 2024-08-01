@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const UserDetail = () => {
   const [user, setUser] = useState(null);
   const [votedProducts, setVotedProducts] = useState([]);
-  const { getProductById } = useCompitationContext(); 
+  const { getProductById } = useCompitationContext();
   const navigate = useNavigate();
 
   const gotoVote = () => {
@@ -20,9 +20,15 @@ const UserDetail = () => {
   const gotoForm = () => {
     navigate("/participationform");
   };
-  
+
   const landingonproductdetail = () => {
-       navigate(`/product/${user?.registeredProduct[0]?._id ?user?.registeredProduct[0]?._id:user?.registeredProduct[0]?._Id}`)
+    navigate(
+      `/product/${
+        user?.registeredProduct[0]?._id
+          ? user?.registeredProduct[0]?._id
+          : user?.registeredProduct[0]?._Id
+      }`
+    );
   };
 
   useEffect(() => {
@@ -31,7 +37,7 @@ const UserDetail = () => {
       setUser(JSON.parse(storedUser));
     }
   }, []);
-  console.log(user?.productVotes.length ===0 ,"user?.productVotes === null ")
+  console.log(user?.productVotes.length === 0, "user?.productVotes === null ");
 
   useEffect(() => {
     const fetchVotedProducts = async () => {
@@ -69,11 +75,12 @@ const UserDetail = () => {
             {user?.mobileNumber}
           </Typography>
         </Profile>
-        
+
         <Typography variant="h4" sx={{ fontWeight: "bold", color: "#666666" }}>
-          Your Product 
+          Your Product
         </Typography>
-        {user?.registeredProduct === null || user?.registeredProduct.length === 0? (
+        {user?.registeredProduct === null ||
+        user?.registeredProduct?.length === 0 ? (
           <Button
             sx={{
               color: "white",
@@ -181,7 +188,7 @@ const UserDetail = () => {
                       <span>{user?.registeredProduct[0]?.shgname}</span>
                     </li>
                   </ul>
-                
+
                   <Grid container spacing={2} sx={{ marginTop: 2 }}>
                     {user?.registeredProduct &&
                       user?.registeredProduct.length > 0 && (
@@ -221,7 +228,7 @@ const UserDetail = () => {
                 container
                 justifyContent="center"
                 alignItems="center"
-                sx={{ height: '10vh' }} 
+                sx={{ height: "10vh" }}
               >
                 <Button
                   variant="contained"
@@ -234,8 +241,8 @@ const UserDetail = () => {
                     width: "14rem",
                     borderRadius: "50px",
                     textTransform: "uppercase",
-                                      fontSize: "16px",
-                                      }}
+                    fontSize: "16px",
+                  }}
                 >
                   View Product
                 </Button>
@@ -250,44 +257,43 @@ const UserDetail = () => {
         >
           Products you voted for...
         </Typography>
-        {user?.productVotes === null || user?.productVotes.length ===0 ? (
-          <>       
-                     <Grid xs={12} sx={{ marginTop: "3rem", marginBottom: "3rem" }}>
-            <Button
-              sx={{
-                color: "white",
-                backgroundColor: "#9C2946",
-                fontWeight: "800",
-                width: "14rem",
-                borderRadius: "50px",
-                marginTop: "1rem",
-                marginBottom: "1rem",
-              }}
-              onClick={gotoVote}
-            >
-              Vote For Products
-            </Button>
-          </Grid>
+        {user?.productVotes === null || user?.productVotes.length === 0 ? (
+          <>
+            <Grid xs={12} sx={{ marginTop: "3rem", marginBottom: "3rem" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  backgroundColor: "#9C2946",
+                  fontWeight: "800",
+                  width: "14rem",
+                  borderRadius: "50px",
+                  marginTop: "1rem",
+                  marginBottom: "1rem",
+                }}
+                onClick={gotoVote}
+              >
+                Vote For Products
+              </Button>
+            </Grid>
           </>
         ) : (
           <>
-         
-          <Grid container spacing={2}>
-            {votedProducts &&
-              votedProducts.map((product) => (
-                <Grid
-                  item
-                  key={product._id}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  sx={{ display: "flex", justifyContent: "center" }}
-                >
-                  <ProductPost product={product} />
-                </Grid>
-              ))}
-          </Grid>
+            <Grid container spacing={2}>
+              {votedProducts &&
+                votedProducts.map((product) => (
+                  <Grid
+                    item
+                    key={product._id}
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
+                    sx={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <ProductPost product={product} />
+                  </Grid>
+                ))}
+            </Grid>
           </>
         )}
       </Container>

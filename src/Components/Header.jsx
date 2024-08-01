@@ -24,7 +24,9 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+
 const pages = ["Products", "Categories", "Votes", "Faq"];
+
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -54,11 +56,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const SmallAvatar = styled(Avatar)(({ theme }) => ({
-  width: 22,
-  height: 22,
-  border: `2px solid ${theme.palette.background.paper}`,
-}));
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -79,14 +76,8 @@ function Header() {
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
-    if (page === "Products") {
-      navigate("/products");
-    } else if (page === "Categories") {
-      navigate("/categories");
-    } else if (page === "Votes") {
-      navigate("/");
-    } else if (page === "Faq") {
-      navigate("/faq");
+    if (page) {
+      navigate(`/${page.toLowerCase()}`);
     }
   };
 
@@ -110,6 +101,7 @@ function Header() {
       alert("Failed to login/register.");
     }
   };
+
   const handleLogout = () => {
     logoutUser();
     navigate("/");
@@ -124,12 +116,7 @@ function Header() {
   };
 
   return (
-    <AppBar
-      position="sticky"
-      sx={{
-        background: "#fff",
-      }}
-    >
+    <AppBar position="sticky" sx={{ background: "#fff" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box>
@@ -155,26 +142,43 @@ function Header() {
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
               keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+              transformOrigin={{ vertical: "top", horizontal: "left" }}
               open={Boolean(anchorElNav)}
               onClose={() => handleCloseNavMenu(null)}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+              {isLoggedIn ? (
+                <>
+                  <MenuItem onClick={handleClick}>
+                    <StyledBadge
+                      overlap="circular"
+                      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                      variant="dot"
+                    >
+                      <Avatar />
+                    </StyledBadge>
+                    <Typography textAlign="center" sx={{ ml: 1 }}>
+                      Profile
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <LogoutIcon sx={{ color: "#9C2946", mr: 1 }} />
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem onClick={handleOpenModal}>
+                  <LoginIcon sx={{ color: "#9C2946", mr: 1 }} />
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -218,70 +222,63 @@ function Header() {
               </Typography>
             ))}
           </Box>
-
-          <Box>
-            {isLoggedIn === false ? (
-              <>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleOpenModal}
-                  style={{
-                    position: "relative",
-                    backgroundColor: "#9C2946",
-                    fontWeight: "600",
-                    textTransform: "capitalize",
-                    borderRadius: "50px",
-                    padding: "20px",
-                    fontSize: "16px",
-                    boxShadow: "4px 6px 10px 0px grey",
-                  }}
+          <Box
+            sx={{ display: { xs: "flex", md: "none" }, alignItems: "center" }}
+          >
+            {isLoggedIn && (
+              <Box
+                onClick={handleClick}
+                sx={{ cursor: "pointer", display: { xs: "flex", md: "none" } }}
+              >
+                <StyledBadge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  variant="dot"
                 >
-                  Login
-                  <LoginIcon sx={{ color: "#fff", marginLeft: "10px" }} />
-                </Button>
-              </>
+                  <Avatar />
+                </StyledBadge>
+              </Box>
+            )}
+          </Box>
+          <Box
+            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+          >
+            {isLoggedIn ? (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleLogout}
+                sx={{
+                  backgroundColor: "#9C2946",
+                  fontWeight: "600",
+                  textTransform: "capitalize",
+                  borderRadius: "50px",
+                  padding: "10px 20px",
+                  fontSize: "16px",
+                  boxShadow: "4px 6px 10px 0px grey",
+                }}
+              >
+                Logout
+                <LogoutIcon sx={{ color: "#fff", marginLeft: "10px" }} />
+              </Button>
             ) : (
-              <>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    // padding: "16px",
-                    gap: "16px",
-                  }}
-                >
-                  <Box onClick={handleClick} sx={{ cursor: "pointer" }}>
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                      variant="dot"
-                    >
-                      <Avatar />
-                    </StyledBadge>
-                  </Box>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleLogout}
-                    sx={{
-                      backgroundColor: "#9C2946",
-                      fontWeight: "600",
-                      textTransform: "capitalize",
-                      borderRadius: "50px",
-                      padding: "10px 20px",
-                      fontSize: "16px",
-                      boxShadow: "4px 6px 10px 0px grey",
-                      display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
-                      alignItems: "left",
-                    }}
-                  >
-                    Logout
-                    <LogoutIcon sx={{ color: "#fff", marginLeft: "10px" }} />
-                  </Button>
-                </Box>
-              </>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpenModal}
+                sx={{
+                  backgroundColor: "#9C2946",
+                  fontWeight: "600",
+                  textTransform: "capitalize",
+                  borderRadius: "50px",
+                  padding: "20px",
+                  fontSize: "16px",
+                  boxShadow: "4px 6px 10px 0px grey",
+                }}
+              >
+                Login
+                <LoginIcon sx={{ color: "#fff", marginLeft: "10px" }} />
+              </Button>
             )}
           </Box>
         </Toolbar>
