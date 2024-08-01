@@ -85,7 +85,7 @@ function Header() {
       navigate("/winner");
     } else if (page === "Faq") {
       navigate("/faq");
-
+    }
     if (page) {
       navigate(`/${page.toLowerCase()}`);
 
