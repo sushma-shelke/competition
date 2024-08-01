@@ -29,6 +29,7 @@ export const ListAllApi = {
 
 
   getTopVotedProduct: async () => await Get("/votes/top-voted"),
+  getCategoryWiseTopVotedProduct:async(id)=> await Get(`/votes/category-wise-top-voted/${id}`),
 
   RegisterApi: async (json) => {
     return await Post("/users/createorloginuser", json);

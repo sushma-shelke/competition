@@ -17,6 +17,7 @@ import UserDetail from "./Components/User/UserDetail";
 import Result from "./Components/Result";
 import ParticipationForm from "./Components/Form/ParticipationForm";
 import FAQ from "./Components/AboutUs/FAQComponent";
+import Winner from "./Components/Winner/Winner";
 
 function Home() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="/userdetail" element={<UserDetail />} />
           <Route path="/result" element={<Result />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/winner" element={<Winner />} />
         </Routes>
         <Footer />
       </div>
