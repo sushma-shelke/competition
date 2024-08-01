@@ -166,7 +166,7 @@ button:active {
   }
   .menuButton {
     position: relative;
-    left: -8rem;
+    left: 5.5rem !important;
   }
   .imageClassMobile {
     display: grid !important;
@@ -200,6 +200,22 @@ button:active {
   .img-showcase {
     position: absolute;
     top: 20%;
+  }
+  .css-19r6kue-MuiContainer-root {
+    width: 100%;
+    margin-left: auto;
+    box-sizing: border-box;
+    margin-right: auto;
+    display: block;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .BMC {
+    margin-right: "0px";
+  }
+  .css-ryckft {
+    cursor: pointer;
+    margin: 0px !important;
   }
 }
 .css-1i5opmb-MuiButtonBase-root-MuiButton-root:hover {
