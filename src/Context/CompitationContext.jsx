@@ -16,6 +16,7 @@ export const CompitationContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [votes, setVotes] = useState([]);
   const [topVoted, setTopVoted] = useState([]);
+  const [categoryWiseTopProducts ,setCategoryWiseTopProducts ]=useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
@@ -187,7 +188,18 @@ export const CompitationContextProvider = ({ children }) => {
       throw error; 
     }
   };
-
+// category wise top voted products
+const categoryWiseTopVotedProducts = async (id) => {
+  try {
+    const response = await ListAllApi.getCategoryWiseTopVotedProduct(id);
+     console.log("getCategoryWiseTopVotedProduct", response?.result?.data);
+     setCategoryWiseTopProducts(response?.result?.data)
+    // return response;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw error; 
+  }
+};
   const logoutUser = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
@@ -213,7 +225,8 @@ export const CompitationContextProvider = ({ children }) => {
     categoryProduct,
        pid,setPid,
        logoutUser,
-    
+       categoryWiseTopProducts,
+       categoryWiseTopVotedProducts
   };
   return (
     <CompitationContext.Provider value={value}>

@@ -24,7 +24,7 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-const pages = ["Products", "Categories", "Votes", "Faq"];
+const pages = ["Products", "Categories", "Winner", "Faq"];
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -83,8 +83,8 @@ function Header() {
       navigate("/products");
     } else if (page === "Categories") {
       navigate("/categories");
-    } else if (page === "Votes") {
-      navigate("/");
+    } else if (page === "Winner") {
+      navigate("/winner");
     } else if (page === "Faq") {
       navigate("/faq");
     }
