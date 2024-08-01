@@ -19,6 +19,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import logoImage from "../Assets/Images/Mumbai-Local-PNG1.png";
+import logo1Image from "../Assets/Images/BMCLogoo.png";
 import { useCompitationContext } from "../Context/CompitationContext";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
@@ -61,7 +62,7 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState(""); 
+
   const { isLoggedIn, registerOrLoginUser, logoutUser } =
     useCompitationContext();
   const navigate = useNavigate();
@@ -85,7 +86,7 @@ function Header() {
     setAnchorElUser(null);
   };
 
-  const handleLogoClick = () => {
+  const handleBMCLogoClick = () => {
     navigate("/");
   };
 
@@ -94,17 +95,11 @@ function Header() {
   };
 
   const handleLogin = async () => {
-    if (mobileNumber.length !== 10) {
-      setErrorMessage("Mobile number must be 10 digits long.");
-      return;
-    }
     const result = await registerOrLoginUser(mobileNumber);
     if (result) {
       setOpenModal(false);
-      setErrorMessage("");
     } else {
       alert("Failed to login/register.");
-      // setErrorMessage("Failed to login/register.");
     }
   };
 
@@ -115,24 +110,45 @@ function Header() {
 
   const handleOpenModal = () => {
     setOpenModal(true);
-    
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setErrorMessage("");
   };
 
   return (
     <AppBar position="sticky" sx={{ background: "#fff" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box>
+          <Box sx={{ display: "flex" }}>
+            <a
+              href="https://www.mcgm.gov.in/irj/portal/anonymous?guest_user=english"
+              target="_blank"
+            >
+              <img
+                src={logo1Image}
+                className="BMC"
+                style={{
+                  cursor: "pointer",
+                  height: "50px",
+                  width: "50px",
+                  margin: "10px",
+                  marginRight: "0px",
+                }}
+              />
+            </a>
             <img
               src={logoImage}
-              className="logocss"
-              onClick={handleLogoClick}
-              style={{ cursor: "pointer" }}
+              className="Mumbai Local"
+              onClick={handleBMCLogoClick} // Assuming this is the correct function
+              style={{
+                cursor: "pointer",
+                height: "50px",
+                width: "auto",
+                margin: "10px",
+                borderLeft: "2px solid #bdbdbd", // Adding a left border
+                paddingLeft: "10px", // Optional: to create space between the border and image
+              }}
             />
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -164,18 +180,6 @@ function Header() {
               ))}
               {isLoggedIn ? (
                 <>
-                  <MenuItem onClick={handleClick}>
-                    <StyledBadge
-                      overlap="circular"
-                      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                      variant="dot"
-                    >
-                      <Avatar />
-                    </StyledBadge>
-                    <Typography textAlign="center" sx={{ ml: 1 }}>
-                      Profile
-                    </Typography>
-                  </MenuItem>
                   <MenuItem onClick={handleLogout}>
                     <LogoutIcon sx={{ color: "#9C2946", mr: 1 }} />
                     <Typography textAlign="center">Logout</Typography>
@@ -231,12 +235,16 @@ function Header() {
             ))}
           </Box>
           <Box
-            sx={{ display: { xs: "flex", md: "none" }, alignItems: "center" }}
+            sx={{
+              display: { xs: "flex", md: "flex" },
+              alignItems: "center",
+              marginRight: "10px",
+            }}
           >
             {isLoggedIn && (
               <Box
                 onClick={handleClick}
-                sx={{ cursor: "pointer", display: { xs: "flex", md: "none" } }}
+                sx={{ cursor: "pointer", margin: "10px" }}
               >
                 <StyledBadge
                   overlap="circular"
@@ -247,10 +255,6 @@ function Header() {
                 </StyledBadge>
               </Box>
             )}
-          </Box>
-          <Box
-            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
-          >
             {isLoggedIn ? (
               <Button
                 variant="contained"
@@ -264,6 +268,7 @@ function Header() {
                   padding: "10px 20px",
                   fontSize: "16px",
                   boxShadow: "4px 6px 10px 0px grey",
+                  display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
                 }}
               >
                 Logout
@@ -282,6 +287,7 @@ function Header() {
                   padding: "20px",
                   fontSize: "16px",
                   boxShadow: "4px 6px 10px 0px grey",
+                  display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
                 }}
               >
                 Login
@@ -303,13 +309,11 @@ function Header() {
             margin="dense"
             id="mobileNumber"
             label="Mobile Number"
-            type="number"
+            type="text"
             fullWidth
             variant="outlined"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
-            error={!!errorMessage} // Show error state if there is an error
-            helperText={errorMessage} 
           />
         </DialogContent>
         <DialogActions>
