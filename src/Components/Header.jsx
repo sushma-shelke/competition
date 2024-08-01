@@ -64,7 +64,7 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
-
+  const [errorMessage, setErrorMessage] = React.useState(""); 
   const { isLoggedIn, registerOrLoginUser, logoutUser } =
     useCompitationContext();
   const navigate = useNavigate();
@@ -103,11 +103,17 @@ function Header() {
   };
 
   const handleLogin = async () => {
+    if (mobileNumber.length !== 10) {
+      setErrorMessage("Mobile number must be 10 digits long.");
+      return;
+    }
     const result = await registerOrLoginUser(mobileNumber);
     if (result) {
       setOpenModal(false);
+      setErrorMessage("");
     } else {
       alert("Failed to login/register.");
+      // setErrorMessage("Failed to login/register.");
     }
   };
   const handleLogout = () => {
@@ -117,10 +123,12 @@ function Header() {
 
   const handleOpenModal = () => {
     setOpenModal(true);
+    
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
+    setErrorMessage("");
   };
 
   return (
@@ -298,11 +306,13 @@ function Header() {
             margin="dense"
             id="mobileNumber"
             label="Mobile Number"
-            type="text"
+            type="number"
             fullWidth
             variant="outlined"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
+            error={!!errorMessage} // Show error state if there is an error
+            helperText={errorMessage} 
           />
         </DialogContent>
         <DialogActions>
