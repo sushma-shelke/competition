@@ -47,42 +47,6 @@ const UserDetail = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const fetchVotedProducts = async () => {
-  //     if (user?.productVotes) {
-  //       // if (user?.productVotes) {
-  //       console.log(
-  //         "Fetching product details for voted products...",
-  //         user?.productVotes,
-  //         "asd",
-  //         user
-  //       );
-
-  //       // const productDetails = await Promise.all(
-  //       //   user.productVotes.map(async (vote) => {
-  //       //     try {
-  //       //       const product = await wretch(
-  //       //         `http://mumbailocal.org:8080/products/${vote.productid}`
-  //       //       )
-  //       //         .get()
-  //       //         .json();
-  //       //       console.log("Product fetched:", product);
-  //       //       return product;
-  //       //     } catch (error) {
-  //       //       console.error("Error fetching product details:", error);
-  //       //       return null;
-  //       //     }
-  //       //   })
-  //       // );
-  //       // setVotedProducts(productDetails.filter(Boolean));
-  //     }
-  //   };
-
-  //   if (user) {
-  //     fetchVotedProducts();
-  //   }
-  // }, [user]);
-
   useEffect(() => {
     const fetchVotedProducts = async () => {
       if (user?.productVotes) {
@@ -348,18 +312,27 @@ export default UserDetail;
 
 // Styled components
 const Container = styled(Box)(({ theme }) => ({
-  margin: theme.spacing(4),
+  maxWidth: "1200px",
+  margin: "0 auto",
+  marginTop: "-309px",
+  padding: "20px",
+  backgroundColor: "#fff",
+  borderRadius: "30px",
+  boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+  textAlign: "center",
 }));
 
 const Profile = styled(Box)(({ theme }) => ({
+  padding: "20px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  marginBottom: theme.spacing(4),
 }));
 
 const CenteredAvatar = styled(Avatar)(({ theme }) => ({
-  width: 120,
-  height: 120,
-  marginBottom: theme.spacing(2),
+  width: 130,
+  height: 130,
+  marginTop: "-100px",
+  marginBottom: "20px",
+  boxShadow: "0 0 20px rgba(0, 0, 0, 40%)",
 }));
