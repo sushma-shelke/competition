@@ -35,19 +35,13 @@ const FAQ = () => {
         "Prizes include gift vouchers, a feature in our blog, and exclusive promotion opportunities. Details will be provided closer to the competition date.",
     },
     {
-      question: "Can I edit my submission after submitting?",
-      answer:
-        "Yes, you can edit your submission until the submission deadline. After that, no changes will be allowed.",
+      question: "Can I edit my Product after submitting it?",
+      answer: "No, you cann't edit your Product once its submitted.",
     },
     {
       question: "Do I need to be logged in to register a product?",
       answer:
         "Yes, users must be logged in to register a product for the competition. Please log in or create an account to submit your product.",
-    },
-    {
-      question: "Can content be submitted in languages other than English?",
-      answer:
-        "Yes, content can be submitted in English or any other Indian language.",
     },
   ];
 
