@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Typography, Grid, Box, Button } from "@mui/material";
 import { styled } from "@mui/system";
+import wretch from "wretch";
 import userIcon from "../../Assets/Images/usericon.jpeg";
 import ProductPost from "../Products/ProductPost";
-import { useCompitationContext } from "../../Context/CompitationContext";
-import { ListAllApi } from "../../Api/ListAllApi";
 import { useNavigate } from "react-router-dom";
+import { ListAllApi } from "../../Api/ListAllApi";
+import { useCompitationContext } from "../../Context/CompitationContext";
 
 const UserDetail = () => {
   const [user, setUser] = useState(null);
@@ -22,23 +23,65 @@ const UserDetail = () => {
   };
 
   const landingonproductdetail = () => {
-
-    navigate(
-      `/product/${
-        user?.registeredProduct[0]?._id
-          ? user?.registeredProduct[0]?._id
-          : user?.registeredProduct[0]?._Id
-      }`
-    );
-
+    const productId = user?.registeredProduct[0]?._Id;
+    if (productId) {
+      navigate(`/product/${productId}`);
+    } else {
+      console.log("No registered product found for the user.");
+    }
   };
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      const userId = JSON.parse(storedUser).id; // Assuming 'id' is stored in localStorage
+      console.log("Fetching user data for ID:", userId);
+
+      wretch(`http://mumbailocal.org:8080/users/${userId}`)
+        .get()
+        .json((data) => {
+          console.log("User data fetched:", data);
+          setUser(data.data);
+        })
+        .catch((error) => console.error("Error fetching user data:", error));
     }
   }, []);
+
+  // useEffect(() => {
+  //   const fetchVotedProducts = async () => {
+  //     if (user?.productVotes) {
+  //       // if (user?.productVotes) {
+  //       console.log(
+  //         "Fetching product details for voted products...",
+  //         user?.productVotes,
+  //         "asd",
+  //         user
+  //       );
+
+  //       // const productDetails = await Promise.all(
+  //       //   user.productVotes.map(async (vote) => {
+  //       //     try {
+  //       //       const product = await wretch(
+  //       //         `http://mumbailocal.org:8080/products/${vote.productid}`
+  //       //       )
+  //       //         .get()
+  //       //         .json();
+  //       //       console.log("Product fetched:", product);
+  //       //       return product;
+  //       //     } catch (error) {
+  //       //       console.error("Error fetching product details:", error);
+  //       //       return null;
+  //       //     }
+  //       //   })
+  //       // );
+  //       // setVotedProducts(productDetails.filter(Boolean));
+  //     }
+  //   };
+
+  //   if (user) {
+  //     fetchVotedProducts();
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     const fetchVotedProducts = async () => {
@@ -55,7 +98,6 @@ const UserDetail = () => {
 
     fetchVotedProducts();
   }, [user, getProductById]);
-
   return (
     <>
       <Grid
@@ -306,27 +348,18 @@ export default UserDetail;
 
 // Styled components
 const Container = styled(Box)(({ theme }) => ({
-  maxWidth: "1200px",
-  margin: "0 auto",
-  marginTop: "-309px",
-  padding: "20px",
-  backgroundColor: "#fff",
-  borderRadius: "30px",
-  boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
-  textAlign: "center",
+  margin: theme.spacing(4),
 }));
 
 const Profile = styled(Box)(({ theme }) => ({
-  padding: "20px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  marginBottom: theme.spacing(4),
 }));
 
 const CenteredAvatar = styled(Avatar)(({ theme }) => ({
-  width: 130,
-  height: 130,
-  marginTop: "-100px",
-  marginBottom: "20px",
-  boxShadow: "0 0 20px rgba(0, 0, 0, 40%)",
+  width: 120,
+  height: 120,
+  marginBottom: theme.spacing(2),
 }));

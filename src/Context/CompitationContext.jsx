@@ -16,7 +16,7 @@ export const CompitationContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [votes, setVotes] = useState([]);
   const [topVoted, setTopVoted] = useState([]);
-  const [categoryWiseTopProducts ,setCategoryWiseTopProducts ]=useState([]);
+  const [categoryWiseTopProducts, setCategoryWiseTopProducts] = useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
@@ -41,25 +41,29 @@ export const CompitationContextProvider = ({ children }) => {
       }
     })();
   }, []);
-   // Product List All pgination 
-   useEffect(() => {
+  // Product List All pgination
+  useEffect(() => {
     (async () => {
       try {
         const response = await ListAllApi.getProductPagination(currentPage, 12);
         setProducts(response?.result?.data?.data || []);
-        setTotalPages(response?.result?.data?.totalPages || 1); 
+        setTotalPages(response?.result?.data?.totalPages || 1);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     })();
   }, [currentPage]);
- 
-   // category product list with pagination 
-   useEffect(() => {
+
+  // category product list with pagination
+  useEffect(() => {
     if (pid) {
       (async () => {
         try {
-          const response = await ListAllApi.getCategoryPagination(pid, currentPage, 12);
+          const response = await ListAllApi.getCategoryPagination(
+            pid,
+            currentPage,
+            12
+          );
           setCategoryProduct(response?.result?.data?.data || []);
           setTotalPages(response?.result?.data?.totalPages || 1);
         } catch (error) {
@@ -68,7 +72,7 @@ export const CompitationContextProvider = ({ children }) => {
       })();
     }
   }, [pid, currentPage]);
-    // Function to fetch product by ID
+  // Function to fetch product by ID
   const getProductById = async (id) => {
     try {
       const response = await ListAllApi.getProductById(id);
@@ -84,7 +88,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getCategory();
-               setCategory(response?.result?.data || []);
+        setCategory(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -106,7 +110,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getTopVotedProduct();
-              setTopVoted(response?.result?.data || []);
+        setTopVoted(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -140,11 +144,11 @@ export const CompitationContextProvider = ({ children }) => {
   const addProduct = async (productData) => {
     try {
       const response = await CreateApi.AddProduct(productData);
-       console.log("Product added successfully:", response);
+      console.log("Product added successfully:", response);
       return response;
     } catch (error) {
       console.error("Error adding product:", error);
-      throw error; 
+      throw error;
     }
   };
 
@@ -153,7 +157,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getUsers();
-            setUsers(response?.result?.data || []);
+        setUsers(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -165,7 +169,7 @@ export const CompitationContextProvider = ({ children }) => {
     (async () => {
       try {
         const response = await ListAllApi.getvotes();
-               setVotes(response?.result?.data || []);
+        setVotes(response?.result?.data || []);
       } catch (error) {
         console.error("Error fetching votes:", error);
       }
@@ -177,29 +181,29 @@ export const CompitationContextProvider = ({ children }) => {
     try {
       const response = await CreateApi.GiveVote(votedata);
       if (response?.result?.status == 200) {
-        alert("Congratulation You Have Nice Choise");
+        alert("Congratulation You Have Nice Choice");
         return response;
       }
       if (response?.result?.status == 204) {
-        alert("You Alrady Give Vote to This Product");
+        alert("You Alrady Voted one Product in This Category");
       }
     } catch (error) {
       console.error("Error adding vote:", error);
-      throw error; 
+      throw error;
     }
   };
-// category wise top voted products
-const categoryWiseTopVotedProducts = async (id) => {
-  try {
-    const response = await ListAllApi.getCategoryWiseTopVotedProduct(id);
-     console.log("getCategoryWiseTopVotedProduct", response?.result?.data);
-     setCategoryWiseTopProducts(response?.result?.data)
-    // return response;
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    throw error; 
-  }
-};
+  // category wise top voted products
+  const categoryWiseTopVotedProducts = async (id) => {
+    try {
+      const response = await ListAllApi.getCategoryWiseTopVotedProduct(id);
+      console.log("getCategoryWiseTopVotedProduct", response?.result?.data);
+      setCategoryWiseTopProducts(response?.result?.data);
+      // return response;
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      throw error;
+    }
+  };
   const logoutUser = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
@@ -208,7 +212,8 @@ const categoryWiseTopVotedProducts = async (id) => {
 
   const value = {
     faq,
-    products, currentPage,
+    products,
+    currentPage,
     setCurrentPage,
     totalPages,
     category,
@@ -223,10 +228,11 @@ const categoryWiseTopVotedProducts = async (id) => {
     addProduct,
     giveVote,
     categoryProduct,
-       pid,setPid,
-       logoutUser,
-       categoryWiseTopProducts,
-       categoryWiseTopVotedProducts
+    pid,
+    setPid,
+    logoutUser,
+    categoryWiseTopProducts,
+    categoryWiseTopVotedProducts,
   };
   return (
     <CompitationContext.Provider value={value}>

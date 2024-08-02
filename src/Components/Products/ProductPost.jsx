@@ -272,8 +272,6 @@
 
 // export default ProductPost;
 
-
-
 import React, { useEffect, useState } from "react";
 import {
   Card,
@@ -353,7 +351,9 @@ const ProductPost = ({ product }) => {
       setUser(parsedUser);
 
       // Check if the current product is already liked by the user
-      const isProductLiked = parsedUser.productVotes?.some(vote => vote.productid === product._Id);
+      const isProductLiked = parsedUser.productVotes?.some(
+        (vote) => vote.productid === product._Id
+      );
       setLiked(isProductLiked);
     }
   }, [product._id]);
@@ -376,17 +376,21 @@ const ProductPost = ({ product }) => {
   };
 
   const handleShare = () => {
-    const productUrl = `http://mumbailocal.org:8080/getproductbyid/${product._id}`;
+    const productUrl = `http://mumbailocal.org:8080/getproductbyid/${product._Id}`;
     const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
     window.open(whatsappUrl, "_blank");
   };
 
   const handleProductSelect = () => {
-    navigate(`/product/${product?._id ? product?._id : product?.result?._id}`);
+    navigate(`/product/${product?._Id ? product?._Id : product?.result?._Id}`);
   };
 
-  const sortdesc = product?.product_shortdescription ?? product?.result?.product_shortdescription ?? "";
-  const desc = sortdesc.length > 30 ? sortdesc.substring(0, 30) + '...' : sortdesc;
+  const sortdesc =
+    product?.product_shortdescription ??
+    product?.result?.product_shortdescription ??
+    "";
+  const desc =
+    sortdesc.length > 30 ? sortdesc.substring(0, 30) + "..." : sortdesc;
 
   const handleLogin = async () => {
     if (mobileNumber.length !== 10) {
@@ -400,7 +404,9 @@ const ProductPost = ({ product }) => {
       setUser(result); // Update the user state with the logged-in user
 
       // Update the liked state if the user has already liked the product
-      const isProductLiked = result.productVotes?.some(vote => vote.productid === product._id);
+      const isProductLiked = result.productVotes?.some(
+        (vote) => vote.productid === product._id
+      );
       setLiked(isProductLiked);
     } else {
       alert("Failed to login/register.");
@@ -426,7 +432,11 @@ const ProductPost = ({ product }) => {
           component="img"
           height={isMobile ? 150 : 300}
           width={"100%"}
-          image={product?.product_photo ? product?.product_photo : product?.result?.product_photo}
+          image={
+            product?.product_photo
+              ? product?.product_photo
+              : product?.result?.product_photo
+          }
           sx={{
             transition: "transform 0.4s ease", // Smooth transition
             "&:hover": {
@@ -449,7 +459,9 @@ const ProductPost = ({ product }) => {
             variant="h5"
             component="div"
           >
-            {product?.product_name ? product?.product_name : product?.result?.product_name}
+            {product?.product_name
+              ? product?.product_name
+              : product?.result?.product_name}
           </Typography>
           {!isMobile && (
             <Typography
@@ -556,4 +568,3 @@ const ProductPost = ({ product }) => {
 };
 
 export default ProductPost;
-
