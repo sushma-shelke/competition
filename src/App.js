@@ -28,7 +28,7 @@ function Home() {
       <AboutUs />
       <MainCounter />
       <AboutCompetition />
-      <Result />
+      {/* <Result /> */}
       <TopVotedProductGrid products={TopVotedProduct} />
     </div>
   );
