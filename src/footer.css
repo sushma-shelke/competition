@@ -18,7 +18,13 @@ margin-top: -6rem;
     margin-top: 0rem;
     }
     .footerLogo {
-      width: 50%;
-      margin-top: -83px;
+     display: none;
   }
+}
+
+@media only screen and (max-width:768px){
+    .footerLogo {
+     display: none;
+  }
+
 }
