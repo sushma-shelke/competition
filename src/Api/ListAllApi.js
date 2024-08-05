@@ -33,4 +33,5 @@ export const ListAllApi = {
   RegisterApi: async (json) => {
     return await Post("/users/createorloginuser", json);
   },
+  CategorywiseWinner: async () => await Get("/votes/categorywisetopvoted"),
 };
