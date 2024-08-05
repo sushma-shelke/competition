@@ -173,15 +173,54 @@ export const CompitationContextProvider = ({ children }) => {
   const giveVote = async (votedata) => {
     try {
       const response = await CreateApi.GiveVote(votedata);
-      if (response?.result?.status === 200) {
+      console.log(response?.result?.status,"response?.result?.status")
+      if (response?.result?.status == 200) {
+        
         alert("Congratulation You Have Nice Choice");
         return response;
       }
-      if (response?.result?.status === 204) {
+      if (response?.result?.status == 204) {
         alert("You Alrady Voted one Product in This Category");
       }
     } catch (error) {
       console.error("Error adding vote:", error);
+      throw error;
+    }
+  };
+
+  // delete/remove vote
+  //   const removeVote = async (votedata) => {
+  //   try {
+  //     const response = await ListAllApi.deletevote(votedata);
+  //     console.log(response,"response?.result?.status")
+  //     if (response == 200) {
+        
+  //       alert("Vote remove successfully ");
+  //       return response;
+  //     }
+  //     if (response?.result?.status == 204) {
+  //       alert("issue in remove vote");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error remove vote:", error);
+  //     throw error;
+  //   }
+  // };
+  const removeVote = async (votedata) => {
+    try {
+      const response = await ListAllApi.deletevote(votedata);
+      console.log(response, "response");
+  
+      if (response?.status == 200) {
+        alert("Vote removed successfully");
+        return response;
+      }
+  
+      if (response?.status == 204) {
+        alert("Issue in removing vote: Vote not found");
+      }
+    } catch (error) {
+      console.error("Error removing vote:", error);
       throw error;
     }
   };
@@ -245,6 +284,7 @@ export const CompitationContextProvider = ({ children }) => {
     registerOrLoginUser,
     addProduct,
     giveVote,
+    removeVote,
     categoryProduct,
     pid,
     setPid,

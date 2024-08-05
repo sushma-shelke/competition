@@ -1,6 +1,6 @@
 // import Get from "./RequestorApi";
 
-import { Get, Post } from "./RequestorApi";
+import { Get, Post, Delete } from "./RequestorApi";
 
 export const ListAllApi = {
   // faq
@@ -25,7 +25,12 @@ export const ListAllApi = {
 
   //vote
   getvotes: async () => await Get("/votes/getAllvotes"),
+  // deletevote: async (json) => await Delete("/votes/delete", json),
+   deletevote : async (votedata) => {
+    return Delete('/votes/delete', votedata);
+  },
 
+  
   getTopVotedProduct: async () => await Get("/votes/top-voted"),
   getCategoryWiseTopVotedProduct: async (id) =>
     await Get(`/votes/category-wise-top-voted/${id}`),
