@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, Grid, Typography, IconButton, DialogActions, TextField, DialogContentText, DialogTitle, Dialog, DialogContent } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Typography,
+  IconButton,
+  DialogActions,
+  TextField,
+  DialogContentText,
+  DialogTitle,
+  Dialog,
+  DialogContent,
+} from "@mui/material";
 import "../../../src/Card.css";
 import { useParams } from "react-router-dom";
 import { useCompitationContext } from "../../Context/CompitationContext";
@@ -10,11 +21,12 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
 
-  const { getProductById ,giveVote,registerOrLoginUser} = useCompitationContext();
+  const { getProductById, giveVote, registerOrLoginUser, removeVote } =
+    useCompitationContext();
   const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState(""); 
-
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [isVoted, setIsVoted] = useState(false);
   // get data form session storage
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -23,7 +35,7 @@ const ProductDetail = () => {
       setUser(JSON.parse(storedUser));
     }
   }, []);
-  console.log("user",user)
+  console.log("user", user);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -35,6 +47,16 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id, getProductById]);
 
+  console.log(isVoted,"isVoted")
+  useEffect(() => {
+    if (user && product) {
+      const productId = product?._Id || product?._id;
+      const voted = user.productVotes?.some(
+        (vote) => vote.productid === productId
+      );
+      setIsVoted(voted);
+    }
+  }, [user, product]);
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -50,178 +72,185 @@ const ProductDetail = () => {
   };
   const voteData = {
     userid: user?.id,
-    productid: product?._Id ? product?._Id : product?._id ,
+    productid: product?._Id ? product?._Id : product?._id,
     categoryid: product?.product_category,
   };
 
-  
-  const handleVote =()=>{
+  const handleVote = () => {
     if (!user) {
-            setOpenModal(true); 
+      setOpenModal(true);
       return;
     }
     giveVote(voteData);
+    setIsVoted(true);
+  };
+  const handleRemoveVote = () => {
+    if (!user) {
+      setOpenModal(true);
+      return;
     }
-
-    const handleLogin = async () => {
-      if (mobileNumber.length !== 10) {
-        setErrorMessage("Mobile number must be 10 digits long.");
-        return;
-      }
-      const result = await registerOrLoginUser(mobileNumber);
-      if (result) {
-        setOpenModal(false); // Close the modal after successful login
-        setErrorMessage("");
-      } else {
-        alert("Failed to login/register.");
-      }
-    };
-    const handleCloseModal = () => {
-      setOpenModal(false);
+    removeVote(voteData);
+    setIsVoted(false);
+  };
+  const handleLogin = async () => {
+    if (mobileNumber.length !== 10) {
+      setErrorMessage("Mobile number must be 10 digits long.");
+      return;
+    }
+    const result = await registerOrLoginUser(mobileNumber);
+    if (result) {
+      setOpenModal(false); // Close the modal after successful login
       setErrorMessage("");
-    };
+    } else {
+      alert("Failed to login/register.");
+    }
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setErrorMessage("");
+  };
 
   return (
     <>
-    <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
-      <Grid item xs={12}>
-        <Typography
-          className="product-title"
-          sx={{
-            fontSize: "24px",
-            fontWeight: "bold",
-            textAlign: "center",
-            zIndex: "1000",
-          }}
-        >
-          {product?.product_name}
-        </Typography>
-      </Grid>
+      <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
+        <Grid item xs={12}>
+          <Typography
+            className="product-title"
+            sx={{
+              fontSize: "24px",
+              fontWeight: "bold",
+              textAlign: "center",
+              zIndex: "1000",
+            }}
+          >
+            {product?.product_name}
+          </Typography>
+        </Grid>
 
-      <Grid container spacing={2}>
-        <Grid item lg={2} md={6} xs={12} className="imageClassMobile">
-          <div className="img-select">
-            {product?.product_photo_gallery?.map((photo, index) => (
-              <div
-                className="img-item"
-                key={index}
-                style={{ marginBottom: "8px" }}
-              >
-                                <div data-id={index}
-                  onClick={(e) => handleImgClick(e, photo)}>
+        <Grid container spacing={2}>
+          <Grid item lg={2} md={6} xs={12} className="imageClassMobile">
+            <div className="img-select">
+              {product?.product_photo_gallery?.map((photo, index) => (
+                <div
+                  className="img-item"
+                  key={index}
+                  style={{ marginBottom: "8px" }}
+                >
+                  <div
+                    data-id={index}
+                    onClick={(e) => handleImgClick(e, photo)}
+                  >
+                    <img
+                      src={photo}
+                      alt={`Product gallery ${index}`}
+                      className="productGallery"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Grid>
+
+          <Grid item lg={4} md={6} xs={12}>
+            <div className="product-imgs">
+              <div className="img-display">
+                <div className="img-showcase">
                   <img
-                    src={photo}
-                    alt={`Product gallery ${index}`}
-                    className="productGallery"
-                   
+                    src={selectedImage}
+                    alt="Selected product"
+                    style={{ width: "100%", height: "auto" }}
                   />
-               
                 </div>
               </div>
-            ))}
-          </div>
-        </Grid>
-
-        <Grid item lg={4} md={6} xs={12}>
-          <div className="product-imgs">
-            <div className="img-display">
-              <div className="img-showcase">
-                <img
-                  src={selectedImage}
-                  alt="Selected product"
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </div>
             </div>
-          </div>
-        </Grid>
+          </Grid>
 
-        <Grid item lg={5} md={6} xs={12} sx={{ marginY: 5 }}>
-          <div
-            className="product-content"
-            style={{ textAlign: "left", lineHeight: "2" }}
-          >
-            <Typography variant="h6">
-              Price: <span>{product.product_price} ₹</span>
-            </Typography>
-            <Typography variant="h6">About this item:</Typography>
-            <Typography variant="body1">
-              {product.product_shortdescription}
-            </Typography>
-            <ul
-              style={{
-                paddingLeft: "20px",
-                lineHeight: "1.6",
-                textTransform: "capitalize",
-              }}
+          <Grid item lg={5} md={6} xs={12} sx={{ marginY: 5 }}>
+            <div
+              className="product-content"
+              style={{ textAlign: "left", lineHeight: "2" }}
             >
-              <li>
-                Category: <span>{product?.category_name}</span>
-              </li>
-              <li>
-                Color: <span>{product?.product_colour}</span>
-              </li>
-              <li>
-                Weight: <span>{product?.product_weight}</span>
-              </li>
-              <li>
-                Length: <span>{product?.product_length}</span>
-              </li>
-              <li>
-                Width: <span>{product?.product_width}</span>
-              </li>
-              <li>
-                Self Help Group Name: <span>{product?.shgname}</span>
-              </li>
-            </ul>
-            <Grid container spacing={2} sx={{ marginTop: "5rem" }}>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <Button
-                  type="button"
-                  className="btn"
-                  style={{
-                    width: "100%",
-                    backgroundColor: "#9C2946",
-                    fontWeight: "600",
-                    textTransform: "capitalize",
-                    borderRadius: "50px",
-                    padding: "10px 20px",
-                    fontSize: "16px",
-                    boxShadow: "4px 6px 10px 0px grey",
-                    color: "#fff",
-                  }}
-                  onClick={handleVote}
-                >
-                  <FavoriteIcon />
-                  Vote this product
-                </Button>
+              <Typography variant="h6">
+                Price: <span>{product.product_price} ₹</span>
+              </Typography>
+              <Typography variant="h6">About this item:</Typography>
+              <Typography variant="body1">
+                {product.product_shortdescription}
+              </Typography>
+              <ul
+                style={{
+                  paddingLeft: "20px",
+                  lineHeight: "1.6",
+                  textTransform: "capitalize",
+                }}
+              >
+                <li>
+                  Category: <span>{product?.category_name}</span>
+                </li>
+                <li>
+                  Color: <span>{product?.product_colour}</span>
+                </li>
+                <li>
+                  Weight: <span>{product?.product_weight}</span>
+                </li>
+                <li>
+                  Length: <span>{product?.product_length}</span>
+                </li>
+                <li>
+                  Width: <span>{product?.product_width}</span>
+                </li>
+                <li>
+                  Self Help Group Name: <span>{product?.shgname}</span>
+                </li>
+              </ul>
+              <Grid container spacing={2} sx={{ marginTop: "5rem" }}>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                  <Button
+                    type="button"
+                    className="btn"
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#9C2946",
+                      fontWeight: "600",
+                      textTransform: "capitalize",
+                      borderRadius: "50px",
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                      boxShadow: "4px 6px 10px 0px grey",
+                      color: "#fff",
+                    }}
+                    onClick={isVoted ? handleRemoveVote : handleVote}
+                  >
+                    <FavoriteIcon />
+                    {isVoted ? "Remove Vote" : "Vote this product"}
+                  </Button>
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
+                  <IconButton
+                    color="default"
+                    onClick={handleShare}
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#9C2946",
+                      fontWeight: "600",
+                      textTransform: "capitalize",
+                      borderRadius: "50px",
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                      boxShadow: "4px 6px 10px 0px grey",
+                      color: "#fff",
+                    }}
+                  >
+                    <ShareIcon />
+                    Share this product
+                  </IconButton>
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6} md={6} lg={6}>
-                <IconButton
-                  color="default"
-                  onClick={handleShare}
-                  style={{
-                    width: "100%",
-                    backgroundColor: "#9C2946",
-                    fontWeight: "600",
-                    textTransform: "capitalize",
-                    borderRadius: "50px",
-                    padding: "10px 20px",
-                    fontSize: "16px",
-                    boxShadow: "4px 6px 10px 0px grey",
-                    color: "#fff",
-                  }}
-                >
-                  <ShareIcon />
-                  Share this product
-                </IconButton>
-              </Grid>
-            </Grid>
-          </div>
+            </div>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
-    <Dialog open={openModal} onClose={handleCloseModal}>
+      <Dialog open={openModal} onClose={handleCloseModal}>
         <DialogTitle>Login</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -238,7 +267,7 @@ const ProductDetail = () => {
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
             error={!!errorMessage}
-            helperText={errorMessage} 
+            helperText={errorMessage}
           />
         </DialogContent>
         <DialogActions>
@@ -270,8 +299,7 @@ const ProductDetail = () => {
           </Button>
         </DialogActions>
       </Dialog>
-</>
-
+    </>
   );
 };
 

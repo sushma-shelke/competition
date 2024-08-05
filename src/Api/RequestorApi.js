@@ -76,6 +76,22 @@ export const Post = async (path, json, queryParams) => {
   return response;
 };
 
+export const Delete = async (path, json) => {
+  let response = {};
+  try {
+    const request = await wretch(`${RequestDefaults.baseUrl}${path}`)
+      .json(json)
+      .delete()
+      .unauthorized((err) => intercept401(path, err));
+    
+    response.result = await request.json();
+  } catch (e) {
+    console.error("Error in Delete request:", e);
+    response.err = parseError(e.text);
+    response.status = e.status;
+  }
+  return response;
+};
 export const Login = async (path, json) => {
   let response = {};
   const request = await wretch(`${RequestDefaults.baseUrl}${path}`)
