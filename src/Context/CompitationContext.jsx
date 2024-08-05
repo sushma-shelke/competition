@@ -17,6 +17,7 @@ export const CompitationContextProvider = ({ children }) => {
   const [votes, setVotes] = useState([]);
   const [topVoted, setTopVoted] = useState([]);
   const [categoryWiseTopProducts, setCategoryWiseTopProducts] = useState([]);
+  const [categoryWiseWinner, setCategoryWiseWinner] = useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true"
@@ -204,6 +205,33 @@ export const CompitationContextProvider = ({ children }) => {
       throw error;
     }
   };
+  // category wise top voted products
+  const categoryWiseWinnerProducts = async () => {
+    try {
+      const response = await ListAllApi.CategorywiseWinner();
+      console.log("categoryWiseWinnerProducts===", response);
+      categoryWiseWinner(response);
+
+      // return response;
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await ListAllApi.CategorywiseWinner();
+        // console.log(response?.result?.data, "setCategoryWiseWinner===--");
+
+        setCategoryWiseWinner(response?.result?.data || []);
+      } catch (error) {
+        console.error("Error fetching votes:", error);
+      }
+    })();
+  }, []);
+
   const logoutUser = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
@@ -233,6 +261,7 @@ export const CompitationContextProvider = ({ children }) => {
     logoutUser,
     categoryWiseTopProducts,
     categoryWiseTopVotedProducts,
+    categoryWiseWinner,
   };
   return (
     <CompitationContext.Provider value={value}>
