@@ -67,7 +67,7 @@ const ProductPost = ({ product }) => {
   };
 
   const handleShare = () => {
-    const productUrl = `http://mumbailocal.org:8080/getproductbyid/${product._Id}`;
+    const productUrl = `https://mumbailocal.org:8080/getproductbyid/${product._Id}`;
     const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
     window.open(whatsappUrl, "_blank");
   };

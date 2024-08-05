@@ -37,7 +37,7 @@ const UserDetail = () => {
       const userId = JSON.parse(storedUser).id; // Assuming 'id' is stored in localStorage
       console.log("Fetching user data for ID:", userId);
 
-      wretch(`http://mumbailocal.org:8080/users/${userId}`)
+      wretch(`https://mumbailocal.org:8080/users/${userId}`)
         .get()
         .json((data) => {
           console.log("User data fetched:", data);
