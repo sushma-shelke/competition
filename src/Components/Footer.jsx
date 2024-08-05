@@ -2,16 +2,7 @@ import React from "react";
 import "./../footer.css";
 import { Grid, Box, Typography } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTwitter,
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-  faFacebookSquare,
-} from "@fortawesome/free-brands-svg-icons";
-import { faGoodreads } from "@fortawesome/free-brands-svg-icons/faGoodreads";
-import { FacebookRounded, Map } from "@mui/icons-material";
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons/faFacebookF";
+import {faTwitter,   faInstagram,  faLinkedin, faFacebookSquare} from "@fortawesome/free-brands-svg-icons";
 import footerimg1 from "../Assets/Images/Footer/3.png";
 import footerimg2 from "../Assets/Images/Footer/7.png";
 import footerimg3 from "../Assets/Images/Footer/9.png";
@@ -35,7 +26,7 @@ const Footer = () => {
                   xs={3}
                   sx={{ display: "grid", justifyContent: "right" }}
                 >
-                  <img src={footerimg1} height="" width="" />
+                  <img alt="footer image1" src={footerimg1} height="" width="" />
                   {/*<svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 384 512"
@@ -80,7 +71,7 @@ const Footer = () => {
                   xs={3}
                   sx={{ display: "grid", justifyContent: "right" }}
                 >
-                  <img src={footerimg2} height="70%" width="" />
+                  <img alt="footer image2" src={footerimg2} height="70%" width="" />
                   {/*<svg
                     fill="#453D34"
                     xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +113,7 @@ const Footer = () => {
                   xs={3}
                   sx={{ display: "grid", justifyContent: "right" }}
                 >
-                  <img src={footerimg3} height="70%" width="" />
+                  <img alt="footer image3" src={footerimg3} height="70%" width="" />
                   {/*<svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
@@ -165,7 +156,7 @@ const Footer = () => {
         <Grid item container xs={12}>
           <Grid container item lg={7} md={7} sm={12}>
             <Grid item lg={2}>
-              <img src={logo} className="footerLogo" />
+              <img alt="logo" src={logo} className="footerLogo" />
             </Grid>
             <Grid item lg={10}>
               <Typography
@@ -276,7 +267,7 @@ const Footer = () => {
             sm={12}
             sx={{ display: "flex", justifyContent: "center" }}
           >
-            <img src={footerimag4} className="footerSideImage" />
+            <img alt="footer image4" src={footerimag4} className="footerSideImage" />
           </Grid>
         </Grid>
       </Grid>

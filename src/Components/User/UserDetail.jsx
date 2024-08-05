@@ -216,7 +216,7 @@ const UserDetail = () => {
                               <Grid item xs={12} sm={6} md={4} key={index}>
                                 <img
                                   src={photo}
-                                  alt={`Gallery Photo ${index + 1}`}
+                                  alt={`Gallery Photos`}
                                   style={{
                                     width: "100%",
                                     height: "180px",

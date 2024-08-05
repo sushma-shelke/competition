@@ -1,7 +1,9 @@
 import wretch from "wretch";
 
-import { DeleteCookie, FilterQueryParams } from "./Helpers";
-import Response from "./Response";
+import { DeleteCookie,
+  //  FilterQueryParams
+   } from "./Helpers";
+// import Response from "./Response";
 
 class RequestDefaults {
   static token = "";
@@ -90,17 +92,17 @@ export const Login = async (path, json) => {
   return response;
 };
 
-const Patch = async (path, json, queryParams) => {
-  let response = {};
-  const request = await wretch(`${RequestDefaults.baseUrl}${path}`)
-    .query(queryParams)
-    .patch(json)
-    .unauthorized((err) => intercept401(path, err));
-  try {
-    response.result = await request.json();
-  } catch (e) {
-    response.err = parseError(e.text);
-    response.status = e.status;
-  }
-  return response;
-};
+// const Patch = async (path, json, queryParams) => {
+//   let response = {};
+//   const request = await wretch(`${RequestDefaults.baseUrl}${path}`)
+//     .query(queryParams)
+//     .patch(json)
+//     .unauthorized((err) => intercept401(path, err));
+//   try {
+//     response.result = await request.json();
+//   } catch (e) {
+//     response.err = parseError(e.text);
+//     response.status = e.status;
+//   }
+//   return response;
+// };

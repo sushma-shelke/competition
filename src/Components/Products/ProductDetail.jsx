@@ -50,7 +50,7 @@ const ProductDetail = () => {
   };
   const voteData = {
     userid: user?.id,
-    productid: product?._Id,
+    productid: product?._Id ? product?._Id : product?._id ,
     categoryid: product?.product_category,
   };
 
@@ -107,23 +107,16 @@ const ProductDetail = () => {
                 key={index}
                 style={{ marginBottom: "8px" }}
               >
-                <a
-                  href="#"
-                  data-id={index}
-                  onClick={(e) => handleImgClick(e, photo)}
-                >
+                                <div data-id={index}
+                  onClick={(e) => handleImgClick(e, photo)}>
                   <img
                     src={photo}
                     alt={`Product gallery ${index}`}
                     className="productGallery"
-                    // style={{
-                    //   width: "50%",
-                    //   height: "50%",
-                    //   border: "1px solid #ccc",
-                    //   borderRadius: 10,
-                    // }}
+                   
                   />
-                </a>
+               
+                </div>
               </div>
             ))}
           </div>
