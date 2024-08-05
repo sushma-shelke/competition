@@ -88,7 +88,6 @@ function Header() {
     }
     if (page) {
       navigate(`/${page.toLowerCase()}`);
-
     }
   };
 

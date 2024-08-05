@@ -18,6 +18,7 @@ import Result from "./Components/Result";
 import ParticipationForm from "./Components/Form/ParticipationForm";
 import FAQ from "./Components/AboutUs/FAQComponent";
 import Winner from "./Components/Winner/Winner";
+import WinnerProducts from "./Components/Winner/WinnerProducts";
 
 function Home() {
   return (
@@ -49,7 +50,8 @@ function App() {
           <Route path="/userdetail" element={<UserDetail />} />
           <Route path="/result" element={<Result />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/winner" element={<Winner />} />
+          <Route path="/winner" element={<WinnerProducts />} />
+          {/* <Route path="/winner" element={<Winner />} /> */}
         </Routes>
         <Footer />
       </div>
