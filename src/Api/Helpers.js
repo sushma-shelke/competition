@@ -22,11 +22,16 @@ export const FilterQueryParams = (queryParams) => {
   const paramKeys = Object.keys(params);
 
   // Removes empty query params
-  paramKeys.map((key) => {
+  // paramKeys.map((key) => {
+  //   if (typeof params[key] !== "boolean" && !params[key]) {
+  //     delete params[key];
+  //   }
+  // });
+  paramKeys.forEach((key) => {
     if (typeof params[key] !== "boolean" && !params[key]) {
       delete params[key];
     }
   });
-
+  
   return params;
 };

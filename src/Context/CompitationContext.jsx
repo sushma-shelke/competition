@@ -1,12 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { ListAllApi } from "../Api/ListAllApi";
-import { ShowByIdApi } from "../Api/ShowByIdApi";
 import { CreateApi } from "../Api/CreateApi";
-import { useForm } from "react-hook-form";
 
 const CompitationContext = createContext(null);
 export const CompitationContextProvider = ({ children }) => {
-  const [faq, setFaq] = useState([]);
+
   const [products, setProducts] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [pid, setPid] = useState(null);
@@ -22,13 +20,7 @@ export const CompitationContextProvider = ({ children }) => {
     localStorage.getItem("isLoggedIn") === "true"
   );
 
-  //  FAQ List All
-  // useEffect(() => {
-  //   (async () => {
-  //     const { result } = await ListAllApi.getFAQ();
-  //     setFaq(result);
-  //   })();
-  // }, []);
+
 
   // Product List All
   useEffect(() => {
@@ -180,11 +172,11 @@ export const CompitationContextProvider = ({ children }) => {
   const giveVote = async (votedata) => {
     try {
       const response = await CreateApi.GiveVote(votedata);
-      if (response?.result?.status == 200) {
+      if (response?.result?.status === 200) {
         alert("Congratulation You Have Nice Choice");
         return response;
       }
-      if (response?.result?.status == 204) {
+      if (response?.result?.status === 204) {
         alert("You Alrady Voted one Product in This Category");
       }
     } catch (error) {
@@ -211,8 +203,7 @@ export const CompitationContextProvider = ({ children }) => {
   };
 
   const value = {
-    faq,
-    products,
+       products,
     currentPage,
     setCurrentPage,
     totalPages,
@@ -222,8 +213,7 @@ export const CompitationContextProvider = ({ children }) => {
     topVoted,
     getProductById,
     getProductByCayegoryId,
-    getProductById,
-    isLoggedIn,
+     isLoggedIn,
     registerOrLoginUser,
     addProduct,
     giveVote,

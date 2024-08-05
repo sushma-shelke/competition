@@ -17,7 +17,6 @@ import UserDetail from "./Components/User/UserDetail";
 import Result from "./Components/Result";
 import ParticipationForm from "./Components/Form/ParticipationForm";
 import FAQ from "./Components/AboutUs/FAQComponent";
-import Winner from "./Components/Winner/Winner";
 import WinnerProducts from "./Components/Winner/WinnerProducts";
 
 function Home() {

@@ -58,8 +58,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [openModal, setOpenModal] = React.useState(false);
+    const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
 
   const { isLoggedIn, registerOrLoginUser, logoutUser } =
@@ -70,9 +69,7 @@ function Header() {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
@@ -91,9 +88,7 @@ function Header() {
     }
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+
 
   const handleBMCLogoClick = () => {
     navigate("/");
@@ -133,10 +128,12 @@ function Header() {
             <a
               href="https://www.mcgm.gov.in/irj/portal/anonymous?guest_user=english"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 src={logo1Image}
                 className="BMC"
+                alt="bmcLogo"
                 style={{
                   cursor: "pointer",
                   height: "50px",
@@ -150,6 +147,7 @@ function Header() {
               src={logoImage}
               className="Mumbai Local"
               onClick={handleBMCLogoClick} // Assuming this is the correct function
+              alt="Logo"
               style={{
                 cursor: "pointer",
                 height: "50px",

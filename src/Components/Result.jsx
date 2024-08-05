@@ -33,6 +33,7 @@ export default function Result() {
                     <img
                       src="https://t3.ftcdn.net/jpg/06/41/86/84/360_F_641868415_icZuVksFNm9fvc6SaTWURenXfeMtXolU.jpg"
                       width="290px"
+                      alt=""
                       style={{ borderRadius: "12px" }}
                     />
                     <Typography xs={12} className="winner-text">
@@ -44,6 +45,7 @@ export default function Result() {
                     <img
                       src="https://m.media-amazon.com/images/I/716fhiaOi7L._SX679_.jpg"
                       width="290px"
+                      alt=""
                       style={{ borderRadius: "12px", paddingLeft: "15px" }}
                     />
                     <Typography xs={12} className="winner-text">
@@ -67,6 +69,7 @@ export default function Result() {
                     <img
                       src="https://t3.ftcdn.net/jpg/06/41/86/84/360_F_641868415_icZuVksFNm9fvc6SaTWURenXfeMtXolU.jpg"
                       width="290px"
+                      alt=""
                       style={{ borderRadius: "12px" }}
                     />
                     <Typography xs={12} className="runnerup-text">
@@ -78,6 +81,7 @@ export default function Result() {
                     <img
                       src="https://m.media-amazon.com/images/I/716fhiaOi7L._SX679_.jpg"
                       width="290px"
+                      alt=""
                       style={{ borderRadius: "12px", paddingLeft: "5px" }}
                     />
                     <Typography xs={12} className="runnerup-text">
@@ -103,6 +107,7 @@ export default function Result() {
                     <img
                       src="https://t3.ftcdn.net/jpg/06/41/86/84/360_F_641868415_icZuVksFNm9fvc6SaTWURenXfeMtXolU.jpg"
                       width="290px"
+                      alt=""
                       style={{ borderRadius: "12px" }}
                     />
                     <Typography xs={12} className="last-text">
@@ -113,6 +118,7 @@ export default function Result() {
                     <img
                       src="https://m.media-amazon.com/images/I/716fhiaOi7L._SX679_.jpg"
                       width="290px"
+                      alt=""
                       style={{ borderRadius: "12px", paddingLeft: "5px" }}
                     />
                     <Typography xs={12} className="last-text">

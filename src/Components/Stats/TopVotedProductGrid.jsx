@@ -6,7 +6,7 @@ import { Typography, useMediaQuery } from "@mui/material";
 
 const TopVotedProductGrid = () => {
   const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
-  const isTablet = useMediaQuery("(max-width: 960px)"); // Tablet view
+  // const isTablet = useMediaQuery("(max-width: 960px)"); // Tablet view
   const { topVoted } = useCompitationContext();
   return (
     <>

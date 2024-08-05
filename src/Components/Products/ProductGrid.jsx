@@ -94,8 +94,7 @@ import { useCompitationContext } from "../../Context/CompitationContext";
 const ProductGrid = () => {
   const { products, currentPage, setCurrentPage, totalPages } = useCompitationContext();
   const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
-  const isTablet = useMediaQuery("(max-width: 960px)"); // Tablet view
-
+ 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
