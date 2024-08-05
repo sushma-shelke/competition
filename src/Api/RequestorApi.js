@@ -6,7 +6,7 @@ import Response from "./Response";
 class RequestDefaults {
   static token = "";
   // static baseUrl = "http://localhost:8080";
-  static baseUrl = "http://mumbailocal.org:8080";
+  static baseUrl = "https://mumbailocal.org:8080";
   // http://mumbailocal.org:8080/getproduct
 
   static version = "/v1";
