@@ -37,7 +37,7 @@ const ParticipationForm = () => {
       formData.append("file", file);
 
       try {
-        const response = await wretch("http://mumbailocal.org:8080/upload")
+        const response = await wretch("https://mumbailocal.org:8080/upload")
           .post(formData)
           .json((res) => res);
 
@@ -61,7 +61,7 @@ const ParticipationForm = () => {
         const formData = new FormData();
         formData.append("file", file);
         try {
-          const response = await wretch("http://mumbailocal.org:8080/upload")
+          const response = await wretch("https://mumbailocal.org:8080/upload")
             .post(formData)
             .json((res) => res);
 
