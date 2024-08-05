@@ -47,7 +47,7 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id, getProductById]);
 
-  console.log(isVoted,"isVoted")
+  console.log(isVoted, "isVoted");
   useEffect(() => {
     if (user && product) {
       const productId = product?._Id || product?._id;
@@ -158,7 +158,7 @@ const ProductDetail = () => {
                   <img
                     src={selectedImage}
                     alt="Selected product"
-                    style={{ width: "100%", height: "auto" }}
+                    style={{ width: "100%", height: "500px" }}
                   />
                 </div>
               </div>
