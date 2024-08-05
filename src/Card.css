@@ -32,8 +32,9 @@ img {
 }
 
 .img-showcase img {
-  margin: 20px;
+  /* margin: 10px; */
   min-width: 100%;
+  height: auto;
 }
 
 .img-select {
@@ -264,5 +265,17 @@ img {
   .img-item {
     margin-bottom: 8px; /* Space between images vertically */
     margin-right: 0; /* Remove horizontal margin */
+  }
+}
+
+@media screen and (min-width: 380) {
+  .img-showcase {
+    display: flex;
+    width: 100%;
+    transition: all 0.5s ease;
+  }
+
+  .img-showcase img {
+    min-width: 100%;
   }
 }
