@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
-import Image1 from "../../Assets/Images/ai.jpg";
+// import Image1 from "../../Assets/Images/ai.jpg";
 
 const AboutUs = () => {
   return (
@@ -22,8 +22,10 @@ const AboutUs = () => {
           sx={{ display: "flex", justifyContent: "center" }}
         >
           <img
-            src={Image1}
-            alt={"Image1"}
+            src={
+              "http://kitintellect.tech/bmccompetition/MumbaiLocal-AboutUs.jpg_20240806075733"
+            }
+            alt="MumbaiLocal-AboutUs"
             style={{
               width: "80%",
               cursor: "pointer",
