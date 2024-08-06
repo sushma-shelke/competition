@@ -54,7 +54,7 @@ const ProductDetail = () => {
   }, [id, getProductById]);
 
   console.log(isVoted, "isVoted");
-  
+
   useEffect(() => {
     if (user && product) {
       const productId = product?._Id || product?._id;
@@ -72,10 +72,11 @@ const ProductDetail = () => {
     e.preventDefault();
     setSelectedImage(photo);
   };
+  
   const handleShare = () => {
-    const productUrl = `https://mumbailocal.org:8080/getproductbyid/${product._Id}`;
-    const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
-    window.open(whatsappUrl, "_blank");
+         const productUrl = `https://mumbailocal.org/product/${product._id ? product._id: product?.result?._id}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product?.product_name?product?.product_name:product?.result?.product_name}. ${product?.shgname?product?.shgname:product?.result?.shgname}.Link:${productUrl}`;
+      window.open(whatsappUrl, "_blank");
   };
   const voteData = {
     userid: user?.id,
