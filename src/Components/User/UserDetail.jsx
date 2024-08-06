@@ -65,6 +65,7 @@ const UserDetail = () => {
   return (
     <>
       <Grid
+        item
         xs={12}
         style={{
           background: "linear-gradient(to right, #FF4485, #FE8A77)",
@@ -266,7 +267,11 @@ const UserDetail = () => {
         </Typography>
         {user?.productVotes === null || user?.productVotes.length === 0 ? (
           <>
-            <Grid xs={12} sx={{ marginTop: "3rem", marginBottom: "3rem" }}>
+            <Grid
+              container
+              xs={12}
+              sx={{ marginTop: "3rem", marginBottom: "3rem" }}
+            >
               <Button
                 sx={{
                   color: "white",
