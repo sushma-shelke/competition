@@ -295,7 +295,7 @@ const UserDetail = () => {
                     sm={6}
                     md={4}
                     lg={3}
-                    sx={{ display: "flex", justifyContent: "center" }}
+                    sx={{ display: "flex", justifyContent: "center"}}
                   >
                     <ProductPost product={product} />
                   </Grid>
@@ -320,6 +320,7 @@ const Container = styled(Box)(({ theme }) => ({
   borderRadius: "30px",
   boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
   textAlign: "center",
+ 
 }));
 
 const Profile = styled(Box)(({ theme }) => ({

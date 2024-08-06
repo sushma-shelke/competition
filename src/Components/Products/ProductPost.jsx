@@ -19,6 +19,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { useNavigate } from "react-router-dom";
 import { useCompitationContext } from "../../Context/CompitationContext";
+import wretch from "wretch";
 
 const ProductPost = ({ product }) => {
   const navigate = useNavigate();
@@ -27,7 +28,6 @@ const ProductPost = ({ product }) => {
   const [liked, setLiked] = useState(false);
   const { giveVote, registerOrLoginUser } = useCompitationContext();
 
-  // get data form session storage
   const [user, setUser] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [mobileNumber, setMobileNumber] = useState("");
@@ -36,17 +36,24 @@ const ProductPost = ({ product }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-      setUser(parsedUser);
+      const userId = JSON.parse(storedUser).id; 
+      console.log("Fetching user data for ID:", userId);
 
-      // Check if the current product is already liked by the user
-      const isProductLiked = parsedUser.productVotes?.some(
-        (vote) => vote.productid === product._Id
-      );
-      setLiked(isProductLiked);
+      wretch(`https://mumbailocal.org:8080/users/${userId}`)
+        .get()
+        .json((data) => {
+          console.log("User data fetched:", data);
+          setUser(data.data);
+
+          const isProductLiked = data.data.productVotes?.some(
+            (vote) => vote.productid === product._Id
+          );
+          setLiked(isProductLiked);
+        })
+        .catch((error) => console.error("Error fetching user data:", error));
     }
   }, [product._Id]);
-
+  
   const votedata = {
     userid: user?.id,
     productid: product?._Id,
