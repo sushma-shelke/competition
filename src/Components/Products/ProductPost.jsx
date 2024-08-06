@@ -20,9 +20,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import { useNavigate } from "react-router-dom";
 import { useCompitationContext } from "../../Context/CompitationContext";
 
-
-
-
 const ProductPost = ({ product }) => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
@@ -62,7 +59,7 @@ const ProductPost = ({ product }) => {
       return;
     }
     setLiked(!liked);
-   
+
     giveVote(votedata);
   };
 
@@ -71,9 +68,13 @@ const ProductPost = ({ product }) => {
     const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.product_shortdescription}.Link:${productUrl}`;
     window.open(whatsappUrl, "_blank");
   };
-
-  const handleProductSelect = () => {
-    navigate(`/product/${product?._Id ? product?._Id : product?.result?._Id}`);
+  
+  const productData = product?.result?._id
+    ? product?.result?._id
+    : product?.result?._Id;
+  
+    const handleProductSelect = () => {
+    navigate(`/product/${product?._Id ? product?._Id : productData}`);
   };
 
   const sortdesc =

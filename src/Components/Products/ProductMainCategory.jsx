@@ -10,6 +10,8 @@ const ProductMainCategory = () => {
     navigate(`/category/${id}`);
   };
   return (
+    <>
+    
     <Grid
       container
       sx={{ justifyContent: "center", marginBottom: "40px" }}
@@ -33,6 +35,7 @@ const ProductMainCategory = () => {
         </Grid>
       ))}
     </Grid>
+    </>
   );
 };
 

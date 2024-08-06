@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import { useCompitationContext } from "../../Context/CompitationContext";
 import ShareIcon from "@mui/icons-material/Share";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import wretch from "wretch";
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -27,16 +28,21 @@ const ProductDetail = () => {
   const [mobileNumber, setMobileNumber] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
   const [isVoted, setIsVoted] = useState(false);
-  // get data form session storage
+  
   const [user, setUser] = useState(null);
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      const userId = JSON.parse(storedUser).id;
+            wretch(`https://mumbailocal.org:8080/users/${userId}`)
+        .get()
+        .json((data) => {
+                   setUser(data.data);
+        })
+        .catch((error) => console.error("Error fetching user data:", error));
     }
   }, []);
-  console.log("user", user);
-
+  
   useEffect(() => {
     const fetchProduct = async () => {
       const fetchedProduct = await getProductById(id);
@@ -48,6 +54,7 @@ const ProductDetail = () => {
   }, [id, getProductById]);
 
   console.log(isVoted, "isVoted");
+  
   useEffect(() => {
     if (user && product) {
       const productId = product?._Id || product?._id;
