@@ -224,7 +224,7 @@ function Header() {
                 onClick={() => handleCloseNavMenu(page)}
                 sx={{
                   margin: 2,
-                  color: "#9C2946",
+                  color: "#6f1c32",
                   display: "block",
                   fontWeight: "700",
                   textTransform: "capitalize",

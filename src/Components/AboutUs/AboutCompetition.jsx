@@ -1,11 +1,8 @@
 import React from "react";
 import { Grid, Typography, useMediaQuery } from "@mui/material";
-import Winning from "../../Assets/Images/Winning.png";
-import Registration from "../../Assets/Images/Registration.png";
-import Votes from "../../Assets/Images/Votes.png";
 const AboutCompetition = () => {
   const isMobile = useMediaQuery("(max-width: 600px)"); // Mobile view
-   return (
+  return (
     <Grid container sx={{ mt: 4, justifyContent: "center" }}>
       <Typography
         gutterBottom
@@ -48,8 +45,10 @@ const AboutCompetition = () => {
             Product Registration:
           </Typography>
           <img
-            src={Registration}
-            alt={"Image1"}
+            src={
+              "http://kitintellect.tech/bmccompetition/MumbaiLocal-Registration.png_20240806074936"
+            }
+            alt="MumbaiLocal-Registration"
             style={{
               width: "80%",
               cursor: "pointer",
@@ -83,8 +82,10 @@ const AboutCompetition = () => {
             User Voting:
           </Typography>
           <img
-            src={Votes}
-            alt={"Image1"}
+            src={
+              "http://kitintellect.tech/bmccompetition/MumbaiLocal-Votes.png_20240806075105"
+            }
+            alt="MumbaiLocal-Votes"
             style={{
               width: "80%",
               cursor: "pointer",
@@ -119,8 +120,10 @@ const AboutCompetition = () => {
             Winning Criteria:
           </Typography>
           <img
-            src={Winning}
-            alt={"Image1"}
+            src={
+              "http://kitintellect.tech/bmccompetition/MumbaiLocal-Winning.png_20240806075142"
+            }
+            alt="MumbaiLocal-Winning"
             style={{
               width: "80%",
               cursor: "pointer",
