@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCompitationContext } from '../../Context/CompitationContext';
-import { Grid, Button, ButtonGroup, Box } from '@mui/material';
+import { Grid, Button, ButtonGroup, Box, Typography } from '@mui/material';
 import ProductPost from './ProductPost';
 import ImageCarousel from '../ImageCarousel';
 import ProductMainCategory from './ProductMainCategory';
@@ -26,19 +26,28 @@ const CategoryDetail = () => {
     setCurrentPage(pageNumber);
   };
 
- 
+ console.log(categoryProduct,"categoryProduct")
   return (
     <>
       <ImageCarousel />
       <ProductMainCategory/>
       <div style={{ marginTop: '16px' }}>
         <Grid container spacing={2} justifyContent="center">
-          {Array.isArray(categoryProduct) &&
+          
+          {Array.isArray(categoryProduct) && categoryProduct.length > 0 ? (
             categoryProduct.map((product) => (
               <Grid item key={product.id} xs={12} sm={6} md={3}>
                 <ProductPost product={product} />
               </Grid>
-            ))}
+            ))):(
+              <Typography
+              variant="h6"
+              sx={{ textAlign: "center", color: "#9c2946" }}
+            >
+                No products added in this category yet...
+              </Typography>
+            )}
+            
         </Grid>
         
           {totalPages > 1 && (
