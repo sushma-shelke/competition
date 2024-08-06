@@ -18,8 +18,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import logoImage from "../Assets/Images/Mumbai-Local-PNG1.png";
-import logo1Image from "../Assets/Images/BMCLogoo.png";
 import { useCompitationContext } from "../Context/CompitationContext";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
@@ -58,7 +56,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
   const [mobileNumber, setMobileNumber] = React.useState("");
 
   const { isLoggedIn, registerOrLoginUser, logoutUser } =
@@ -68,8 +66,6 @@ function Header() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
-
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
@@ -87,8 +83,6 @@ function Header() {
       navigate(`/${page.toLowerCase()}`);
     }
   };
-
-
 
   const handleBMCLogoClick = () => {
     navigate("/");
@@ -131,9 +125,11 @@ function Header() {
               rel="noopener noreferrer"
             >
               <img
-                src={logo1Image}
+                src={
+                  "http://kitintellect.tech/bmccompetition/MumbaiLocal-BMCLogoo.png_20240806054923"
+                }
                 className="BMC"
-                alt="bmcLogo"
+                alt="MumbaiLocal-BMCLogo"
                 style={{
                   cursor: "pointer",
                   height: "50px",
@@ -144,17 +140,19 @@ function Header() {
               />
             </a>
             <img
-              src={logoImage}
+              src={
+                "http://kitintellect.tech/bmccompetition/MumbaiLocal-logo.png_20240806054556"
+              }
               className="Mumbai Local"
-              onClick={handleBMCLogoClick} // Assuming this is the correct function
-              alt="Logo"
+              onClick={handleBMCLogoClick}
+              alt="MumbaiLocal-Logo"
               style={{
                 cursor: "pointer",
                 height: "50px",
                 width: "auto",
                 margin: "10px",
-                borderLeft: "2px solid #bdbdbd", // Adding a left border
-                paddingLeft: "10px", // Optional: to create space between the border and image
+                borderLeft: "2px solid #bdbdbd",
+                paddingLeft: "10px",
               }}
             />
           </Box>
@@ -233,7 +231,7 @@ function Header() {
                   fontSize: "20px",
                   cursor: "pointer",
                   "&:hover": {
-                    color: "#4A4A4A", // Dark gray color on hover
+                    color: "#4A4A4A",
                   },
                 }}
               >
@@ -275,7 +273,7 @@ function Header() {
                   padding: "10px 20px",
                   fontSize: "16px",
                   boxShadow: "4px 6px 10px 0px grey",
-                  display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
+                  display: { xs: "none", md: "flex" },
                 }}
               >
                 Logout
@@ -294,7 +292,7 @@ function Header() {
                   padding: "20px",
                   fontSize: "16px",
                   boxShadow: "4px 6px 10px 0px grey",
-                  display: { xs: "none", md: "flex" }, // Hide on mobile (xs) and show on medium (md) and up
+                  display: { xs: "none", md: "flex" },
                 }}
               >
                 Login
