@@ -133,7 +133,10 @@ const ProductGrid = () => {
               </Grid>
             ))
           ) : (
-            <Typography variant="body1" color="textSecondary">
+            <Typography
+            variant="h6"
+            sx={{ textAlign: "center", color: "#9c2946" }}
+          >
               No products available.
             </Typography>
           )}

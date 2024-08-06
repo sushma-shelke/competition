@@ -23,7 +23,7 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-const pages = ["Products", "Categories", "Winner", "Faq"];
+const pages = ["Products","Winner","Faq"];
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
