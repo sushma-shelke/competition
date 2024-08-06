@@ -10,6 +10,8 @@ const TopVotedProductGrid = () => {
   const { topVoted } = useCompitationContext();
   return (
     <>
+    {topVoted.length>0?(
+      <>
       <Typography
         gutterBottom
         sx={{
@@ -39,6 +41,8 @@ const TopVotedProductGrid = () => {
           </Grid>
         ))}
       </Grid>
+      </>
+      ):(<Typography></Typography>)}
     </>
   );
 };
