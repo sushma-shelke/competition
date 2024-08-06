@@ -150,8 +150,9 @@ const ProductDetail = () => {
                   >
                     <img
                       src={photo}
-                      alt={`Product gallery ${index}`}
+                      alt={`mumbailocal Product gallery ${index}`}
                       className="productGallery"
+                      
                     />
                   </div>
                 </div>
