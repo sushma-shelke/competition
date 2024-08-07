@@ -191,7 +191,7 @@ const Footer = () => {
               sx={{ paddingTop: "5px", paddingLeft: "3rem" }}
             >
               <Grid item container lg={5} md={5} sm={12}>
-                <Grid
+                {/* <Grid
                   item
                   xs={2}
                   sx={{ display: "flex", justifyContent: "center" }}
@@ -204,7 +204,7 @@ const Footer = () => {
                   >
                     <FontAwesomeIcon icon={faTwitter} size="2x" />
                   </a>
-                </Grid>
+                </Grid> */}
 
                 <Grid
                   item
@@ -229,7 +229,7 @@ const Footer = () => {
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/the.mumbai.local/?hl=en"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "#E1306C" }}
