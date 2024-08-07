@@ -28,21 +28,21 @@ const ProductDetail = () => {
   const [mobileNumber, setMobileNumber] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
   const [isVoted, setIsVoted] = useState(false);
-  
+
   const [user, setUser] = useState(null);
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const userId = JSON.parse(storedUser).id;
-            wretch(`https://mumbailocal.org:8080/users/${userId}`)
+      wretch(`https://mumbailocal.org:8080/users/${userId}`)
         .get()
         .json((data) => {
-                   setUser(data.data);
+          setUser(data.data);
         })
         .catch((error) => console.error("Error fetching user data:", error));
     }
   }, []);
-  
+
   useEffect(() => {
     const fetchProduct = async () => {
       const fetchedProduct = await getProductById(id);
@@ -53,7 +53,7 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id, getProductById]);
 
-  console.log(isVoted, "isVoted");
+  // console.log(isVoted, "isVoted");
 
   useEffect(() => {
     if (user && product) {
@@ -72,11 +72,19 @@ const ProductDetail = () => {
     e.preventDefault();
     setSelectedImage(photo);
   };
-  
+
   const handleShare = () => {
-         const productUrl = `https://mumbailocal.org/product/${product._id ? product._id: product?.result?._id}`;
-      const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product?.product_name?product?.product_name:product?.result?.product_name}. ${product?.shgname?product?.shgname:product?.result?.shgname}.Link:${productUrl}`;
-      window.open(whatsappUrl, "_blank");
+    const productUrl = `https://mumbailocal.org/product/${
+      product._id ? product._id : product?.result?._id
+    }`;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${
+      product?.product_name
+        ? product?.product_name
+        : product?.result?.product_name
+    }. ${
+      product?.shgname ? product?.shgname : product?.result?.shgname
+    }.Link:${productUrl}`;
+    window.open(whatsappUrl, "_blank");
   };
   const voteData = {
     userid: user?.id,
@@ -152,7 +160,6 @@ const ProductDetail = () => {
                       src={photo}
                       alt={`mumbailocal Product gallery ${index}`}
                       className="productGallery"
-                      
                     />
                   </div>
                 </div>

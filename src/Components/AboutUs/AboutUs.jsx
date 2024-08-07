@@ -58,20 +58,7 @@ const AboutUs = () => {
             entrepreneurial spirit of these groups, offering them the
             recognition and support they deserve.
           </Typography>
-          <Typography
-            variant="h5"
-            gutterBottom
-            sx={{ fontWeight: 600, color: "#6f1c32" }}
-          >
-            Current Initiative : Competition
-          </Typography>
-          <Typography paragraph>
-            As part of our commitment to fostering the talents and hard work of
-            SHGs, we are excited to announce the SHGeshop Competition. This
-            competition is open to all SHGs involved in the production of any
-            product. It offers a unique opportunity for these groups to showcase
-            their creativity and business acumen.
-          </Typography>
+
           <Typography
             variant="h5"
             gutterBottom
