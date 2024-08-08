@@ -40,7 +40,8 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/"  element={<Home />} />
+          <Route path="/home"  element={<Home />} />
           <Route path="/participationform" element={<ParticipationForm />} />
           <Route path="/products" element={<ProductGrid />} />
           <Route path="/categories" element={<ProductMainCategory />} />
