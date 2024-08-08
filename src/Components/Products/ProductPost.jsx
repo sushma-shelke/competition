@@ -313,13 +313,10 @@ const ProductPost = ({ product }) => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const userId = JSON.parse(storedUser).id;
-      console.log("Fetching user data for ID:", userId);
-
-      wretch(`https://mumbailocal.org:8080/users/${userId}`)
+           wretch(`https://mumbailocal.org:8080/users/${userId}`)
         .get()
         .json((data) => {
-          console.log("User data fetched:", data);
-          setUser(data.data);
+           setUser(data.data);
 
           const isProductLiked = data.data.productVotes?.some(
             (vote) => vote.productid === product._Id
