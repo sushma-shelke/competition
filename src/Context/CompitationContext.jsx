@@ -189,34 +189,17 @@ export const CompitationContextProvider = ({ children }) => {
   };
 
   // delete/remove vote
-  //   const removeVote = async (votedata) => {
-  //   try {
-  //     const response = await ListAllApi.deletevote(votedata);
-  //     console.log(response,"response?.result?.status")
-  //     if (response == 200) {
-        
-  //       alert("Vote remove successfully ");
-  //       return response;
-  //     }
-  //     if (response?.result?.status == 204) {
-  //       alert("issue in remove vote");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error remove vote:", error);
-  //     throw error;
-  //   }
-  // };
-  const removeVote = async (votedata) => {
+    const removeVote = async (votedata) => {
     try {
       const response = await ListAllApi.deletevote(votedata);
       console.log(response, "response");
   
-      if (response?.status == 200) {
+      if (response?.result?.status == 200) {
         alert("Vote removed successfully");
         return response;
       }
   
-      if (response?.status == 204) {
+      if (response?.result?.status == 204) {
         alert("Issue in removing vote: Vote not found");
       }
     } catch (error) {
