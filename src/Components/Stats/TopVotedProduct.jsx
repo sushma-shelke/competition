@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 
 const TopVotedProduct = ({ product }) => {
- 
   return (
     <>
       <Grid
@@ -28,6 +27,7 @@ const TopVotedProduct = ({ product }) => {
             sm: 12,
             boxShadow: "2px 5px 12px rgba(0, 0, 0, 0.25)",
             borderRadius: "10px",
+            width: "350px",
           }}
         >
           <CardMedia
