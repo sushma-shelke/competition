@@ -23,7 +23,7 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-const pages = ["Products","Winner","Faq"];
+const pages = ["Home","Products","Winner","Faq"];
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -69,8 +69,9 @@ function Header() {
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
-
-    if (page === "Products") {
+    if (page === "Home") {
+      navigate("/");
+    }else if (page === "Products") {
       navigate("/products");
     } else if (page === "Categories") {
       navigate("/categories");
@@ -85,7 +86,7 @@ function Header() {
   };
 
   const handleBMCLogoClick = () => {
-    navigate("/");
+    navigate("https://mumbailocal.org/");
   };
 
   const handleClick = () => {
@@ -139,12 +140,13 @@ function Header() {
                 }}
               />
             </a>
+            <a href="https://mumbailocal.org/">
             <img
               src={
                 "http://kitintellect.tech/bmccompetition/MumbaiLocal-logo.png_20240806054556"
               }
               className="Mumbai Local"
-              onClick={handleBMCLogoClick}
+              // onClick={handleBMCLogoClick}
               alt="MumbaiLocal-Logo"
               style={{
                 cursor: "pointer",
@@ -155,6 +157,7 @@ function Header() {
                 paddingLeft: "10px",
               }}
             />
+             </a>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton

@@ -75,6 +75,7 @@ export const Post = async (path, json, queryParams) => {
   return response;
 };
 
+
 export const Delete = async (path, json) => {
   let response = {};
   try {
@@ -91,6 +92,7 @@ export const Delete = async (path, json) => {
   }
   return response;
 };
+
 export const Login = async (path, json) => {
   let response = {};
   const request = await wretch(`${RequestDefaults.baseUrl}${path}`)

@@ -224,6 +224,8 @@ export const CompitationContextProvider = ({ children }) => {
       throw error;
     }
   };
+
+ 
   // category wise top voted products
   const categoryWiseTopVotedProducts = async (id) => {
     try {
