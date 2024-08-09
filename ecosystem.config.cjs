@@ -13,7 +13,7 @@ module.exports = {
       name: "myapp",
       script: "npm",
       args: "run start",
-      cwd: "/var/www/shgcompetition",
+      cwd: "/var/www/competition/",
       env: {
         NODE_ENV: "production",
       },

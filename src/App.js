@@ -36,7 +36,7 @@ function Home() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/competition">
       <div className="App">
         <Header />
         <Routes>
