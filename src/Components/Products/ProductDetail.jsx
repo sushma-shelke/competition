@@ -75,18 +75,27 @@ const ProductDetail = () => {
     setSelectedImage(photo);
   };
 
-  const handleShare = () => {
-    const productUrl = `https://mumbailocal.org/competition/product/${product._id ? product._id : product?.result?._id}`;  // Ensure that the product's ID is correctly accessed
-    const productName = encodeURIComponent( product?.product_name
-      ? product?.product_name
-      : product?.result?.product_name); // Encode the product name to handle special characters
-    const shgName = encodeURIComponent( product?.shgname ? product?.shgname : product?.result?.shgname); // Encode SHG name as well
-    const message = `Check out this product and vote: ${productName}. ${shgName}. Link: ${productUrl}`;
+//   const handleShare = () => {
+//     const productUrl = `https://mumbailocal.org/competition/product/${product._id ? product._id : product?.result?._id}`;  // Ensure that the product's ID is correctly accessed
     
-    const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
-    window.open(whatsappUrl, "_blank");
-};
+//     const productName = encodeURIComponent( product?.product_name
+//       ? product?.product_name
+//       : product?.result?.product_name); // Encode the product name to handle special characters
+//     const shgName = encodeURIComponent( product?.shgname ? product?.shgname : product?.result?.shgname); // Encode SHG name as well
+//     const message = `Check out this product and vote: ${productName}. ${shgName}. Link: ${productUrl}`;
+    
+//     const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
+//     window.open(whatsappUrl, "_blank");
+// };
 
+const handleShare = () => {
+  const productUrl = `https://mumbailocal.org/competition/product/${product._id ? product._id : product?.result?._id}`;
+  const productName = encodeURIComponent(product?.product_name || product?.result?.product_name);
+  const shgName = encodeURIComponent(product?.shgname || product?.result?.shgname);
+  const message = `Check out this product and vote: ${productName}. ${shgName}. Link: ${productUrl}`;
+  const whatsappUrl = `https://api.whatsapp.com/send?text=${message}&image=https://kitintellect.tech/bmccompetition/meta%20tag.jpeg_20240808061052`;
+  window.open(whatsappUrl, "_blank");
+};
   const voteData = {
     userid: user?.id,
     productid: product?._Id ? product?._Id : product?._id,
@@ -133,8 +142,9 @@ const ProductDetail = () => {
                 <title>{product?.product_name}</title>
                 <meta property="og:title" content={`${product?.product_name}`} />
                 <meta property="og:description" content={`${product?.product_shortdescription}`} />
-                <meta property="og:image" content={product?.product_photo} />
-                <meta property="og:url" content={`https://mumbailocal.org/competition/product/${product._Id}`} />
+                {/* <meta property="og:image" content={product?.product_photo} /> */}
+                <meta property="og:image" content="https://kitintellect.tech/bmccompetition/meta%20tag.jpeg_20240808061052"  />
+               <meta property="og:url" content={`https://mumbailocal.org/competition/product/${product._id}`} />
                
             </Helmet>
       <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
