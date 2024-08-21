@@ -134,7 +134,7 @@ const ProductDetail = () => {
                 <meta property="og:title" content={`${product?.product_name}`} />
                 <meta property="og:description" content={`${product?.product_shortdescription}`} />
                 <meta property="og:image" content={product?.product_photo} />
-                <meta property="og:url" content={`http://localhost:3000/competition/product/${product._Id}`} />
+                <meta property="og:url" content={`https://mumbailocal.org/competition/product/${product._Id}`} />
                
             </Helmet>
       <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
