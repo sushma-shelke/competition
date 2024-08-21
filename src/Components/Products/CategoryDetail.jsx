@@ -44,7 +44,7 @@ const CategoryDetail = () => {
               variant="h6"
               sx={{ textAlign: "center", color: "#9c2946" }}
             >
-                No products added in this category yet...
+              Products not available
               </Typography>
             )}
             

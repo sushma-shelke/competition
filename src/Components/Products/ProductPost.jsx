@@ -86,11 +86,24 @@ const ProductPost = ({ product }) => {
     // });
   };
 
-  const handleShare = () => {
-            const productUrl = `https://mumbailocal.org/competition/product/${product._Id}`;
-        const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.shgname}.Link:${productUrl}`;
+  // const handleShare = () => {
+  //           const productUrl = `https://mumbailocal.org/competition/product/${product._Id}`;
+  //       const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.shgname}.Link:${productUrl}`;
+  //       window.open(whatsappUrl, "_blank");
+  //     };
+
+
+      const handleShare = () => {
+        const productUrl = `https://mumbailocal.org/competition/product/${product._id ? product._id : product?.result?._id}`;  // Ensure that the product's ID is correctly accessed
+        const productName = encodeURIComponent( product?.product_name
+          ? product?.product_name
+          : product?.result?.product_name); // Encode the product name to handle special characters
+        const shgName = encodeURIComponent( product?.shgname ? product?.shgname : product?.result?.shgname); // Encode SHG name as well
+        const message = `Check out this product and vote: ${productName}. ${shgName}. Link: ${productUrl}`;
+        
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
         window.open(whatsappUrl, "_blank");
-      };
+    };
       const productData = product?.result?._id
           ? product?.result?._id
           : product?.result?._Id;
@@ -201,6 +214,7 @@ const ProductPost = ({ product }) => {
             padding: isMobile ? "0 8px" : "8px",
           }}
         >
+        
           <IconButton
             color={liked ? "secondary" : "default"}
             onClick={handleLike}
@@ -211,7 +225,7 @@ const ProductPost = ({ product }) => {
               justifyContent: "center",
             }}
           >
-            <FavoriteIcon fontSize={isMobile ? "small" : "medium"} />
+            <FavoriteIcon fontSize={isMobile ? "small" : "medium"} /><Typography sx={{ml:1}}>Vote</Typography>
           </IconButton>
           <IconButton
             color="default"
