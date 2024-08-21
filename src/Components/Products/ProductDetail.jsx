@@ -17,6 +17,8 @@ import { useCompitationContext } from "../../Context/CompitationContext";
 import ShareIcon from "@mui/icons-material/Share";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import wretch from "wretch";
+import { Helmet } from "react-helmet";
+
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -74,18 +76,17 @@ const ProductDetail = () => {
   };
 
   const handleShare = () => {
-    const productUrl = `https://mumbailocal.org/product/${
-      product._id ? product._id : product?.result?._id
-    }`;
-    const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${
-      product?.product_name
-        ? product?.product_name
-        : product?.result?.product_name
-    }. ${
-      product?.shgname ? product?.shgname : product?.result?.shgname
-    }.Link:${productUrl}`;
+    const productUrl = `https://mumbailocal.org/competition/product/${product._id ? product._id : product?.result?._id}`;  // Ensure that the product's ID is correctly accessed
+    const productName = encodeURIComponent( product?.product_name
+      ? product?.product_name
+      : product?.result?.product_name); // Encode the product name to handle special characters
+    const shgName = encodeURIComponent( product?.shgname ? product?.shgname : product?.result?.shgname); // Encode SHG name as well
+    const message = `Check out this product and vote: ${productName}. ${shgName}. Link: ${productUrl}`;
+    
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
     window.open(whatsappUrl, "_blank");
-  };
+};
+
   const voteData = {
     userid: user?.id,
     productid: product?._Id ? product?._Id : product?._id,
@@ -128,6 +129,14 @@ const ProductDetail = () => {
 
   return (
     <>
+    <Helmet>
+                <title>{product?.product_name}</title>
+                <meta property="og:title" content={`${product?.product_name}`} />
+                <meta property="og:description" content={`${product?.product_shortdescription}`} />
+                <meta property="og:image" content={product?.product_photo} />
+                <meta property="og:url" content={`http://localhost:3000/competition/product/${product._Id}`} />
+               
+            </Helmet>
       <Grid container spacing={2} sx={{ padding: 2 }} class="mobileViewMargin">
         <Grid item xs={12}>
           <Typography
