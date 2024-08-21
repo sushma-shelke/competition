@@ -96,6 +96,8 @@ const handleShare = () => {
   const whatsappUrl = `https://api.whatsapp.com/send?text=${message}&image=https://kitintellect.tech/bmccompetition/meta%20tag.jpeg_20240808061052`;
   window.open(whatsappUrl, "_blank");
 };
+
+
   const voteData = {
     userid: user?.id,
     productid: product?._Id ? product?._Id : product?._id,
