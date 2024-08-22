@@ -29,7 +29,7 @@ const Footer = () => {
                   <img
                     alt="MumbaiLocal-Findus"
                     src={
-                      "http://kitintellect.tech/bmccompetition/MumbaiLocal-Findus.png_20240806073716"
+                      "https://kitintellect.tech/bmccompetition/findus_mumbaiLocal.png_20240822050918"
                     }
                     height=""
                     width=""
@@ -70,7 +70,7 @@ const Footer = () => {
                   <img
                     alt="MumbaiLocal-Callus"
                     src={
-                      "http://kitintellect.tech/bmccompetition/MumbaiLocal-Callus.png_20240806073626"
+                      "https://kitintellect.tech/bmccompetition/callus_mumbailocal.png_20240822050830"
                     }
                     height="70%"
                     width=""
@@ -110,7 +110,7 @@ const Footer = () => {
                   <img
                     alt="MumbaiLocal-Mailus"
                     src={
-                      "http://kitintellect.tech/bmccompetition/MumbaiLocal-Mailus.png_20240806073838"
+                      "https://kitintellect.tech/bmccompetition/mailus_mumbailocal.png_20240822051019"
                     }
                     height="70%"
                     width=""
@@ -265,7 +265,7 @@ const Footer = () => {
             <img
               alt="MumbaiLocal-SHG"
               src={
-                "http://kitintellect.tech/bmccompetition/MumbaiLocal-SHG.png_20240806073908"
+                "https://kitintellect.tech/bmccompetition/MumbaiLocal-SHG1footer.png_20240822132900"
               }
               className="footerSideImage"
             />
