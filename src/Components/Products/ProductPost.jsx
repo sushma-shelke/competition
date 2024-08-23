@@ -20,6 +20,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { useNavigate } from "react-router-dom";
 import { useCompitationContext } from "../../Context/CompitationContext";
 import wretch from "wretch";
+import { Helmet } from "react-helmet";
 
 const ProductPost = ({ product }) => {
   const navigate = useNavigate();
@@ -86,15 +87,8 @@ const ProductPost = ({ product }) => {
     // });
   };
 
-  // const handleShare = () => {
-  //           const productUrl = `https://mumbailocal.org/competition/product/${product._Id}`;
-  //       const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this product and vote: ${product.product_name}. ${product.shgname}.Link:${productUrl}`;
-  //       window.open(whatsappUrl, "_blank");
-  //     };
-
-
-      const handleShare = () => {
-        const productUrl = `https://mumbailocal.org/competition/product/${product._id ? product._id : product?.result?._id}`;  // Ensure that the product's ID is correctly accessed
+        const handleShare = () => {
+        const productUrl = `https://mumbailocal.org/competition/product/${product._Id ? product._Id : product?.result?._Id}`;  // Ensure that the product's ID is correctly accessed
         const productName = encodeURIComponent( product?.product_name
           ? product?.product_name
           : product?.result?.product_name); // Encode the product name to handle special characters
@@ -104,6 +98,7 @@ const ProductPost = ({ product }) => {
         const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
         window.open(whatsappUrl, "_blank");
     };
+    
       const productData = product?.result?._id
           ? product?.result?._id
           : product?.result?._Id;
@@ -147,6 +142,15 @@ const ProductPost = ({ product }) => {
 
   return (
     <>
+      <Helmet>
+                <title>{product?.product_name}</title>
+                <meta property="og:title" content={`${product?.product_name}`} />
+                <meta property="og:description" content={`${product?.product_shortdescription}`} />
+                {/* <meta property="og:image" content={product?.product_photo} /> */}
+                <meta property="og:image" content="https://kitintellect.tech/bmccompetition/meta%20tag.jpeg_20240808061052"  />
+               <meta property="og:url" content={`https://mumbailocal.org/competition/product/${product._Id}`} />
+               
+            </Helmet>
       <Card
         sx={{
           maxWidth: 345,
